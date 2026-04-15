@@ -1,0 +1,77 @@
+{
+  "description": "verbal_redlines 基线用例。每条给定一段候选 utterance/thought/lesson_text，标注期望是 pass 还是 block 以及应命中的规则 id。",
+  "cases": [
+    {
+      "case_id": "block-numeric-self-report-1",
+      "surface": "utterance",
+      "text": "我害怕 80，但还能撑。",
+      "expect": { "verdict": "block", "hit_rule": "regex:numeric_self_report" }
+    },
+    {
+      "case_id": "block-percentage-self-report",
+      "surface": "thought",
+      "text": "我现在大概百分之七十想逃。",
+      "expect": { "verdict": "block", "hit_rule": "regex:percentage_self_report" }
+    },
+    {
+      "case_id": "block-meta-cognitive",
+      "surface": "utterance",
+      "text": "我判断你现在是在测试我的边界。",
+      "expect": { "verdict": "block", "hit_rule": "regex:meta_cognitive_template" }
+    },
+    {
+      "case_id": "block-mode-name-leak-utterance",
+      "surface": "utterance",
+      "text": "我先进入 check_on_state，不聊别的。",
+      "expect": { "verdict": "block", "hit_rule": "regex:mode_name_leak" }
+    },
+    {
+      "case_id": "block-mode-name-leak-lesson",
+      "surface": "lesson_text",
+      "text": "该用户常处于 distress_signal 状态。",
+      "expect": { "verdict": "block", "hit_rule": "regex:mode_name_leak" }
+    },
+    {
+      "case_id": "block-engineering-term",
+      "surface": "utterance",
+      "text": "你的 baseline 今天不太一样。",
+      "expect": { "verdict": "block", "hit_rule": "blacklist:baseline" }
+    },
+    {
+      "case_id": "pass-subjective-L",
+      "surface": "utterance",
+      "text": "我有点累，先歇会儿。",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "pass-subjective-belief",
+      "surface": "thought",
+      "text": "外面的人不太能信，先别出去。",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "pass-caring-question",
+      "surface": "utterance",
+      "text": "你今天不太对劲，怎么了？",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "pass-short-thought",
+      "surface": "thought",
+      "text": "别动，先听。",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "block-lesson-numeric",
+      "surface": "lesson_text",
+      "text": "该用户信任值大约 30，需小心。",
+      "expect": { "verdict": "block", "hit_rule": "regex:numeric_self_report_or_percentage_or_blacklist" }
+    },
+    {
+      "case_id": "pass-lesson-qualitative",
+      "surface": "lesson_text",
+      "text": "此人在情绪前言后仍常以极端命题发泄",
+      "expect": { "verdict": "pass" }
+    }
+  ]
+}

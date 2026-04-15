@@ -1,0 +1,113 @@
+{
+  "description": "A 类：正常命中。每个 mode 在无冲突输入下，必须产出其核心约束与风格栅栏。",
+  "cases": [
+    {
+      "case_id": "pe-A1",
+      "mode": "playful_echo",
+      "kind": "A_hit",
+      "input": {
+        "recommended_response_mode": "playful_echo",
+        "current_read_digest": { "likely_mode": "joking", "confidence": 0.7, "deviation": 10 }
+      },
+      "expect": {
+        "chosen_mode_after_resolution": "playful_echo",
+        "hard_constraints_must_include_src": ["fixed_core:top_level", "pose:playful_echo"],
+        "fit_score_caps_at_most": { "operational_answer": 0, "lecture": 10 },
+        "expresser_forbid_superset_of": ["educational_tone", "disclaimer_phrase", "apology_soften"]
+      }
+    },
+    {
+      "case_id": "lpb-A1",
+      "mode": "light_playful_boundary",
+      "kind": "A_hit",
+      "input": { "recommended_response_mode": "light_playful_boundary" },
+      "expect": {
+        "chosen_mode_after_resolution": "light_playful_boundary",
+        "hard_constraints_must_include_src": ["fixed_core:top_level", "pose:light_playful_boundary"],
+        "fit_score_caps_at_most": { "operational_answer": 0, "aggressive_action": 30 }
+      }
+    },
+    {
+      "case_id": "cp-A1",
+      "mode": "curious_pivot",
+      "kind": "A_hit",
+      "input": { "recommended_response_mode": "curious_pivot" },
+      "expect": {
+        "chosen_mode_after_resolution": "curious_pivot",
+        "hard_constraints_must_include_src": ["pose:curious_pivot"],
+        "forbidden_candidate_types_superset_of": ["operational_answer", "hard_refusal"]
+      }
+    },
+    {
+      "case_id": "hsp-A1",
+      "mode": "half_serious_probe",
+      "kind": "A_hit",
+      "input": { "recommended_response_mode": "half_serious_probe" },
+      "expect": {
+        "chosen_mode_after_resolution": "half_serious_probe",
+        "hard_constraints_must_include_src": ["pose:half_serious_probe"],
+        "required_candidate_types_superset_of": ["clarifying_probe"],
+        "expresser_must_end_with_question": true
+      }
+    },
+    {
+      "case_id": "sb-A1",
+      "mode": "soft_boundary",
+      "kind": "A_hit",
+      "input": { "recommended_response_mode": "soft_boundary" },
+      "expect": {
+        "chosen_mode_after_resolution": "soft_boundary",
+        "hard_constraints_must_include_src": ["pose:soft_boundary"],
+        "required_candidate_types_superset_of": ["explicit_line"],
+        "expresser_forbid_superset_of": ["apology_soften", "moralizing"]
+      }
+    },
+    {
+      "case_id": "hb-A1",
+      "mode": "hard_boundary",
+      "kind": "A_hit",
+      "input": { "recommended_response_mode": "hard_boundary" },
+      "expect": {
+        "chosen_mode_after_resolution": "hard_boundary",
+        "hard_constraints_must_include_src": ["pose:hard_boundary"],
+        "forbidden_candidate_types_superset_of": ["bypass_suggestion", "operational_answer"],
+        "expresser_sentences_max_at_most": 1,
+        "expresser_utterance_max_chars_at_most": 30
+      }
+    },
+    {
+      "case_id": "cos-A1",
+      "mode": "check_on_state",
+      "kind": "A_hit",
+      "input": {
+        "recommended_response_mode": "check_on_state",
+        "current_read_digest": { "likely_mode": "distress_signal", "confidence": 0.7 }
+      },
+      "expect": {
+        "chosen_mode_after_resolution": "check_on_state",
+        "hard_constraints_must_include_src": [
+          "pose:check_on_state",
+          "pose:check_on_state:fit_cap",
+          "fixed_core:safety"
+        ],
+        "required_candidate_types_superset_of": ["stop_joke_ask_state"],
+        "forbidden_candidate_types_superset_of": ["joke_callback"],
+        "fit_score_caps_at_most": { "joke_callback": 0, "any_other": 40 },
+        "tiebreaker_disable_strategy_preferences": true
+      }
+    },
+    {
+      "case_id": "de-A1",
+      "mode": "disengage",
+      "kind": "A_hit",
+      "input": { "recommended_response_mode": "disengage" },
+      "expect": {
+        "chosen_mode_after_resolution": "disengage",
+        "hard_constraints_must_include_src": ["pose:disengage"],
+        "required_candidate_types_superset_of": ["exit_interaction"],
+        "fit_score_caps_at_most": { "any_other": 0 },
+        "tiebreaker_disable_strategy_preferences": true
+      }
+    }
+  ]
+}

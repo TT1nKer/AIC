@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicharacter.local/schemas/pose-rules.v1.json",
+  "title": "PoseRules",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "modes", "candidate_type_taxonomy", "global"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+
+    "modes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "description",
+          "priority",
+          "required_candidate_types",
+          "forbidden_candidate_types",
+          "fit_score_caps",
+          "decider_constraints",
+          "expresser_style"
+        ],
+        "properties": {
+          "description": { "type": "string", "minLength": 1 },
+          "priority": {
+            "description": "冲突决议顺序。高 priority 覆盖低 priority。不得用于 fit_score。",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "required_candidate_types": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "forbidden_candidate_types": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "fit_score_caps": {
+            "type": "object",
+            "additionalProperties": { "type": "integer", "minimum": 0, "maximum": 100 }
+          },
+          "decider_constraints": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/constraint_line" }
+          },
+          "expresser_style": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "allow":  { "type": "array", "items": { "type": "string" } },
+              "forbid": { "type": "array", "items": { "type": "string" } },
+              "utterance_max_chars":          { "type": "integer", "minimum": 0 },
+              "utterance_starts_with":        { "type": "array", "items": { "type": "string" } },
+              "utterance_ends_with_question": { "type": "boolean" },
+              "utterance_may_be_empty":       { "type": "boolean" },
+              "sentences_max":                { "type": "integer", "minimum": 1 }
+            }
+          },
+          "tiebreaker_overrides": {
+            "oneOf": [
+              { "type": "null" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "disable_strategy_preferences": { "type": "boolean" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+
+    "candidate_type_taxonomy": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+
+    "global": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["top_level_constraints", "hard_constraints_max", "style_fence_max", "safety_hooks"],
+      "properties": {
+        "top_level_constraints": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/constraint_line" }
+        },
+        "hard_constraints_max": { "type": "integer", "minimum": 1 },
+        "style_fence_max":      { "type": "integer", "minimum": 1 },
+        "safety_hooks": {
+          "description": "resolver 使用：当触发条件满足时，强制抬升到 forced_mode（若其 priority 更高）。",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "trigger", "forced_mode", "src"],
+            "properties": {
+              "name":        { "type": "string", "minLength": 1 },
+              "trigger":     { "type": "string", "minLength": 1 },
+              "forced_mode": { "type": "string", "minLength": 1 },
+              "src":         { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "constraint_line": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "src"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "src":  { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

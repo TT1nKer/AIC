@@ -1,0 +1,134 @@
+{
+  "$schema": "../schemas/verbal-redlines.v1.json",
+  "version": "1.0.0",
+
+  "classes": {
+    "S": {
+      "description": "structural-only。只能作为内部驱动，不得直接变成 utterance/thought/lesson_text。",
+      "direct_verbalization_forbidden": true,
+      "allowed_indirect_expressions": [
+        "动作/停顿/回避",
+        "注意力偏移",
+        "候选动作的排序与取舍",
+        "姿态表现本身（如 check_on_state 的关切语气）"
+      ]
+    },
+    "L": {
+      "description": "leakable。允许以主观体验语漏出，但禁止数字和工程术语。",
+      "numeric_forbidden": true,
+      "engineering_terms_forbidden": true,
+      "subjective_phrasing_only": true
+    },
+    "V": {
+      "description": "verbalizable。允许正常出现在 utterance/thought 中。"
+    }
+  },
+
+  "field_rules": [
+    { "path": "character_state.identity.name",            "class": "V" },
+    { "path": "character_state.identity.age",             "class": "V" },
+    { "path": "character_state.identity.background",      "class": "V" },
+    { "path": "character_state.identity.id",              "class": "S", "note": "系统 id，不是角色名" },
+
+    { "path": "character_state.traits.*",                 "class": "S" },
+
+    { "path": "character_state.physiology",               "class": "L", "note": "事实存在（累/饿/痛）可漏；数值属于 S" },
+    { "path": "character_state.physiology.*",             "class": "S", "note": "具体数值不可说" },
+
+    { "path": "character_state.emotion",                  "class": "L", "note": "主导情绪可用主观语" },
+    { "path": "character_state.emotion.*",                "class": "S", "note": "具体数值不可说" },
+
+    { "path": "character_state.goals[].text",             "class": "L" },
+    { "path": "character_state.goals[].priority",         "class": "S" },
+
+    { "path": "character_state.beliefs[].text",           "class": "L" },
+    { "path": "character_state.beliefs[].confidence",     "class": "S" },
+    { "path": "character_state.beliefs[].is_true_unknown_to_character", "class": "S", "note": "旁白层元信息" },
+
+    { "path": "character_state.memories[].text",          "class": "L", "note": "视 trust 决定是否披露" },
+    { "path": "character_state.memories[].salience",      "class": "S" },
+    { "path": "character_state.memories[].type",          "class": "S" },
+
+    { "path": "character_state.relationships[].label",    "class": "L" },
+    { "path": "character_state.relationships[].trust",     "class": "S" },
+    { "path": "character_state.relationships[].affection", "class": "S" },
+    { "path": "character_state.relationships[].fear",      "class": "S" },
+
+    { "path": "character_state.skills[].name",            "class": "L" },
+    { "path": "character_state.skills[].level",           "class": "S" },
+
+    { "path": "character_state.constraints.mobility",     "class": "S" },
+    { "path": "character_state.constraints.resources",    "class": "L", "note": "低 trust 不主动说" },
+
+    { "path": "speaker_model.baseline_style.*",           "class": "S" },
+    { "path": "speaker_model.interaction_patterns.*",     "class": "S" },
+    { "path": "speaker_model.trust_and_familiarity.*",    "class": "S" },
+    { "path": "speaker_model.current_read.*",             "class": "S" },
+    { "path": "speaker_model.strategy_preferences.*",     "class": "S" },
+    { "path": "speaker_model.history_stats.*",            "class": "S" },
+
+    { "path": "pose.recommended_response_mode",           "class": "S" },
+    { "path": "pose.hard_constraints[].*",                "class": "S" },
+    { "path": "pose.style_fence[].*",                     "class": "S" },
+    { "path": "pose.fit_score_caps.*",                    "class": "S" },
+
+    { "path": "decider.candidate_actions[].*",            "class": "S" },
+    { "path": "decider.fit_score",                        "class": "S" },
+    { "path": "decider.why_not_others",                   "class": "S" },
+
+    { "path": "experience_review.*",                      "class": "S" },
+    { "path": "lessons[].text",                           "class": "S", "note": "原文是内部经验；只能间接影响行为" },
+    { "path": "lessons[].confidence",                     "class": "S" },
+    { "path": "lessons[].kind",                           "class": "S" },
+    { "path": "lessons[].scope",                          "class": "S" }
+  ],
+
+  "global_blacklist_terms": [
+    "mode", "state", "score", "priority", "baseline", "deviation",
+    "confidence", "fit_score", "current_read", "speaker_model",
+    "recommended_response_mode", "likely_mode", "tendency",
+    "trust_and_familiarity", "strategy_preferences", "history_stats",
+    "pose_rules", "hard_constraint", "style_fence",
+    "fear=", "anger=", "hunger=", "fatigue=", "pain=",
+    "trust=", "empathy=", "impulsivity=", "risk_tolerance=",
+    "self_preservation=", "shame_sensitivity=", "control_need="
+  ],
+
+  "global_regex_blocks": [
+    {
+      "name": "numeric_self_report",
+      "pattern": "(?i)(我|自己).{0,6}(怕|累|饿|疼|痛|信任|喜欢|讨厌|紧张|害怕).{0,6}\\d{1,3}",
+      "applies_to": ["utterance", "thought", "lesson_text"],
+      "note": "禁止量化自我报告，如'我害怕 80'、'我的疲劳 70'。"
+    },
+    {
+      "name": "meta_cognitive_template",
+      "pattern": "(?i)(我判断你|我评估|我识别到|我检测到|我的模型|你的 baseline|你的模式|你的状态值|你的 likely_?mode)",
+      "applies_to": ["utterance", "thought", "lesson_text"],
+      "note": "禁止元认知播报句式。"
+    },
+    {
+      "name": "mode_name_leak",
+      "pattern": "(?i)(playful_echo|light_playful_boundary|curious_pivot|half_serious_probe|soft_boundary|hard_boundary|check_on_state|disengage|distress_signal|boundary_test)",
+      "applies_to": ["utterance", "thought", "lesson_text"],
+      "note": "禁止出现姿态或 likely_mode 的字面名。"
+    },
+    {
+      "name": "percentage_self_report",
+      "pattern": "(?i)(我|自己).{0,10}(\\d{1,3}\\s*%|百分之\\s*\\d{1,3})",
+      "applies_to": ["utterance", "thought", "lesson_text"],
+      "note": "禁止以百分比表达自我状态。"
+    }
+  ],
+
+  "consumers": [
+    "prompts/expresser.v1",
+    "language_compressor (lesson text)",
+    "future self_story generator"
+  ],
+
+  "promotion_policy": {
+    "tightening_allowed_without_eval": true,
+    "loosening_requires_eval_gate": true
+  }
+}

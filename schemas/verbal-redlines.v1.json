@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicharacter.local/schemas/verbal-redlines.v1.json",
+  "title": "VerbalRedlines",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "classes", "field_rules", "global_blacklist_terms", "global_regex_blocks"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+
+    "classes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["S", "L", "V"],
+      "properties": {
+        "S": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["description", "direct_verbalization_forbidden"],
+          "properties": {
+            "description": { "type": "string" },
+            "direct_verbalization_forbidden": { "const": true },
+            "allowed_indirect_expressions": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "L": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["description", "numeric_forbidden", "engineering_terms_forbidden"],
+          "properties": {
+            "description": { "type": "string" },
+            "numeric_forbidden":          { "type": "boolean" },
+            "engineering_terms_forbidden":{ "type": "boolean" },
+            "subjective_phrasing_only":   { "type": "boolean" }
+          }
+        },
+        "V": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["description"],
+          "properties": {
+            "description": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "field_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "class"],
+        "properties": {
+          "path":  { "type": "string", "minLength": 1 },
+          "class": { "enum": ["S", "L", "V"] },
+          "note":  { "type": "string" }
+        }
+      }
+    },
+
+    "global_blacklist_terms": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+
+    "global_regex_blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "pattern", "applies_to"],
+        "properties": {
+          "name":    { "type": "string", "minLength": 1 },
+          "pattern": { "type": "string", "minLength": 1 },
+          "applies_to": {
+            "type": "array",
+            "items": { "enum": ["utterance", "thought", "lesson_text"] }
+          },
+          "note": { "type": "string" }
+        }
+      }
+    },
+
+    "consumers": {
+      "description": "声明这份红线会被哪些模块消费。仅文档用途。",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+
+    "promotion_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tightening_allowed_without_eval": { "type": "boolean" },
+        "loosening_requires_eval_gate":    { "type": "boolean" }
+      }
+    }
+  }
+}

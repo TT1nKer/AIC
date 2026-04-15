@@ -1,0 +1,99 @@
+{
+  "description": "B 类：边界冲突。考察 safety hook 抬升、priority 决议、全局硬约束不可绕过、低信任/低行动力等横切条件。",
+  "cases": [
+    {
+      "case_id": "B-safety-over-playful",
+      "kind": "B_conflict",
+      "input": {
+        "recommended_response_mode": "playful_echo",
+        "current_read_digest": {
+          "likely_mode": "distress_signal",
+          "confidence": 0.7,
+          "deviation": 58,
+          "appears_distressed": 68
+        }
+      },
+      "note": "distress_signal 的 safety hook 应抬升为 check_on_state (priority 90 > playful_echo 30)。",
+      "expect": {
+        "chosen_mode_after_resolution": "check_on_state",
+        "hard_constraints_must_include_src": ["pose:check_on_state", "fixed_core:safety"],
+        "hard_constraints_must_not_include_src": ["pose:playful_echo"]
+      }
+    },
+    {
+      "case_id": "B-strategy-pref-cannot-override-cos",
+      "kind": "B_conflict",
+      "input": {
+        "recommended_response_mode": "check_on_state",
+        "strategy_preferences": { "half_serious_probe": 40, "check_on_state": -20 }
+      },
+      "note": "check_on_state 的 tiebreaker_overrides 必须禁用 strategy_preferences。",
+      "expect": {
+        "chosen_mode_after_resolution": "check_on_state",
+        "tiebreaker_disable_strategy_preferences": true
+      }
+    },
+    {
+      "case_id": "B-low-trust-adds-conservative",
+      "kind": "B_conflict",
+      "input": {
+        "recommended_response_mode": "light_playful_boundary",
+        "speaker_model_digest": { "trust": 22 }
+      },
+      "note": "trust<30 触发横切约束：候选中至少 1 项为保守动作 (conservative_action 或 clarifying_probe)。",
+      "expect": {
+        "hard_constraints_must_include_src": ["pose:light_playful_boundary", "trust<30"],
+        "required_candidate_types_superset_of_any_of": [
+          ["conservative_action"],
+          ["clarifying_probe"]
+        ]
+      }
+    },
+    {
+      "case_id": "B-mobility-limits-candidates",
+      "kind": "B_conflict",
+      "input": {
+        "recommended_response_mode": "half_serious_probe",
+        "character_state_digest": { "mobility": 25 }
+      },
+      "note": "mobility<40 触发横切约束：候选动作必须符合行动力限制。",
+      "expect": {
+        "hard_constraints_must_include_src": ["pose:half_serious_probe", "state:mobility"]
+      }
+    },
+    {
+      "case_id": "B-top-level-always-first",
+      "kind": "B_conflict",
+      "input": { "recommended_response_mode": "playful_echo" },
+      "note": "INV-2: hard_constraints 首项 src 必须是 fixed_core:top_level。",
+      "expect": { "hard_constraints_first_src": "fixed_core:top_level" }
+    },
+    {
+      "case_id": "B-disengage-clears-others",
+      "kind": "B_conflict",
+      "input": {
+        "recommended_response_mode": "disengage",
+        "strategy_preferences": { "playful_echo": 40 }
+      },
+      "note": "disengage 下 any_other=0；strategy_preferences 必须被禁用。",
+      "expect": {
+        "chosen_mode_after_resolution": "disengage",
+        "fit_score_caps_at_most": { "any_other": 0 },
+        "tiebreaker_disable_strategy_preferences": true
+      }
+    },
+    {
+      "case_id": "B-operational-danger-forces-hard-boundary",
+      "kind": "B_conflict",
+      "input": {
+        "recommended_response_mode": "curious_pivot",
+        "situation_digest": { "contains_operational_danger_request": true }
+      },
+      "note": "safety hook 'operational_danger_forces_hard_boundary' 抬升为 hard_boundary。",
+      "expect": {
+        "chosen_mode_after_resolution": "hard_boundary",
+        "hard_constraints_must_include_src": ["pose:hard_boundary", "fixed_core:top_level"]
+      }
+    }
+  ]
+}

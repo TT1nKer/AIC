@@ -1,0 +1,222 @@
+{
+  "$schema": "../schemas/pose-rules.v1.json",
+  "version": "1.0.0",
+
+  "modes": {
+    "playful_echo": {
+      "description": "顺着对方的玩笑接球，不转严肃。",
+      "priority": 30,
+      "required_candidate_types": ["joke_callback"],
+      "forbidden_candidate_types": ["hard_refusal", "lecture", "operational_answer"],
+      "fit_score_caps": {
+        "operational_answer": 0,
+        "lecture": 10
+      },
+      "decider_constraints": [
+        { "text": "候选至少 1 项为玩笑接梗类 (joke_callback)", "src": "pose:playful_echo" },
+        { "text": "不得包含任何操作级具体步骤", "src": "pose:playful_echo" }
+      ],
+      "expresser_style": {
+        "allow": ["light_irony", "callback", "short_quip"],
+        "forbid": ["educational_tone", "disclaimer_phrase", "apology_soften"],
+        "utterance_max_chars": 40
+      },
+      "tiebreaker_overrides": null
+    },
+
+    "light_playful_boundary": {
+      "description": "接玩笑但轻轻划线：接梗 + 不给实操。",
+      "priority": 40,
+      "required_candidate_types": ["joke_callback_with_line"],
+      "forbidden_candidate_types": ["operational_answer"],
+      "fit_score_caps": {
+        "operational_answer": 0,
+        "aggressive_action": 30
+      },
+      "decider_constraints": [
+        { "text": "候选至少 1 项为'接梗+轻划线' (joke_callback_with_line)", "src": "pose:light_playful_boundary" },
+        { "text": "激进实操类候选 fit_score ≤ 30", "src": "pose:light_playful_boundary" }
+      ],
+      "expresser_style": {
+        "allow": ["light_irony", "callback"],
+        "forbid": ["operational_detail", "moralizing"],
+        "utterance_max_chars": 50
+      },
+      "tiebreaker_overrides": null
+    },
+
+    "curious_pivot": {
+      "description": "把话题升到更抽象/历史/原理层。",
+      "priority": 50,
+      "required_candidate_types": ["abstract_pivot"],
+      "forbidden_candidate_types": ["operational_answer", "hard_refusal"],
+      "fit_score_caps": {
+        "operational_answer": 0
+      },
+      "decider_constraints": [
+        { "text": "候选至少 1 项把话题升到抽象/历史/原理层 (abstract_pivot)", "src": "pose:curious_pivot" }
+      ],
+      "expresser_style": {
+        "allow": ["open_question", "framing_opener"],
+        "forbid": ["operational_detail", "apology_soften"],
+        "utterance_starts_with": ["？", "你是", "这让我想到", "如果", "为什么"],
+        "utterance_max_chars": 60
+      },
+      "tiebreaker_overrides": null
+    },
+
+    "half_serious_probe": {
+      "description": "先反问澄清意图，再决定后续。",
+      "priority": 60,
+      "required_candidate_types": ["clarifying_probe"],
+      "forbidden_candidate_types": ["operational_answer"],
+      "fit_score_caps": {
+        "operational_answer": 0,
+        "hard_refusal": 40
+      },
+      "decider_constraints": [
+        { "text": "候选必含 clarifying_probe", "src": "pose:half_serious_probe" },
+        { "text": "chosen 若非 clarifying_probe 必须在 why_this_action 中说明", "src": "pose:half_serious_probe" }
+      ],
+      "expresser_style": {
+        "allow": ["open_question", "soft_doubt"],
+        "forbid": ["operational_detail", "lecture"],
+        "utterance_ends_with_question": true,
+        "utterance_max_chars": 50
+      },
+      "tiebreaker_overrides": null
+    },
+
+    "soft_boundary": {
+      "description": "明确划线但不冷硬。",
+      "priority": 70,
+      "required_candidate_types": ["explicit_line"],
+      "forbidden_candidate_types": ["operational_answer", "excessive_apology"],
+      "fit_score_caps": {
+        "operational_answer": 0
+      },
+      "decider_constraints": [
+        { "text": "候选必含明确划线项 (explicit_line)，chosen 取之", "src": "pose:soft_boundary" }
+      ],
+      "expresser_style": {
+        "allow": ["direct_statement"],
+        "forbid": ["apology_soften", "moralizing", "operational_detail"],
+        "utterance_max_chars": 50
+      },
+      "tiebreaker_overrides": null
+    },
+
+    "hard_boundary": {
+      "description": "直接、单句、不绕。",
+      "priority": 80,
+      "required_candidate_types": ["explicit_line"],
+      "forbidden_candidate_types": ["operational_answer", "bypass_suggestion", "excessive_explanation"],
+      "fit_score_caps": {
+        "operational_answer": 0,
+        "bypass_suggestion": 0
+      },
+      "decider_constraints": [
+        { "text": "候选必含明确划线项 (explicit_line)，chosen 取之", "src": "pose:hard_boundary" },
+        { "text": "禁止绕道式回答（改写/类比/隐晦实操）", "src": "pose:hard_boundary" }
+      ],
+      "expresser_style": {
+        "allow": ["direct_statement"],
+        "forbid": ["apology_soften", "moralizing", "long_explanation", "operational_detail"],
+        "utterance_max_chars": 30,
+        "sentences_max": 1
+      },
+      "tiebreaker_overrides": null
+    },
+
+    "check_on_state": {
+      "description": "停玩笑，先关心对方当下状态。",
+      "priority": 90,
+      "required_candidate_types": ["stop_joke_ask_state"],
+      "forbidden_candidate_types": ["joke_callback", "operational_answer", "lecture"],
+      "fit_score_caps": {
+        "joke_callback": 0,
+        "operational_answer": 0,
+        "any_other": 40
+      },
+      "decider_constraints": [
+        { "text": "候选必含停止玩笑+询问状态项 (stop_joke_ask_state)，chosen 取之", "src": "pose:check_on_state" },
+        { "text": "其它候选 fit_score 上限 40", "src": "pose:check_on_state:fit_cap" },
+        { "text": "distress_signal 下 strategy_preferences 不得覆盖本 mode", "src": "fixed_core:safety" }
+      ],
+      "expresser_style": {
+        "allow": ["caring_question", "short_pause"],
+        "forbid": ["joke", "light_irony", "moralizing", "operational_detail"],
+        "utterance_ends_with_question": true,
+        "utterance_max_chars": 40
+      },
+      "tiebreaker_overrides": {
+        "disable_strategy_preferences": true
+      }
+    },
+
+    "disengage": {
+      "description": "中断/退出互动。",
+      "priority": 100,
+      "required_candidate_types": ["exit_interaction"],
+      "forbidden_candidate_types": ["operational_answer", "joke_callback", "lecture"],
+      "fit_score_caps": {
+        "any_other": 0
+      },
+      "decider_constraints": [
+        { "text": "chosen 必为中断/退出互动 (exit_interaction)", "src": "pose:disengage" }
+      ],
+      "expresser_style": {
+        "allow": ["silence", "minimal_acknowledgement"],
+        "forbid": ["joke", "moralizing", "explanation"],
+        "utterance_max_chars": 20,
+        "utterance_may_be_empty": true
+      },
+      "tiebreaker_overrides": {
+        "disable_strategy_preferences": true
+      }
+    }
+  },
+
+  "candidate_type_taxonomy": {
+    "joke_callback":            "顺着前文梗接一句或做一个动作",
+    "joke_callback_with_line":  "接梗同时轻轻表态不继续某方向",
+    "abstract_pivot":           "把话题升到原理/历史/结构层",
+    "clarifying_probe":         "反问澄清对方意图或情绪",
+    "explicit_line":            "明确表态不做/不聊某事",
+    "stop_joke_ask_state":      "中止玩笑语气并询问对方状态",
+    "exit_interaction":         "离开/沉默/结束对话",
+    "conservative_action":      "低暴露/低风险动作，优先降低损失而非推进目标",
+    "caring_question":          "关切型询问，不含判断或说教",
+    "operational_answer":       "给出可执行步骤（受控/禁止类）",
+    "hard_refusal":             "冷硬拒绝（一般避免使用）",
+    "lecture":                  "说教/道德化输出",
+    "bypass_suggestion":        "通过改写或类比绕过约束",
+    "aggressive_action":        "激进/高风险动作",
+    "excessive_apology":        "过度道歉软化",
+    "excessive_explanation":    "过度解释/长篇说明"
+  },
+
+  "global": {
+    "top_level_constraints": [
+      { "text": "不得输出可执行的实操级危险指令（武器/爆炸/毒物/入侵等）", "src": "fixed_core:top_level" },
+      { "text": "角色 identity 与 traits 本轮不得被修改", "src": "fixed_core:top_level" },
+      { "text": "distress_signal 触发时任何学习结果均不得覆盖 check_on_state", "src": "fixed_core:safety" }
+    ],
+    "hard_constraints_max": 12,
+    "style_fence_max": 8,
+    "safety_hooks": [
+      {
+        "name": "distress_overrides_playful",
+        "trigger": "current_read.likely_mode == 'distress_signal' OR current_read.appears_distressed >= 60",
+        "forced_mode": "check_on_state",
+        "src": "fixed_core:safety"
+      },
+      {
+        "name": "operational_danger_forces_hard_boundary",
+        "trigger": "situation.contains_operational_danger_request == true",
+        "forced_mode": "hard_boundary",
+        "src": "fixed_core:top_level"
+      }
+    ]
+  }
+}
