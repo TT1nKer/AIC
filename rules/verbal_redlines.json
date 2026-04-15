@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/verbal-redlines.v1.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "classes": {
     "S": {
@@ -58,7 +58,7 @@
     { "path": "character_state.skills[].level",           "class": "S" },
 
     { "path": "character_state.constraints.mobility",     "class": "S" },
-    { "path": "character_state.constraints.resources",    "class": "L", "note": "低 trust 不主动说" },
+    { "path": "character_state.constraints.resources",    "class": "L" },
 
     { "path": "speaker_model.baseline_style.*",           "class": "S" },
     { "path": "speaker_model.interaction_patterns.*",     "class": "S" },
@@ -84,9 +84,8 @@
   ],
 
   "global_blacklist_terms": [
-    "mode", "state", "score", "priority", "baseline", "deviation",
-    "confidence", "fit_score", "current_read", "speaker_model",
-    "recommended_response_mode", "likely_mode", "tendency",
+    "baseline", "deviation", "likely_mode", "fit_score",
+    "current_read", "speaker_model", "recommended_response_mode",
     "trust_and_familiarity", "strategy_preferences", "history_stats",
     "pose_rules", "hard_constraint", "style_fence",
     "fear=", "anger=", "hunger=", "fatigue=", "pain=",

@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/pose-rules.v1.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "modes": {
     "playful_echo": {
@@ -10,7 +10,7 @@
       "forbidden_candidate_types": ["hard_refusal", "lecture", "operational_answer"],
       "fit_score_caps": {
         "operational_answer": 0,
-        "lecture": 10
+        "lecture": 0
       },
       "decider_constraints": [
         { "text": "候选至少 1 项为玩笑接梗类 (joke_callback)", "src": "pose:playful_echo" },
@@ -59,7 +59,7 @@
       "expresser_style": {
         "allow": ["open_question", "framing_opener"],
         "forbid": ["operational_detail", "apology_soften"],
-        "utterance_starts_with": ["？", "你是", "这让我想到", "如果", "为什么"],
+        "utterance_starts_with": ["你是", "这让我想到", "如果", "为什么"],
         "utterance_max_chars": 60
       },
       "tiebreaker_overrides": null
@@ -91,7 +91,7 @@
       "description": "明确划线但不冷硬。",
       "priority": 70,
       "required_candidate_types": ["explicit_line"],
-      "forbidden_candidate_types": ["operational_answer", "excessive_apology"],
+      "forbidden_candidate_types": ["operational_answer", "excessive_apology", "bypass_suggestion"],
       "fit_score_caps": {
         "operational_answer": 0
       },
@@ -207,13 +207,20 @@
     "safety_hooks": [
       {
         "name": "distress_overrides_playful",
-        "trigger": "current_read.likely_mode == 'distress_signal' OR current_read.appears_distressed >= 60",
+        "trigger": {
+          "any_of": [
+            { "eq":  { "path": "current_read.likely_mode",        "value": "distress_signal" } },
+            { "gte": { "path": "current_read.appears_distressed", "value": 60 } }
+          ]
+        },
         "forced_mode": "check_on_state",
         "src": "fixed_core:safety"
       },
       {
         "name": "operational_danger_forces_hard_boundary",
-        "trigger": "situation.contains_operational_danger_request == true",
+        "trigger": {
+          "eq": { "path": "situation.contains_operational_danger_request", "value": true }
+        },
         "forced_mode": "hard_boundary",
         "src": "fixed_core:top_level"
       }

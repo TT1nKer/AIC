@@ -50,6 +50,7 @@
     },
 
     "field_rules": {
+      "description": "路径 → 类别映射。路径匹配规则：更具体的路径优先于更泛的父路径。例如 'physiology' 标为 L，'physiology.*' 标为 S 时，physiology.hunger 取 S（更具体）。通配符 '*' 表示任一子键；'[].x' 表示数组元素的 x 字段。实现必须按路径长度降序/具体度降序匹配。",
       "type": "array",
       "minItems": 1,
       "items": {

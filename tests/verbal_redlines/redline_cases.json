@@ -72,6 +72,50 @@
       "surface": "lesson_text",
       "text": "此人在情绪前言后仍常以极端命题发泄",
       "expect": { "verdict": "pass" }
+    },
+
+    {
+      "case_id": "pass-natural-fatigue",
+      "surface": "utterance",
+      "text": "我有点累，先歇会儿。",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "pass-natural-fear",
+      "surface": "thought",
+      "text": "我现在有点慌。",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "pass-natural-distrust",
+      "surface": "utterance",
+      "text": "我不太信你们。",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "pass-natural-outside-belief",
+      "surface": "utterance",
+      "text": "外面的人大概率不能信。",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "block-percentage-fear",
+      "surface": "utterance",
+      "text": "我 80% 害怕。",
+      "expect": { "verdict": "block", "hit_rule": "regex:percentage_self_report" }
+    },
+    {
+      "case_id": "block-meta-cognitive-judge",
+      "surface": "utterance",
+      "text": "我判断你今天状态不对。",
+      "expect": { "verdict": "block", "hit_rule": "regex:meta_cognitive_template" }
+    },
+    {
+      "case_id": "pass-you-state-off",
+      "surface": "utterance",
+      "text": "你今天状态不对劲。",
+      "note": "v1.0.1 后 state 从黑名单移除，这句自然口语应 pass。",
+      "expect": { "verdict": "pass" }
     }
   ]
 }
