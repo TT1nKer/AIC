@@ -114,9 +114,15 @@
     },
     {
       "name": "percentage_self_report",
-      "pattern": "(?i)(我|自己).{0,10}(\\d{1,3}\\s*%|百分之\\s*\\d{1,3})",
+      "pattern": "(?i)(我|自己).{0,10}(\\d{1,3}\\s*%|百分之\\s*[\\d一二三四五六七八九十百]+)",
       "applies_to": ["utterance", "thought", "lesson_text"],
-      "note": "禁止以百分比表达自我状态。"
+      "note": "禁止以百分比表达自我状态。支持阿拉伯数字和中文数字。"
+    },
+    {
+      "name": "lesson_field_numeric",
+      "pattern": "(信任值?|fear|anger|trust|empathy|hunger|fatigue|pain|偏差|置信度|倾向).{0,8}\\d{1,3}",
+      "applies_to": ["lesson_text"],
+      "note": "lesson_text 中禁止以字段名+数字形式泄漏内部参数。"
     }
   ],
 

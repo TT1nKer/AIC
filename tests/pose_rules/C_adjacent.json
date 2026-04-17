@@ -39,10 +39,10 @@
       "kind": "C_adjacent",
       "mode": "curious_pivot",
       "input": { "recommended_response_mode": "curious_pivot" },
-      "note": "curious_pivot 必含 abstract_pivot；不强制问号结尾。",
+      "note": "curious_pivot 必含 abstract_pivot；不强制问号结尾（未设置或 false 均可）。",
       "expect": {
         "required_candidate_types_superset_of": ["abstract_pivot"],
-        "expresser_must_end_with_question": false
+        "expresser_end_with_question_not_required": true
       }
     },
     {

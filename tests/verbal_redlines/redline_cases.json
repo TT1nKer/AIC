@@ -65,7 +65,7 @@
       "case_id": "block-lesson-numeric",
       "surface": "lesson_text",
       "text": "该用户信任值大约 30，需小心。",
-      "expect": { "verdict": "block", "hit_rule": "regex:numeric_self_report_or_percentage_or_blacklist" }
+      "expect": { "verdict": "block", "hit_rule": "regex:lesson_field_numeric" }
     },
     {
       "case_id": "pass-lesson-qualitative",

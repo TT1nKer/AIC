@@ -36,11 +36,12 @@
     {
       "case_id": "B-low-trust-adds-conservative",
       "kind": "B_conflict",
+      "requires": "compiler",
       "input": {
         "recommended_response_mode": "light_playful_boundary",
         "speaker_model_digest": { "trust": 22 }
       },
-      "note": "trust<30 触发横切约束：候选中至少 1 项为保守动作 (conservative_action 或 clarifying_probe)。",
+      "note": "trust<30 触发横切约束：候选中至少 1 项为保守动作。此约束由 compiler 注入，非 pose_rules 内置。resolver-only runner 应跳过。",
       "expect": {
         "hard_constraints_must_include_src": ["pose:light_playful_boundary", "trust<30"],
         "required_candidate_types_superset_of_any_of": [
@@ -52,11 +53,12 @@
     {
       "case_id": "B-mobility-limits-candidates",
       "kind": "B_conflict",
+      "requires": "compiler",
       "input": {
         "recommended_response_mode": "half_serious_probe",
         "character_state_digest": { "mobility": 25 }
       },
-      "note": "mobility<40 触发横切约束：候选动作必须符合行动力限制。",
+      "note": "mobility<40 触发横切约束。此约束由 compiler 注入。resolver-only runner 应跳过。",
       "expect": {
         "hard_constraints_must_include_src": ["pose:half_serious_probe", "state:mobility"]
       }
