@@ -11,6 +11,7 @@ from pathlib import Path
 
 from pose_resolver import resolve as pose_resolve
 from redline_checker import check as redline_check
+from compiler import compile_phase_b
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -30,9 +31,37 @@ def build_ctx(inp: dict) -> dict:
     }
 
 
+def assert_pose_via_compiler(rules: dict, case: dict) -> list[str]:
+    """Run cases that need compiler (trust<30, mobility<40 cross-cuts)."""
+    failures = []
+    inp = case["input"]
+    ctx = {
+        "character_state": inp.get("character_state_digest", {}),
+        "speaker_model": inp.get("speaker_model_digest", {}),
+        "situation": inp.get("situation_digest", {}),
+        "lessons": [],
+        "now_iso": "",
+    }
+    cr = inp.get("current_read_digest", {"recommended_response_mode": inp["recommended_response_mode"]})
+    if "recommended_response_mode" not in cr:
+        cr["recommended_response_mode"] = inp["recommended_response_mode"]
+
+    result = compile_phase_b(ctx, cr, rules)
+    hc = result["decider_payload"]["hard_constraints"]
+    hc_srcs = {c["src"] for c in hc}
+    ex = case["expect"]
+
+    if "hard_constraints_must_include_src" in ex:
+        for want in ex["hard_constraints_must_include_src"]:
+            if want not in hc_srcs:
+                failures.append(f"compiler: missing src: {want}")
+
+    return failures
+
+
 def assert_pose(rules: dict, case: dict) -> list[str] | None:
     if case.get("requires") == "compiler":
-        return None  # skip — needs compiler, not just resolver
+        return assert_pose_via_compiler(rules, case)
     failures = []
     ctx = build_ctx(case["input"])
     result = pose_resolve(rules, case["input"]["recommended_response_mode"], ctx)

@@ -39,7 +39,7 @@
       "requires": "compiler",
       "input": {
         "recommended_response_mode": "light_playful_boundary",
-        "speaker_model_digest": { "trust": 22 }
+        "speaker_model_digest": { "trust_and_familiarity": { "trust": 22 } }
       },
       "note": "trust<30 触发横切约束：候选中至少 1 项为保守动作。此约束由 compiler 注入，非 pose_rules 内置。resolver-only runner 应跳过。",
       "expect": {
@@ -56,7 +56,7 @@
       "requires": "compiler",
       "input": {
         "recommended_response_mode": "half_serious_probe",
-        "character_state_digest": { "mobility": 25 }
+        "character_state_digest": { "constraints": { "mobility": 25 } }
       },
       "note": "mobility<40 触发横切约束。此约束由 compiler 注入。resolver-only runner 应跳过。",
       "expect": {
