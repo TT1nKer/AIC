@@ -16,10 +16,12 @@ import sys
 from pathlib import Path
 
 RUN_DECIDER = os.environ.get("RUN_DECIDER", "0") == "1"
+RUN_EXPRESSER = os.environ.get("RUN_EXPRESSER", "0") == "1"
 
 from compiler import compile_phase_a, compile_phase_b, fill_chosen_action
 from speaker_reader import read_speaker, SpeakerReaderError
 from decider import decide, DeciderError
+from expresser import express, ExpresserError
 from redline_checker import check as redline_check
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -52,6 +54,25 @@ def _maybe_run_decider(ctx, cr, phase_b, rules, redlines):
     return dec, errs
 
 
+def _maybe_run_expresser(phase_b, dec, redlines):
+    if not RUN_EXPRESSER or dec is None:
+        return None, []
+    try:
+        exp = express(
+            phase_b["expresser_payload"],
+            chosen_action=dec["output"]["chosen_action"],
+            chosen_candidate_type=dec["output"]["chosen_candidate_type"],
+            redlines=redlines,
+        )
+    except ExpresserError as e:
+        return None, [f"Expresser failed: {e}"]
+    errs: list[str] = []
+    if not exp["compliance"]["ok"]:
+        for e in exp["compliance"]["errors"]:
+            errs.append(f"expresser compliance: {e}")
+    return exp, errs
+
+
 def run_scenario_one_of(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str], dict]:
     """反例场景：允许 mode 落在 expect_one_of_modes 里任何一个。"""
     failures: list[str] = []
@@ -75,12 +96,15 @@ def run_scenario_one_of(rules: dict, redlines: dict, sc: dict) -> tuple[bool, li
 
     dec, dec_errs = _maybe_run_decider(ctx, cr, phase_b, rules, redlines)
     failures.extend(dec_errs)
+    exp, exp_errs = _maybe_run_expresser(phase_b, dec, redlines)
+    failures.extend(exp_errs)
 
     summary = {
         "current_read": cr,
         "resolved_mode": resolved,
         "escalated_by": trace["escalated_by"],
         "decider": dec,
+        "expresser": exp,
     }
     return len(failures) == 0, failures, summary
 
@@ -124,6 +148,8 @@ def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str]
 
     dec, dec_errs = _maybe_run_decider(ctx, cr, phase_b, rules, redlines)
     failures.extend(dec_errs)
+    exp, exp_errs = _maybe_run_expresser(phase_b, dec, redlines)
+    failures.extend(exp_errs)
 
     for s in ("utterance", "thought", "lesson_text"):
         pass  # not applicable here — no LLM-generated utterance yet
@@ -135,6 +161,7 @@ def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str]
         "hard_constraints_srcs": sorted(hc_srcs),
         "style_fence_count": len(expresser["style_fence"]),
         "decider": dec,
+        "expresser": exp,
     }
     return len(failures) == 0, failures, summary
 
@@ -153,6 +180,18 @@ def _print_summary(summary: dict):
         print(f"  decider.compliance_ok = {dec['compliance']['ok']}")
         if dec['compliance']['errors']:
             for e in dec['compliance']['errors']:
+                print(f"    !! {e}")
+    exp = summary.get("expresser")
+    if exp:
+        o = exp['output']
+        print(f"  expresser.action     = {o.get('action','')}")
+        print(f"  expresser.gesture    = {o.get('gesture','')}")
+        print(f"  expresser.facial     = {o.get('facial_expression','')}")
+        print(f"  expresser.utterance  = {o.get('utterance','')!r}")
+        print(f"  expresser.thought    = {o.get('thought','')!r}")
+        print(f"  expresser.compliance_ok = {exp['compliance']['ok']}")
+        if exp['compliance']['errors']:
+            for e in exp['compliance']['errors']:
                 print(f"    !! {e}")
 
 
