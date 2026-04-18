@@ -1,0 +1,125 @@
+{
+  "description": "对话机制压测集。每条是多轮用户脚本，附断言。断言针对 discourse_state 和 chosen_type，不针对具体措辞。",
+  "persona": "p1",
+  "scripts": [
+    {
+      "script_id": "D1-two-questions-one-answer",
+      "name": "两个问题只答一个",
+      "note": "用户一次抛两个问题。系统应记录两个 open_questions，答一个、留一个；或一次答两个。错误状态：两个都没答、或第二轮用户指出后仍不答。",
+      "turns": [
+        {
+          "user": "你是谁？你平时都在做什么？",
+          "assert": {
+            "open_questions_from_user_min": 2,
+            "chosen_candidate_type_in": ["direct_self_answer", "partial_answer_with_uncertainty"]
+          }
+        },
+        {
+          "user": "那另一个问题你还没答呢",
+          "assert": {
+            "answer_obligation": "high",
+            "chosen_candidate_type_in": ["direct_self_answer", "partial_answer_with_uncertainty", "reference_resolution"],
+            "chosen_utterance_must_not_be_probe": true
+          }
+        }
+      ]
+    },
+
+    {
+      "script_id": "D2-topic-switch",
+      "name": "用户强行换话题",
+      "note": "用户抛问题 → 用户不等回答直接换话题 → 检查 open_loops 是否降权或释放。错误状态：一直缠着旧问题不接新话题。",
+      "turns": [
+        {
+          "user": "你平时都吃些什么？"
+        },
+        {
+          "user": "算了不聊这个，今天天气挺好的",
+          "assert": {
+            "chosen_candidate_type_not_in": ["reference_resolution"],
+            "utterance_should_not_contain_any": ["你刚才", "上一个", "之前问的", "那个问题"]
+          }
+        }
+      ]
+    },
+
+    {
+      "script_id": "D3-character-drops-thread",
+      "name": "角色自抛话题但用户不接",
+      "note": "第一轮角色可能抛出反问或话题钩子；用户第二轮直接忽略。系统应放掉那个钩子，不该追着问。",
+      "turns": [
+        {
+          "user": "你是谁？"
+        },
+        {
+          "user": "嗯。",
+          "assert": {
+            "chosen_candidate_type_not_in": ["reference_resolution"],
+            "utterance_should_not_contain_any": ["你呢", "你刚才", "那你"]
+          }
+        }
+      ]
+    },
+
+    {
+      "script_id": "D4-multi-turn-referent",
+      "name": "长对话里的指代追踪",
+      "note": "多次出现'这事''那种人''刚才那个'。系统应逐轮接住指代，不会越滚越乱。",
+      "turns": [
+        {
+          "user": "你平时遇到难搞的人会怎么处理？"
+        },
+        {
+          "user": "你说的'难搞的人'是哪种？",
+          "assert": {
+            "chosen_candidate_type_in": ["reference_resolution", "direct_self_answer", "partial_answer_with_uncertainty"],
+            "discourse_state_unresolved_self_reference_not_null": true
+          }
+        },
+        {
+          "user": "那种人你会直接躲还是硬刚？",
+          "assert": {
+            "chosen_candidate_type_in": ["direct_self_answer", "partial_answer_with_uncertainty", "reference_resolution"]
+          }
+        }
+      ]
+    },
+
+    {
+      "script_id": "D5-user-asks-about-characters-utterance",
+      "name": "用户追问角色自己刚说的话",
+      "note": "角色说一句话后，用户追问里面的具体词。系统必须触发 reference_resolution 或 direct_self_answer，绝不能反问。",
+      "turns": [
+        {
+          "user": "你觉得人靠什么才能活得久一点？"
+        },
+        {
+          "user": "你说的'那种东西'具体是什么？",
+          "assert": {
+            "chosen_candidate_type_in": ["reference_resolution", "direct_self_answer", "partial_answer_with_uncertainty"],
+            "chosen_utterance_must_not_be_probe": true
+          }
+        }
+      ]
+    },
+
+    {
+      "script_id": "D6-plain-chat-drift",
+      "name": "纯闲聊多轮不掉线",
+      "note": "6 轮普通日常问题。错误状态：任一轮退回 half_serious_probe 或 curious_pivot 或 abstract_pivot。",
+      "turns": [
+        { "user": "你叫什么？" },
+        { "user": "你多大了？" },
+        { "user": "你喜欢吃辣的吗？" },
+        { "user": "为啥呢？" },
+        { "user": "那你睡眠好吗？" },
+        {
+          "user": "哈哈行吧",
+          "assert": {
+            "max_mode_other_than_direct_and_playful": 0
+          }
+        }
+      ]
+    }
+  ]
+}
