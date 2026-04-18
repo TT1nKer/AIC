@@ -11,11 +11,15 @@ live_runner — 只读联调：用真实 SpeakerReader 替换 mocked_current_rea
 
 from __future__ import annotations
 import json
+import os
 import sys
 from pathlib import Path
 
+RUN_DECIDER = os.environ.get("RUN_DECIDER", "0") == "1"
+
 from compiler import compile_phase_a, compile_phase_b, fill_chosen_action
 from speaker_reader import read_speaker, SpeakerReaderError
+from decider import decide, DeciderError
 from redline_checker import check as redline_check
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -23,6 +27,29 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def load(rel: str):
     return json.loads((ROOT / rel).read_text("utf-8"))
+
+
+def _maybe_run_decider(ctx, cr, phase_b, rules, redlines):
+    if not RUN_DECIDER:
+        return None, []
+    try:
+        dec = decide(
+            phase_b["decider_payload"],
+            current_read=cr,
+            rules=rules,
+            resolved_mode=phase_b["_trace"]["resolved_mode"],
+        )
+    except DeciderError as e:
+        return None, [f"Decider failed: {e}"]
+    errs: list[str] = []
+    if not dec["compliance"]["ok"]:
+        for e in dec["compliance"]["errors"]:
+            errs.append(f"decider compliance: {e}")
+    # Check redlines on chosen_action (utterance surface)
+    r = redline_check(redlines, "utterance", dec["output"]["chosen_action"])
+    if r["verdict"] != "pass":
+        errs.append(f"decider chosen_action violates redline: {r['hit_rule']}")
+    return dec, errs
 
 
 def run_scenario_one_of(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str], dict]:
@@ -46,10 +73,14 @@ def run_scenario_one_of(rules: dict, redlines: dict, sc: dict) -> tuple[bool, li
     if resolved in not_modes:
         failures.append(f"resolved_mode {resolved} is forbidden in this scenario")
 
+    dec, dec_errs = _maybe_run_decider(ctx, cr, phase_b, rules, redlines)
+    failures.extend(dec_errs)
+
     summary = {
         "current_read": cr,
         "resolved_mode": resolved,
         "escalated_by": trace["escalated_by"],
+        "decider": dec,
     }
     return len(failures) == 0, failures, summary
 
@@ -91,6 +122,9 @@ def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str]
     if pose_one_of and not any(p in hc_srcs for p in pose_one_of):
         failures.append(f"decider hard_constraints must contain one of {pose_one_of}")
 
+    dec, dec_errs = _maybe_run_decider(ctx, cr, phase_b, rules, redlines)
+    failures.extend(dec_errs)
+
     for s in ("utterance", "thought", "lesson_text"):
         pass  # not applicable here — no LLM-generated utterance yet
 
@@ -100,6 +134,7 @@ def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str]
         "escalated_by": trace["escalated_by"],
         "hard_constraints_srcs": sorted(hc_srcs),
         "style_fence_count": len(expresser["style_fence"]),
+        "decider": dec,
     }
     return len(failures) == 0, failures, summary
 
@@ -110,6 +145,15 @@ def _print_summary(summary: dict):
     print(f"  likely_mode={cr.get('likely_mode')}  rec={cr.get('recommended_response_mode')}  conf={cr.get('confidence')}")
     print(f"  resolved_mode={summary.get('resolved_mode')}  escalated_by={summary.get('escalated_by')}")
     print(f"  evidence = {cr.get('evidence')}")
+    dec = summary.get("decider")
+    if dec:
+        print(f"  decider.chosen = {dec['output']['chosen_action']}  [{dec['output']['chosen_candidate_type']}]")
+        cand_types = [(c["candidate_type"], c["fit_score"]) for c in dec['output']['candidate_actions']]
+        print(f"  decider.candidates = {cand_types}")
+        print(f"  decider.compliance_ok = {dec['compliance']['ok']}")
+        if dec['compliance']['errors']:
+            for e in dec['compliance']['errors']:
+                print(f"    !! {e}")
 
 
 def main():
