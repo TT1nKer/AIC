@@ -46,9 +46,16 @@ def _render(template: str, slots: dict[str, str]) -> str:
     return out
 
 
+BUCKET_KEYS = [
+    "playfulness_signals", "distress_signals", "seriousness_signals",
+    "baseline_deviation_signals", "operational_risk_signals", "trust_risk_signals",
+]
+
+
 def _validate(cr: dict) -> list[str]:
     errs: list[str] = []
-    req = ["likely_mode", "secondary_mode", "appears_playful", "appears_serious",
+    req = ["evidence_buckets", "bucket_evidence",
+           "likely_mode", "secondary_mode", "appears_playful", "appears_serious",
            "appears_distressed", "deviation_from_baseline", "confidence",
            "evidence", "recommended_response_mode"]
     for k in req:
@@ -56,6 +63,16 @@ def _validate(cr: dict) -> list[str]:
             errs.append(f"missing: {k}")
     if errs:
         return errs
+
+    buckets = cr.get("evidence_buckets", {})
+    for bk in BUCKET_KEYS:
+        v = buckets.get(bk)
+        if not isinstance(v, int) or not (0 <= v <= 100):
+            errs.append(f"evidence_buckets.{bk}: need int 0..100, got {v!r}")
+    ev_map = cr.get("bucket_evidence", {})
+    for bk in BUCKET_KEYS:
+        if bk not in ev_map or not isinstance(ev_map[bk], str) or not ev_map[bk]:
+            errs.append(f"bucket_evidence.{bk}: need non-empty string")
 
     if cr["likely_mode"] not in VALID_LIKELY_MODES:
         errs.append(f"likely_mode not in enum: {cr['likely_mode']}")

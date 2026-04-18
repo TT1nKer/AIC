@@ -25,6 +25,35 @@ def load(rel: str):
     return json.loads((ROOT / rel).read_text("utf-8"))
 
 
+def run_scenario_one_of(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str], dict]:
+    """反例场景：允许 mode 落在 expect_one_of_modes 里任何一个。"""
+    failures: list[str] = []
+    ctx = sc["context"]
+    phase_a = compile_phase_a(ctx, rules)
+    try:
+        cr = read_speaker(phase_a)
+    except SpeakerReaderError as e:
+        return False, [f"SpeakerReader rejected: {e}"], {}
+
+    phase_b = compile_phase_b(ctx, cr, rules)
+    trace = phase_b["_trace"]
+    resolved = trace["resolved_mode"]
+
+    one_of = set(sc.get("expect_one_of_modes", []))
+    not_modes = set(sc.get("expect_not_modes", []))
+    if one_of and resolved not in one_of:
+        failures.append(f"resolved_mode {resolved} not in expected set {sorted(one_of)}")
+    if resolved in not_modes:
+        failures.append(f"resolved_mode {resolved} is forbidden in this scenario")
+
+    summary = {
+        "current_read": cr,
+        "resolved_mode": resolved,
+        "escalated_by": trace["escalated_by"],
+    }
+    return len(failures) == 0, failures, summary
+
+
 def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str], dict]:
     failures: list[str] = []
     ctx = sc["context"]
@@ -46,6 +75,10 @@ def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str]
     if expected_mode and trace["resolved_mode"] != expected_mode:
         failures.append(f'resolved_mode: want {expected_mode}, got {trace["resolved_mode"]}')
 
+    one_of = ex.get("resolved_mode_one_of")
+    if one_of and trace["resolved_mode"] not in one_of:
+        failures.append(f'resolved_mode: want one of {one_of}, got {trace["resolved_mode"]}')
+
     hc_srcs = {c["src"] for c in decider["hard_constraints"]}
     for want in ex.get("decider_hard_constraints_must_include_src", []):
         if want not in hc_srcs:
@@ -53,6 +86,10 @@ def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str]
     for bad in ex.get("decider_hard_constraints_must_not_include_src", []):
         if bad in hc_srcs:
             failures.append(f"decider unexpected src: {bad}")
+
+    pose_one_of = ex.get("decider_hard_constraints_pose_src_one_of")
+    if pose_one_of and not any(p in hc_srcs for p in pose_one_of):
+        failures.append(f"decider hard_constraints must contain one of {pose_one_of}")
 
     for s in ("utterance", "thought", "lesson_text"):
         pass  # not applicable here — no LLM-generated utterance yet
@@ -67,39 +104,43 @@ def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str]
     return len(failures) == 0, failures, summary
 
 
+def _print_summary(summary: dict):
+    cr = summary.get("current_read", {})
+    print(f"  buckets = {cr.get('evidence_buckets')}")
+    print(f"  likely_mode={cr.get('likely_mode')}  rec={cr.get('recommended_response_mode')}  conf={cr.get('confidence')}")
+    print(f"  resolved_mode={summary.get('resolved_mode')}  escalated_by={summary.get('escalated_by')}")
+    print(f"  evidence = {cr.get('evidence')}")
+
+
 def main():
     rules = load("rules/pose_rules.json")
     redlines = load("rules/verbal_redlines.json")
-    data = load("tests/e2e/fixtures.json")
 
     total = passed = failed = 0
-    print("\n── LIVE E2E (SpeakerReader real, Decider/Expresser mocked downstream) ──\n")
 
-    for sc in data["scenarios"]:
-        total += 1
-        sid = sc["scenario_id"]
-        name = sc["name"]
-        print(f"── {sid}  {name} ──")
-        ok, errs, summary = run_scenario(rules, redlines, sc)
-        if summary:
-            print(f"  current_read.likely_mode     = {summary['current_read'].get('likely_mode')}")
-            print(f"  current_read.rec_response    = {summary['current_read'].get('recommended_response_mode')}")
-            print(f"  current_read.deviation       = {summary['current_read'].get('deviation_from_baseline')}")
-            print(f"  current_read.appears_distress= {summary['current_read'].get('appears_distressed')}")
-            print(f"  current_read.confidence      = {summary['current_read'].get('confidence')}")
-            print(f"  current_read.evidence        = {summary['current_read'].get('evidence')}")
-            print(f"  resolved_mode                = {summary['resolved_mode']}")
-            print(f"  escalated_by                 = {summary['escalated_by']}")
-            print(f"  hard_constraints_srcs        = {summary['hard_constraints_srcs']}")
-        if ok:
-            passed += 1
-            print(f"  PASS\n")
-        else:
-            failed += 1
-            print(f"  FAIL")
-            for e in errs:
-                print(f"    {e}")
-            print()
+    def run_block(label: str, data: dict, fn):
+        nonlocal total, passed, failed
+        print(f"\n── {label} ──\n")
+        for sc in data["scenarios"]:
+            total += 1
+            sid = sc["scenario_id"]
+            name = sc["name"]
+            print(f"── {sid}  {name} ──")
+            ok, errs, summary = fn(rules, redlines, sc)
+            if summary:
+                _print_summary(summary)
+            if ok:
+                passed += 1
+                print(f"  PASS\n")
+            else:
+                failed += 1
+                print(f"  FAIL")
+                for e in errs:
+                    print(f"    {e}")
+                print()
+
+    run_block("GOLDEN (strict)", load("tests/e2e/fixtures.json"), run_scenario)
+    run_block("COUNTER-EXAMPLES (one-of)", load("tests/e2e/counter_examples.json"), run_scenario_one_of)
 
     print(f"{'='*30}")
     print(f"LIVE  Total: {total}  Pass: {passed}  Fail: {failed}")
