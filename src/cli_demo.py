@@ -39,16 +39,23 @@ def load(rel: str):
 # ── personas (keyed by name) ──
 
 def _personas() -> dict[str, dict]:
-    """Pull initial contexts from E2E fixtures. Easy and kept in sync."""
+    """Pull initial contexts from E2E fixtures + any single-persona files under tests/e2e/."""
     fx = load("tests/e2e/fixtures.json")
     personas = {}
     for sc in fx["scenarios"]:
         key = sc["scenario_id"].lower().replace("e2e-", "p")
-        ctx = json.loads(json.dumps(sc["context"]))  # deep copy
+        ctx = json.loads(json.dumps(sc["context"]))
         ctx["situation"] = {"user_message": ""}
         ctx["recent_turns"] = []
         personas[key] = {"name": sc["name"], "context": ctx}
-    # friendly aliases
+    # single-persona JSON files (produced by from_doomsday.py etc.)
+    for f in sorted((ROOT / "tests" / "e2e").glob("persona_*.json")):
+        data = json.loads(f.read_text("utf-8"))
+        key = f.stem.replace("persona_", "")  # e.g. doomsday_t014
+        ctx = data.get("context", data)
+        ctx["situation"] = {"user_message": ""}
+        ctx["recent_turns"] = []
+        personas[key] = {"name": data.get("scenario_id", key), "context": ctx}
     personas["default"] = personas.get("p1", personas[next(iter(personas))])
     return personas
 
