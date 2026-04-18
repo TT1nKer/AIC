@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -90,19 +91,41 @@ def _debug(summary: dict, exp_out: dict, character_name: str) -> str:
 
 # ── one turn ──
 
+def _stage(label: str):
+    """Print an inline progress tag; flush immediately so it shows before the API blocks."""
+    sys.stdout.write(f"  \x1b[2m[{label}...]\x1b[0m ")
+    sys.stdout.flush()
+    return time.time()
+
+
+def _stage_done(t0: float):
+    dt = time.time() - t0
+    sys.stdout.write(f"\x1b[2m{dt:.1f}s\x1b[0m  ")
+    sys.stdout.flush()
+
+
+def _stage_end():
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+
+
 def run_turn(ctx: dict, rules: dict, redlines: dict, user_msg: str) -> tuple[dict, dict, list[str]]:
     ctx["situation"] = {"user_message": user_msg}
     ctx["now_iso"] = _now_iso()
 
+    t0 = _stage("read")
     try:
         phase_a = compile_phase_a(ctx, rules)
         cr = read_speaker(phase_a)
     except SpeakerReaderError as e:
+        _stage_end()
         return {}, {}, [f"SpeakerReader: {e}"]
+    _stage_done(t0)
 
     phase_b = compile_phase_b(ctx, cr, rules)
     trace = phase_b["_trace"]
 
+    t0 = _stage("decide")
     try:
         dec = decide(
             phase_b["decider_payload"],
@@ -110,10 +133,14 @@ def run_turn(ctx: dict, rules: dict, redlines: dict, user_msg: str) -> tuple[dic
             resolved_mode=trace["resolved_mode"],
         )
     except DeciderError as e:
+        _stage_end()
         return {}, {}, [f"Decider: {e}"]
     if not dec["compliance"]["ok"]:
+        _stage_end()
         return {}, {}, [f"Decider compliance: {err}" for err in dec["compliance"]["errors"]]
+    _stage_done(t0)
 
+    t0 = _stage("express")
     try:
         exp = express(
             phase_b["expresser_payload"],
@@ -122,9 +149,13 @@ def run_turn(ctx: dict, rules: dict, redlines: dict, user_msg: str) -> tuple[dic
             redlines=redlines,
         )
     except ExpresserError as e:
+        _stage_end()
         return {}, {}, [f"Expresser: {e}"]
     if not exp["compliance"]["ok"]:
+        _stage_end()
         return {}, {}, [f"Expresser compliance: {err}" for err in exp["compliance"]["errors"]]
+    _stage_done(t0)
+    _stage_end()
 
     summary = {
         "current_read": cr,
