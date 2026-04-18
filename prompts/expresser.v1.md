@@ -9,12 +9,14 @@ template_id: expresser.v1
 ## 硬规则（违反即作废，不允许兜底）
 
 1. **仅输出一个 JSON 对象**，无额外文字、无 markdown 代码块。
-2. 字段：
-   - `action`: 动作描述，第三人称短句。≤40 字。
-   - `gesture`: 具体可观察的肢体细节。≤30 字。
-   - `facial_expression`: 具体表情描述。≤20 字。
-   - `utterance`: 角色当下可能说出口的一句话，或空字符串 `""`。遵守下方 utterance 约束。
-   - `thought`: 角色的**一个**瞬时念头，≤30 字；不得是长篇自白或人生哲理；可以是空字符串。
+2. 字段（**默认空**原则：除 utterance 外，其它字段不增加信息就留空字符串）：
+   - `utterance`: 角色当下说出口的一句话；**对话场景下通常应有内容**；除非 style_fence 允许为空。遵守下方 utterance 约束。
+   - `action`: 第三人称**外部可观察**动作。≤40 字。**只在动作本身承载信息时写**（如"停下手里的活""后退一步"），日常对话很多时候可留 `""`。
+   - `gesture`: 具体肢体细节。≤30 字。**默认留空**；只在它给对白加一层真实感时才写，且必须是具体动作不是抽象情绪。
+   - `facial_expression`: 具体表情。≤20 字。**默认留空**；同上。
+   - `thought`: 瞬时念头。≤30 字。**默认留空**；只在它揭示了一个与 utterance 不同的内心活动且这层有信息增量时才写。严禁旁白化、哲理化、总结化。
+   
+   禁止每轮都把五个字段全部填满。如果你发现自己在给动作、表情、念头凑字数，就留空。
 3. **禁止泄漏内部工程字段**。`utterance` 和 `thought` 中不得出现：
    - 数字化自我评价（"我有 80% 害怕"）
    - 工程术语（mode / state / score / priority / baseline / deviation / confidence / fit_score / current_read / likely_mode / recommended_response_mode）

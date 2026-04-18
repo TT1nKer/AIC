@@ -21,10 +21,13 @@ VALID_LIKELY_MODES = {
 }
 VALID_SECONDARY = VALID_LIKELY_MODES | {"none"}
 VALID_RESPONSE_MODES = {
+    "direct_engage",
     "playful_echo", "light_playful_boundary", "curious_pivot",
     "half_serious_probe", "soft_boundary", "hard_boundary",
     "check_on_state", "disengage",
 }
+VALID_ANSWER_OBLIGATION = {"high", "medium", "low", "none"}
+VALID_TOPIC_PRESSURE = {"must_answer_before_pivot", "free"}
 
 
 class SpeakerReaderError(Exception):
@@ -93,6 +96,21 @@ def _validate(cr: dict) -> list[str]:
     ev = cr.get("evidence")
     if not isinstance(ev, list) or not (1 <= len(ev) <= 5) or not all(isinstance(x, str) and x for x in ev):
         errs.append("evidence: need 1..5 non-empty strings")
+
+    ds = cr.get("discourse_state")
+    if not isinstance(ds, dict):
+        errs.append("discourse_state: must be object")
+    else:
+        oq = ds.get("open_questions_from_user")
+        if not isinstance(oq, list) or not all(isinstance(x, str) for x in oq):
+            errs.append("discourse_state.open_questions_from_user: list of strings")
+        usr = ds.get("unresolved_self_reference", None)
+        if usr is not None and not isinstance(usr, str):
+            errs.append("discourse_state.unresolved_self_reference: string or null")
+        if ds.get("answer_obligation") not in VALID_ANSWER_OBLIGATION:
+            errs.append(f"discourse_state.answer_obligation not in enum: {ds.get('answer_obligation')}")
+        if ds.get("topic_pressure") not in VALID_TOPIC_PRESSURE:
+            errs.append(f"discourse_state.topic_pressure not in enum: {ds.get('topic_pressure')}")
 
     return errs
 

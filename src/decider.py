@@ -84,6 +84,46 @@ def _validate_schema(d: dict) -> list[str]:
     return errs
 
 
+ANSWER_SATISFYING_TYPES = {
+    "direct_self_answer", "partial_answer_with_uncertainty", "reference_resolution"
+}
+
+
+def _validate_discourse(d: dict, discourse: dict) -> list[str]:
+    errs: list[str] = []
+    cands = d.get("candidate_actions", [])
+    chosen_type = d.get("chosen_candidate_type")
+    present_types = {c.get("candidate_type") for c in cands}
+
+    usr = (discourse or {}).get("unresolved_self_reference")
+    # Rule 8 first — more specific. When there's an unresolved reference, that's
+    # the required response and rule 7 yields to it.
+    if usr:
+        if "reference_resolution" not in present_types:
+            errs.append("discourse rule 8: unresolved_self_reference present but no reference_resolution candidate")
+        elif chosen_type not in ANSWER_SATISFYING_TYPES:
+            errs.append(f"discourse rule 8: unresolved_self_reference present but chose {chosen_type} (need reference_resolution or a direct answer that resolves it)")
+    else:
+        # Rule 7 only fires when there's no outstanding reference
+        oblig = (discourse or {}).get("answer_obligation")
+        if oblig == "high":
+            if not (present_types & ANSWER_SATISFYING_TYPES):
+                errs.append("discourse rule 7: answer_obligation=high but no direct-answer candidate")
+            elif chosen_type not in ANSWER_SATISFYING_TYPES:
+                reasons = d.get("why_this_action", [])
+                joined = " ".join(reasons) if isinstance(reasons, list) else str(reasons)
+                if chosen_type == "clarifying_probe" and not any(k in joined for k in ("信息", "不足", "不够", "无法", "无从")):
+                    errs.append("discourse rule 7: chose clarifying_probe without info-insufficiency justification")
+                elif chosen_type != "clarifying_probe":
+                    errs.append(f"discourse rule 7: answer_obligation=high but chose {chosen_type}")
+
+    pressure = (discourse or {}).get("topic_pressure")
+    if pressure == "must_answer_before_pivot" and chosen_type == "abstract_pivot":
+        errs.append("discourse rule 9: topic_pressure=must_answer_before_pivot but chose abstract_pivot")
+
+    return errs
+
+
 def _validate_constraints(
     d: dict,
     *,
@@ -206,6 +246,7 @@ def decide(
     slots["FORBIDDEN_TYPES"] = _ser(forbidden)
     slots["FIT_SCORE_CAPS"] = _ser(fit_caps)
     slots["TIEBREAKERS"] = _ser(payload.get("tiebreakers"))
+    slots["DISCOURSE_STATE"] = _ser(current_read.get("discourse_state", {}))
     user = _render(user_template, slots)
 
     try:
@@ -229,9 +270,11 @@ def decide(
         fit_score_caps=fit_caps,
         mandatory_chosen_types=mandatory_chosen,
     )
+    discourse_errs = _validate_discourse(out, current_read.get("discourse_state", {}))
+    all_errs = comp_errs + discourse_errs
     return {
         "output": out,
-        "compliance": {"ok": not comp_errs, "errors": comp_errs, "phase": "constraints"},
+        "compliance": {"ok": not all_errs, "errors": all_errs, "phase": "constraints"},
         "meta": {
             "resolved_mode": resolved_mode,
             "required_types": required,

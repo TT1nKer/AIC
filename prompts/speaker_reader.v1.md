@@ -48,10 +48,25 @@ template_id: speaker_reader.v1
 - `distress_signal` → `check_on_state`（**硬**）
 - `joking` / `meme_play` 且 `operational_risk_signals < 30` → `playful_echo`
 - `joking` / `meme_play` 且 `operational_risk_signals ≥ 30` → `light_playful_boundary`（接梗但不给实操）
-- `serious_inquiry` / `curiosity` 无实操风险 → `curious_pivot`
+- **`serious_inquiry` / `curiosity` 无实操风险**：
+  - 若是直接、低风险、可答的问题（身份、偏好、看法、指代说明、生活问答等），**默认 `direct_engage`**（直接回应），不要滥用 `curious_pivot` 转抽象
+  - 只有当话题本身需要拉到原理/历史/结构层才合适才选 `curious_pivot`（如"冷战威慑逻辑哪边更依赖第一击"）
 - `ambiguous` / `boundary_test` → `half_serious_probe`
 - `operational_risk_signals` 极高且意图倾向真实执行 → `soft_boundary` 或 `hard_boundary`
 - `malicious` 或关系崩溃 → `disengage`
+
+### 步骤 4：产出 discourse_state（对话状态）
+
+这是独立于证据桶的一层，维持对话机制。必须填：
+
+- `open_questions_from_user`: 数组。本轮或最近几轮用户提出、**尚未被角色回答**的直接问题列表，每条 ≤20 字；若无为 `[]`。
+- `unresolved_self_reference`: 字符串 或 `null`。角色**自己上一句**里出现过、对方本轮正在追问的指代或模糊所指（如用户说"什么事？"指向角色上一句的"这种事"）。
+- `answer_obligation`: `"high" | "medium" | "low" | "none"`。本轮用户是否有明确问题需要被回答：
+  - 用户直接问角色（"你是谁""你觉得我怎样"）且风险低 → `high`
+  - 用户追问指代或要求解释前文 → `high`
+  - 用户陈述/玩笑/闲扯 → `low` 或 `none`
+  - distress 话题 → `medium`（关心优先，但仍欠一个回应）
+- `topic_pressure`: `"must_answer_before_pivot" | "free"`。若 `answer_obligation=high` 或存在 `unresolved_self_reference`，必为 `must_answer_before_pivot`。
 
 ## 输出约束
 
@@ -67,7 +82,8 @@ template_id: speaker_reader.v1
    - `deviation_from_baseline`: 0~100 整数（= baseline_deviation_signals）
    - `confidence`: 0~1 小数
    - `evidence`: 1~5 条字符串数组，综合性理由（可引桶外信号）
-   - `recommended_response_mode`: `playful_echo` | `light_playful_boundary` | `curious_pivot` | `half_serious_probe` | `soft_boundary` | `hard_boundary` | `check_on_state` | `disengage`
+   - `recommended_response_mode`: `direct_engage` | `playful_echo` | `light_playful_boundary` | `curious_pivot` | `half_serious_probe` | `soft_boundary` | `hard_boundary` | `check_on_state` | `disengage`
+   - `discourse_state`: object，按步骤 4 定义
 3. 不要输出角色台词、不要复述敏感信息。
 
 # USER

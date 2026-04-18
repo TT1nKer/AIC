@@ -1,8 +1,30 @@
 {
   "$schema": "../schemas/pose-rules.v1.json",
-  "version": "1.0.1",
+  "version": "1.1.0",
 
   "modes": {
+    "direct_engage": {
+      "description": "平等的日常对话。低风险、无 distress、无极端话题、有直接可答的问题时，首选直接回应。",
+      "priority": 20,
+      "required_candidate_types": ["direct_self_answer"],
+      "forbidden_candidate_types": ["operational_answer", "lecture", "abstract_pivot"],
+      "fit_score_caps": {
+        "operational_answer": 0,
+        "lecture": 10,
+        "abstract_pivot": 30
+      },
+      "decider_constraints": [
+        { "text": "候选至少 1 项为 direct_self_answer；若存在未解指代，再加 1 项 reference_resolution", "src": "pose:direct_engage" },
+        { "text": "chosen_action 原则上应为 direct_self_answer 或 partial_answer_with_uncertainty；选 clarifying_probe 必须在 why_this_action 说明是信息真的不够而非回避", "src": "pose:direct_engage" }
+      ],
+      "expresser_style": {
+        "allow": ["direct_statement", "brief_self_reveal", "open_followup"],
+        "forbid": ["lecture", "moralizing", "apology_soften", "operational_detail"],
+        "utterance_max_chars": 50
+      },
+      "tiebreaker_overrides": null
+    },
+
     "playful_echo": {
       "description": "顺着对方的玩笑接球，不转严肃。",
       "priority": 30,
@@ -178,6 +200,9 @@
   },
 
   "candidate_type_taxonomy": {
+    "direct_self_answer":       "正面直接回答对方关于角色本身的问题；允许末尾附一个小反问但不得用反问替代回答",
+    "partial_answer_with_uncertainty": "给出部分直答并承认信息不足或不确定，而不是反问回避",
+    "reference_resolution":     "解释自己上一句里用到的指代或模糊所指（'这种事'、'那个人'等），不得换话题",
     "joke_callback":            "顺着前文梗接一句或做一个动作",
     "joke_callback_with_line":  "接梗同时轻轻表态不继续某方向",
     "abstract_pivot":           "把话题升到原理/历史/结构层",

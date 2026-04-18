@@ -18,6 +18,16 @@ template_id: decider.v1
 4. **候选多样性**：至少覆盖不同风险档（保守 / 折中 / 激进），除非 hard_constraints 明确禁止激进档。
 5. **chosen_action 原则上取 fit_score 最高者**。若目标冲突导致取非最高，必须在 `why_this_action` 里说明。
 6. **禁止输出内部工程字段字面**：不得出现 `hard_constraint / mode / fit_score / src / baseline / deviation` 等词。`why_this_action` 用自然语言说明，但不要写成"因为 current_read 说..."这种元认知句。
+
+### 对话机制（硬规则，优先级高于姿态偏好）
+
+7. **answer_obligation = high** 时：候选中**必须**至少有一项是 `direct_self_answer` 或 `partial_answer_with_uncertainty`；且 `chosen_action` 默认取该类之一。选 `clarifying_probe` 或 `abstract_pivot` 作 chosen 只允许在信息真的不足时，并必须在 `why_this_action` 明确说明。
+8. **unresolved_self_reference 非空** 时：候选中**必须**包含 `reference_resolution`（解释自己上一句的指代），`chosen_action` 必须优先取此类；禁止转移话题或反问。
+9. **topic_pressure = must_answer_before_pivot** 时：禁止用 `abstract_pivot` 作 chosen_action，除非候选已经满足 7/8 的要求后再附加它作为非 chosen 候选。
+10. 真人直答模板参考（仅示意，不要逐字抄）：
+    - "你是谁" → "A07，之前做维修的。你呢？"（brief self-answer + open_followup）
+    - "你觉得我是怎样的人" → "才聊几句，说不好。你挺会试人这点是真的。"（partial_answer_with_uncertainty）
+    - "什么事？" → 解释自己上一句里"这种事"指的是什么，不能再反问。
 7. **action 字段是"外部可观察动作"的第三人称短描述**，不是对白。例：
    - OK: "停下手里的动作，问对方现在怎么样"
    - OK: "接住对方的梗但不给实操"
@@ -63,6 +73,9 @@ template_id: decider.v1
 
 【tiebreakers（仅在 fit_score 差 ≤5 时生效）】
 {{TIEBREAKERS}}
+
+【discourse_state（对话机制，触发硬规则 7/8/9）】
+{{DISCOURSE_STATE}}
 
 【已知关于此人的 lessons（若有）】
 {{LESSONS}}
