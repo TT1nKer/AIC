@@ -24,6 +24,11 @@ from compiler import compile_phase_a, compile_phase_b
 from speaker_reader import read_speaker, SpeakerReaderError
 from decider import decide, DeciderError
 from expresser import express, ExpresserError
+from association_gate import gate as association_gate
+from schema_matcher import match as schema_match, apply_state_shifts, SchemaMatcherError
+
+import os as _os_v2
+AICHAR_V2 = _os_v2.environ.get("AICHAR_V2", "0") == "1"
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS_PATH = ROOT / "tests" / "dialogue" / "dialogue_scripts.json"
@@ -58,6 +63,24 @@ def run_turn(ctx: dict, rules: dict, redlines: dict, user_msg: str) -> tuple[dic
         cr = read_speaker(phase_a)
     except SpeakerReaderError as e:
         return {}, [f"SpeakerReader: {e}"]
+
+    if AICHAR_V2:
+        level = association_gate(cr, ctx)
+        cr["schema_gate_level"] = level
+        if level != "off":
+            try:
+                hits = schema_match(ctx, cr, level)
+            except SchemaMatcherError as e:
+                return {}, [f"SchemaMatcher: {e}"]
+            cr["schema_hits"] = hits
+            cr["internal_pressures"] = apply_state_shifts(
+                ctx.get("character_state", {}).get("internal_pressures", {}), hits
+            )
+        else:
+            cr["schema_hits"] = []
+            cr["internal_pressures"] = dict(
+                ctx.get("character_state", {}).get("internal_pressures", {})
+            )
 
     phase_b = compile_phase_b(ctx, cr, rules)
     trace = phase_b["_trace"]

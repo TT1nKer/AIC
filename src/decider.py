@@ -42,6 +42,18 @@ def _render(template: str, slots: dict[str, str]) -> str:
     return out
 
 
+def _strip_v2_blocks(text: str) -> str:
+    """Remove the 【schema_hits】 and 【internal_pressures】 sections to keep v1 prompt
+    bit-for-bit identical when no v2 data is present. Each block starts at the
+    marker line and ends at the next blank line following its payload."""
+    import re
+    pattern = re.compile(
+        r"\n\n【(?:schema_hits|internal_pressures)[^\n]*】.*?(?=\n\n【|\n\n按|\Z)",
+        re.DOTALL,
+    )
+    return pattern.sub("", text)
+
+
 def _ser(obj) -> str:
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":"))
 
@@ -89,27 +101,38 @@ ANSWER_SATISFYING_TYPES = {
 }
 
 
-def _validate_discourse(d: dict, discourse: dict) -> list[str]:
+def _validate_discourse(d: dict, discourse: dict, mode_required_types: list[str] | None = None) -> list[str]:
+    """Rule 7/8/9 discourse validation.
+
+    Rule 7: answer_obligation=high -> chosen must be a direct-answer type OR
+    the resolved mode's required_candidate_type (because choosing the mode's
+    required type IS the correct answer for that pose, e.g. check_on_state ->
+    stop_joke_ask_state).
+    """
     errs: list[str] = []
     cands = d.get("candidate_actions", [])
     chosen_type = d.get("chosen_candidate_type")
     present_types = {c.get("candidate_type") for c in cands}
+    satisfying = set(ANSWER_SATISFYING_TYPES) | set(mode_required_types or [])
 
     usr = (discourse or {}).get("unresolved_self_reference")
-    # Rule 8 first — more specific. When there's an unresolved reference, that's
-    # the required response and rule 7 yields to it.
+    # Rule 8 first — more specific. When there's an unresolved reference, the
+    # chosen must resolve it: reference_resolution explicitly, a direct answer
+    # that implicitly resolves it, or the mode's required type when that
+    # required type itself can serve as resolution (e.g., direct_self_answer
+    # of "为啥喜欢辣" IS the resolution).
     if usr:
-        if "reference_resolution" not in present_types:
-            errs.append("discourse rule 8: unresolved_self_reference present but no reference_resolution candidate")
-        elif chosen_type not in ANSWER_SATISFYING_TYPES:
-            errs.append(f"discourse rule 8: unresolved_self_reference present but chose {chosen_type} (need reference_resolution or a direct answer that resolves it)")
+        if not (present_types & satisfying):
+            errs.append("discourse rule 8: unresolved_self_reference present but no resolution-capable candidate")
+        elif chosen_type not in satisfying:
+            errs.append(f"discourse rule 8: unresolved_self_reference present but chose {chosen_type} (need reference_resolution / direct answer / mode's required type)")
     else:
         # Rule 7 only fires when there's no outstanding reference
         oblig = (discourse or {}).get("answer_obligation")
         if oblig == "high":
-            if not (present_types & ANSWER_SATISFYING_TYPES):
-                errs.append("discourse rule 7: answer_obligation=high but no direct-answer candidate")
-            elif chosen_type not in ANSWER_SATISFYING_TYPES:
+            if not (present_types & satisfying):
+                errs.append("discourse rule 7: answer_obligation=high but no answer-satisfying candidate")
+            elif chosen_type not in satisfying:
                 reasons = d.get("why_this_action", [])
                 joined = " ".join(reasons) if isinstance(reasons, list) else str(reasons)
                 if chosen_type == "clarifying_probe" and not any(k in joined for k in ("信息", "不足", "不够", "无法", "无从")):
@@ -247,7 +270,16 @@ def decide(
     slots["FIT_SCORE_CAPS"] = _ser(fit_caps)
     slots["TIEBREAKERS"] = _ser(payload.get("tiebreakers"))
     slots["DISCOURSE_STATE"] = _ser(current_read.get("discourse_state", {}))
+    hits = current_read.get("schema_hits")
+    pressures = current_read.get("internal_pressures")
+    has_v2_data = bool(hits) or (pressures and any(v != 0 for v in pressures.values()))
+    slots["SCHEMA_HITS"] = _ser(hits or [])
+    slots["INTERNAL_PRESSURES"] = _ser(pressures or {})
     user = _render(user_template, slots)
+    if not has_v2_data:
+        # Strip the entire 【schema_hits】 and 【internal_pressures】 blocks so v1
+        # prompt stays bit-for-bit identical when no v2 data is present.
+        user = _strip_v2_blocks(user)
 
     try:
         out = chat_json(system, user, model=model, temperature=0.3, max_tokens=1500)
@@ -270,7 +302,11 @@ def decide(
         fit_score_caps=fit_caps,
         mandatory_chosen_types=mandatory_chosen,
     )
-    discourse_errs = _validate_discourse(out, current_read.get("discourse_state", {}))
+    discourse_errs = _validate_discourse(
+        out,
+        current_read.get("discourse_state", {}),
+        mode_required_types=required,
+    )
     all_errs = comp_errs + discourse_errs
     return {
         "output": out,

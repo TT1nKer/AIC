@@ -1,0 +1,176 @@
+{
+  "description": "association_gate 单元测试。纯代码、无 LLM。每条给 mocked current_read + ctx，断言 gate 返回档位。",
+  "cases": [
+    {
+      "case_id": "G-off-plain-greeting",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "low" },
+        "evidence_buckets": { "baseline_deviation_signals": 5 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "早啊" }
+      },
+      "expect": "off"
+    },
+    {
+      "case_id": "G-off-high-oblig-direct-question",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "high" },
+        "evidence_buckets": { "baseline_deviation_signals": 20 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "你是谁" }
+      },
+      "expect": "off"
+    },
+    {
+      "case_id": "G-light-medium-dev",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "medium" },
+        "evidence_buckets": { "baseline_deviation_signals": 45 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "不太对劲啊" }
+      },
+      "expect": "light"
+    },
+    {
+      "case_id": "G-light-followup-low-dev",
+      "current_read": {
+        "evidence_buckets": { "baseline_deviation_signals": 20 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "再说说" }
+      },
+      "expect": "light"
+    },
+    {
+      "case_id": "G-deep-followup-high-dev",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "high" },
+        "evidence_buckets": { "baseline_deviation_signals": 70 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "为什么没有更多的细节" }
+      },
+      "expect": "deep"
+    },
+    {
+      "case_id": "G-deep-detail-push",
+      "current_read": {
+        "evidence_buckets": { "baseline_deviation_signals": 65 }
+      },
+      "ctx": {
+        "recent_turns": [
+          { "role": "user", "text": "具体点", "timestamp": "2026-04-18T00:00:00+08:00" }
+        ],
+        "situation": { "user_message": "继续说" }
+      },
+      "expect": "deep"
+    },
+    {
+      "case_id": "G-off-idle-chat",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "none" },
+        "evidence_buckets": { "baseline_deviation_signals": 15 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "挺好" }
+      },
+      "expect": "off"
+    },
+    {
+      "case_id": "G-light-mid-dev-with-followup",
+      "current_read": {
+        "evidence_buckets": { "baseline_deviation_signals": 45 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "为什么你这么觉得" }
+      },
+      "expect": "light"
+    },
+    {
+      "case_id": "G-off-no-evidence-bucket",
+      "current_read": {},
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "嗯" }
+      },
+      "expect": "off"
+    },
+    {
+      "case_id": "G-off-empty-everything",
+      "current_read": {},
+      "ctx": {},
+      "expect": "off"
+    },
+    {
+      "case_id": "G-light-only-dev",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "medium" },
+        "evidence_buckets": { "baseline_deviation_signals": 55 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "有点意外" }
+      },
+      "expect": "light"
+    },
+    {
+      "case_id": "G-deep-followup-historical",
+      "current_read": {
+        "evidence_buckets": { "baseline_deviation_signals": 62 }
+      },
+      "ctx": {
+        "recent_turns": [
+          { "role": "user", "text": "你说说细节", "timestamp": "t1" }
+        ],
+        "situation": { "user_message": "详细点" }
+      },
+      "expect": "deep"
+    },
+    {
+      "case_id": "G-off-high-oblig-no-deviation",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "high" },
+        "evidence_buckets": { "baseline_deviation_signals": 10 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "你叫什么" }
+      },
+      "expect": "off"
+    },
+    {
+      "case_id": "G-light-abnormal-mid-dev-no-followup",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "low" },
+        "evidence_buckets": { "baseline_deviation_signals": 48 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "今天怪怪的" }
+      },
+      "expect": "light"
+    },
+    {
+      "case_id": "G-off-medium-dev-with-high-oblig",
+      "current_read": {
+        "discourse_state": { "answer_obligation": "high" },
+        "evidence_buckets": { "baseline_deviation_signals": 25 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "你多大" }
+      },
+      "expect": "off"
+    }
+  ]
+}

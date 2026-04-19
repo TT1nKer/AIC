@@ -17,12 +17,38 @@ from pathlib import Path
 
 RUN_DECIDER = os.environ.get("RUN_DECIDER", "0") == "1"
 RUN_EXPRESSER = os.environ.get("RUN_EXPRESSER", "0") == "1"
+AICHAR_V2 = os.environ.get("AICHAR_V2", "0") == "1"
 
 from compiler import compile_phase_a, compile_phase_b, fill_chosen_action
 from speaker_reader import read_speaker, SpeakerReaderError
 from decider import decide, DeciderError
 from expresser import express, ExpresserError
 from redline_checker import check as redline_check
+from association_gate import gate as association_gate
+from schema_matcher import match as schema_match, apply_state_shifts, SchemaMatcherError
+
+
+def _maybe_run_v2(cr: dict, ctx: dict) -> list[str]:
+    """Apply association_gate + schema_matcher if AICHAR_V2=1. Mutates cr in place."""
+    if not AICHAR_V2:
+        return []
+    level = association_gate(cr, ctx)
+    cr["schema_gate_level"] = level
+    if level == "off":
+        cr["schema_hits"] = []
+        cr["internal_pressures"] = dict(
+            ctx.get("character_state", {}).get("internal_pressures", {})
+        )
+        return []
+    try:
+        hits = schema_match(ctx, cr, level)
+    except SchemaMatcherError as e:
+        return [f"SchemaMatcher: {e}"]
+    cr["schema_hits"] = hits
+    cr["internal_pressures"] = apply_state_shifts(
+        ctx.get("character_state", {}).get("internal_pressures", {}), hits
+    )
+    return []
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -83,6 +109,10 @@ def run_scenario_one_of(rules: dict, redlines: dict, sc: dict) -> tuple[bool, li
     except SpeakerReaderError as e:
         return False, [f"SpeakerReader rejected: {e}"], {}
 
+    v2_errs = _maybe_run_v2(cr, ctx)
+    if v2_errs:
+        return False, v2_errs, {}
+
     phase_b = compile_phase_b(ctx, cr, rules)
     trace = phase_b["_trace"]
     resolved = trace["resolved_mode"]
@@ -120,6 +150,10 @@ def run_scenario(rules: dict, redlines: dict, sc: dict) -> tuple[bool, list[str]
         cr = read_speaker(phase_a)
     except SpeakerReaderError as e:
         return False, [f"SpeakerReader rejected: {e}"], {}
+
+    v2_errs = _maybe_run_v2(cr, ctx)
+    if v2_errs:
+        return False, v2_errs, {}
 
     phase_b = compile_phase_b(ctx, cr, rules)
     trace = phase_b["_trace"]

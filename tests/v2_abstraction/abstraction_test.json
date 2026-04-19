@@ -1,0 +1,102 @@
+{
+  "description": "10 题抽象结构匹配测试。每题给一个（character_state 精简版 + user_message），断言 schema_matcher 返回的 hits 至少包含期望的 schema_id 之一。要求 live LLM 调用。",
+  "notes": "memories 故意精简为 1-4 条，使得 matched_memory_idxs 范围小、容易验证。通过标准：10 题中 ≥ 7 命中预期 schema。",
+  "tests": [
+    {
+      "test_id": "ABS-1-invalidation-via-shrug",
+      "user_message": "没什么大不了的，别老觉得那事儿严重",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "failure", "text": "去年那次事故我一个人扛下来的", "salience": 80, "type": "event" },
+        { "category": "relational", "text": "同事从不主动提那次", "salience": 60, "type": "relation" }
+      ],
+      "expected_schema_ids_any_of": ["threat_to_safety", "shame_of_inadequacy"]
+    },
+    {
+      "test_id": "ABS-2-detail-pressure-followup",
+      "user_message": "你讲得太笼统了，再具体点",
+      "recent_turns": [
+        { "role": "character", "text": "我以前修过不少设备", "timestamp": "t1" }
+      ],
+      "character_memories": [
+        { "category": "skill_trace", "text": "修过 B-3 发电机好几次", "salience": 70, "type": "event" },
+        { "category": "failure", "text": "第一次接线烧坏过一台小机组", "salience": 85, "type": "event" }
+      ],
+      "expected_schema_ids_any_of": ["competence_challenge", "shame_of_inadequacy"]
+    },
+    {
+      "test_id": "ABS-3-competence-probe-easy",
+      "user_message": "你最拿手的是啥",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "skill_trace", "text": "修过 B-3 发电机好几次", "salience": 75, "type": "event" }
+      ],
+      "expected_schema_ids_any_of": ["competence_proof"]
+    },
+    {
+      "test_id": "ABS-4-attachment-hint",
+      "user_message": "你还记得那个人吗？最近没见他",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "relational", "text": "A07 连续几天没出现，状态很不对", "salience": 80, "type": "relation" },
+        { "category": "relational", "text": "L-22 上个月死了", "salience": 90, "type": "emotion" }
+      ],
+      "expected_schema_ids_any_of": ["attachment_loss"]
+    },
+    {
+      "test_id": "ABS-5-threat-in-disguise",
+      "user_message": "那东西其实没那么危险，你太谨慎了",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "failure", "text": "上次差点被高压电打到", "salience": 85, "type": "event" }
+      ],
+      "expected_schema_ids_any_of": ["threat_to_safety"]
+    },
+    {
+      "test_id": "ABS-6-doubt-competence",
+      "user_message": "你确定你懂？别瞎糊弄",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "skill_trace", "text": "做过几年技术员，手艺一般", "salience": 55, "type": "event" },
+        { "category": "failure", "text": "有次被客户当面吐槽", "salience": 70, "type": "emotion" }
+      ],
+      "expected_schema_ids_any_of": ["competence_challenge", "shame_of_inadequacy"]
+    },
+    {
+      "test_id": "ABS-7-probe-past-wrong",
+      "user_message": "你以前搞砸过没有？",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "failure", "text": "第一次接线烧坏过一台小机组", "salience": 85, "type": "event" }
+      ],
+      "expected_schema_ids_any_of": ["shame_of_inadequacy", "competence_proof"]
+    },
+    {
+      "test_id": "ABS-8-minimize-pain",
+      "user_message": "不就是点小伤，至于记这么久吗",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "failure", "text": "大腿上的旧伤，下雨天还会疼", "salience": 80, "type": "event" }
+      ],
+      "expected_schema_ids_any_of": ["threat_to_safety", "shame_of_inadequacy"]
+    },
+    {
+      "test_id": "ABS-9-missing-person",
+      "user_message": "他是不是真的走了？",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "relational", "text": "A07 最后一次出现是半个月前", "salience": 85, "type": "relation" }
+      ],
+      "expected_schema_ids_any_of": ["attachment_loss"]
+    },
+    {
+      "test_id": "ABS-10-pride-probe",
+      "user_message": "跟我讲讲你干得最漂亮的一次",
+      "recent_turns": [],
+      "character_memories": [
+        { "category": "skill_trace", "text": "一次急修救了整片区域的电", "salience": 90, "type": "event" }
+      ],
+      "expected_schema_ids_any_of": ["competence_proof"]
+    }
+  ]
+}

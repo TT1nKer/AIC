@@ -77,6 +77,22 @@ template_id: decider.v1
 【discourse_state（对话机制，触发硬规则 7/8/9）】
 {{DISCOURSE_STATE}}
 
+【schema_hits（可选；抽象结构匹配的候选过去模式）】
+schema_hits 列出本轮话题在结构上命中的过去模式。**仅作为软提示**。规则：
+- 不是每轮都有，没有就为空
+- 若要选 `share_episode` / `partial_answer_with_uncertainty` / `reference_resolution` 类候选涉及具体过去，**必须**引用 `matched_memory_idxs` 指向的 memory；不得凭空编造细节
+- 不得把 schema_hits 作为 chosen_action 的唯一理由
+- 不得把 schema_id / match_axes 等字面名写进 why_this_action；用自然语言说理由
+{{SCHEMA_HITS}}
+
+【internal_pressures（可选；本轮快变量，0~40 范围）】
+internal_pressures 是本轮被命中的抽象模式留下的内部压力信号。**仅作为软提示**。规则：
+- 可据此对相关候选 fit_score 做 ±10 以内的微调
+- 禁止将 pressures 作为姿态切换/模式改变的依据（那是 pose_resolver 的事）
+- 不得把字段名（shame_pressure / caution_pull 等）写进 why_this_action；用自然语言说明
+- 无 pressures 或全为 0 时按普通规则决策即可
+{{INTERNAL_PRESSURES}}
+
 【已知关于此人的 lessons（若有）】
 {{LESSONS}}
 

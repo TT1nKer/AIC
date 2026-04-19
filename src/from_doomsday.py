@@ -128,22 +128,30 @@ def _map_beliefs(traces: list[str]) -> list[dict]:
 
 
 def _map_memories(events_log: list[list[dict]]) -> list[dict]:
-    """把逐日事件压成 AICharacter 的 memories[]（type/text/salience）。"""
+    """把逐日事件压成 AICharacter 的 memories[]（type/text/salience/category）。
+
+    category 是 v2 扩展字段：routine | failure | weird | skill_trace | relational。
+    """
     mems = []
     for day_idx, day in enumerate(events_log, start=1):
         for e in day:
             t = e.get("type")
             tg = e.get("target", "")
             if t == "facility_failure":
-                mems.append({"type": "event", "text": f"第 {day_idx} 天，{tg} 出了故障", "salience": 75})
+                mems.append({"type": "event", "text": f"第 {day_idx} 天，{tg} 出了故障",
+                             "salience": 75, "category": "failure"})
             elif t == "contact_absent":
-                mems.append({"type": "relation", "text": f"第 {day_idx} 天，{tg} 没来", "salience": 55})
+                mems.append({"type": "relation", "text": f"第 {day_idx} 天，{tg} 没来",
+                             "salience": 55, "category": "relational"})
             elif t == "contact_present" and e.get("demeanor") == "off":
-                mems.append({"type": "relation", "text": f"第 {day_idx} 天，{tg} 回来了，但状态不太对", "salience": 65})
+                mems.append({"type": "relation", "text": f"第 {day_idx} 天，{tg} 回来了，但状态不太对",
+                             "salience": 65, "category": "weird"})
             elif t == "death_reported":
-                mems.append({"type": "emotion", "text": f"第 {day_idx} 天听说 {tg} 死了", "salience": 90})
+                mems.append({"type": "emotion", "text": f"第 {day_idx} 天听说 {tg} 死了",
+                             "salience": 90, "category": "relational"})
             elif t == "resource_shortage":
-                mems.append({"type": "event", "text": f"第 {day_idx} 天，{tg} 开始告急", "salience": 70})
+                mems.append({"type": "event", "text": f"第 {day_idx} 天，{tg} 开始告急",
+                             "salience": 70, "category": "failure"})
     # 合并相邻同类为一条更概括的记忆，减少碎片化
     merged = _coalesce(mems)
     # 按 salience 降序保留 12 条
@@ -152,14 +160,15 @@ def _map_memories(events_log: list[list[dict]]) -> list[dict]:
 
 
 def _coalesce(mems: list[dict]) -> list[dict]:
-    """相邻天数+同类合并。"""
+    """相邻天数+同类合并。type 和 category 都相同才合并。"""
     if not mems:
         return mems
     out = [dict(mems[0])]
     for m in mems[1:]:
         last = out[-1]
-        # crude: same type + similar target mention → extend
-        if m["type"] == last["type"] and _last_token(m["text"]) == _last_token(last["text"]):
+        if (m["type"] == last["type"]
+                and m.get("category") == last.get("category")
+                and _last_token(m["text"]) == _last_token(last["text"])):
             last["text"] = f"{last['text']}；{m['text']}"
             last["salience"] = min(100, last["salience"] + 5)
         else:
@@ -243,6 +252,13 @@ def convert(agent_card: dict, scenario: list[list[dict]]) -> dict:
         "relationships": relationships,
         "skills": skills,
         "constraints": {"mobility": 75, "resources": ["工具包", "旧扳手"]},
+        "internal_pressures": {
+            "shame_pressure": 0,
+            "caution_pull": 0,
+            "disclosure_resistance": 0,
+            "competence_drive": 0,
+            "detail_pressure": 0,
+        },
     }
 
     speaker_model = {

@@ -203,6 +203,7 @@
     "direct_self_answer":       "正面直接回答对方关于角色本身的问题；允许末尾附一个小反问但不得用反问替代回答",
     "partial_answer_with_uncertainty": "给出部分直答并承认信息不足或不确定，而不是反问回避",
     "reference_resolution":     "解释自己上一句里用到的指代或模糊所指（'这种事'、'那个人'等），不得换话题",
+    "share_episode":            "主动讲出角色过去的一段具体经历或片段；必须引用 character_state.memories 里真实存在的某条 memory，不得凭空编造细节",
     "joke_callback":            "顺着前文梗接一句或做一个动作",
     "joke_callback_with_line":  "接梗同时轻轻表态不继续某方向",
     "abstract_pivot":           "把话题升到原理/历史/结构层",

@@ -73,37 +73,50 @@
         {
           "type": "emotion",
           "text": "第 6 天听说 agent:L-22 死了",
-          "salience": 90
+          "salience": 90,
+          "category": "relational"
         },
         {
           "type": "event",
           "text": "第 7 天，B-3 出了故障",
-          "salience": 75
+          "salience": 75,
+          "category": "failure"
         },
         {
           "type": "event",
           "text": "第 9 天，B-3 出了故障",
-          "salience": 75
+          "salience": 75,
+          "category": "failure"
         },
         {
           "type": "event",
           "text": "第 10 天，food 开始告急",
-          "salience": 70
+          "salience": 70,
+          "category": "failure"
         },
         {
           "type": "relation",
-          "text": "第 3 天，A07 没来；第 4 天，A07 没来；第 5 天，A07 回来了，但状态不太对",
-          "salience": 65
+          "text": "第 5 天，A07 回来了，但状态不太对",
+          "salience": 65,
+          "category": "weird"
+        },
+        {
+          "type": "relation",
+          "text": "第 3 天，A07 没来；第 4 天，A07 没来",
+          "salience": 60,
+          "category": "relational"
         },
         {
           "type": "relation",
           "text": "第 8 天，A07 没来",
-          "salience": 55
+          "salience": 55,
+          "category": "relational"
         },
         {
           "type": "relation",
           "text": "第 9 天，A07 没来",
-          "salience": 55
+          "salience": 55,
+          "category": "relational"
         }
       ],
       "relationships": [
@@ -135,6 +148,13 @@
           "工具包",
           "旧扳手"
         ]
+      },
+      "internal_pressures": {
+        "shame_pressure": 0,
+        "caution_pull": 0,
+        "disclosure_resistance": 0,
+        "competence_drive": 0,
+        "detail_pressure": 0
       }
     },
     "speaker_model": {

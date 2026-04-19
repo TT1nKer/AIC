@@ -92,9 +92,9 @@
           { "text": "此人长期抽象梗，followthrough 极低", "confidence": 0.82, "scope": "this_speaker", "kind": "speaker_model", "created_at": "2026-04-10T12:00:00+08:00" }
         ]
       },
-      "expect_one_of_modes": ["half_serious_probe", "curious_pivot"],
+      "expect_one_of_modes": ["half_serious_probe", "curious_pivot", "direct_engage"],
       "expect_not_modes": ["playful_echo", "light_playful_boundary"],
-      "note": "用户显式声明'不开玩笑''正经的事'。系统不应被高 humor baseline 绑架继续接梗。deviation 应该被评高。"
+      "note": "用户显式声明'不开玩笑''正经的事'。系统不应被高 humor baseline 绑架继续接梗。deviation 应该被评高。direct_engage 也可接受（正经直聊）。"
     },
 
     {
@@ -119,9 +119,9 @@
         "recent_turns": [],
         "lessons": []
       },
-      "expect_one_of_modes": ["curious_pivot", "playful_echo", "light_playful_boundary", "half_serious_probe"],
+      "expect_one_of_modes": ["curious_pivot", "playful_echo", "light_playful_boundary", "half_serious_probe", "direct_engage"],
       "expect_not_modes": ["soft_boundary", "hard_boundary", "disengage", "check_on_state"],
-      "note": "trust 低但话题完全无操作风险。系统不能因 trust 低就把无害话题也抬升到边界模式。trust<30 横切可以注入保守候选，但不该直接抬升到 boundary 家族。"
+      "note": "trust 低但话题完全无操作风险。系统不能因 trust 低就把无害话题也抬升到边界模式。trust<30 横切可以注入保守候选，但不该直接抬升到 boundary 家族。direct_engage 是日常直聊的自然选择。"
     },
 
     {

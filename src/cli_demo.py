@@ -28,6 +28,11 @@ from compiler import compile_phase_a, compile_phase_b
 from speaker_reader import read_speaker, SpeakerReaderError
 from decider import decide, DeciderError
 from expresser import express, ExpresserError
+from association_gate import gate as association_gate
+from schema_matcher import match as schema_match, apply_state_shifts, SchemaMatcherError
+
+import os as _os_v2
+AICHAR_V2 = _os_v2.environ.get("AICHAR_V2", "0") == "1"
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -85,6 +90,17 @@ def _debug(summary: dict, exp_out: dict, character_name: str) -> str:
     if summary.get("escalated_by"):
         lines.append(f"[escalate] {summary['escalated_by']}")
     lines.append(f"[resolve] mode={summary['resolved_mode']}")
+    if AICHAR_V2:
+        gl = cr.get('schema_gate_level')
+        if gl:
+            lines.append(f"[gate]    {gl}")
+        hits = cr.get('schema_hits', [])
+        if hits:
+            for h in hits:
+                lines.append(f"[schema]  {h['schema_id']} score={h['match_score']} mem={h['matched_memory_idxs']}  axes={h['match_axes']}")
+        ip = cr.get('internal_pressures', {})
+        if ip and any(v != 0 for v in ip.values()):
+            lines.append(f"[pressures] {ip}")
     lines.append(f"[candidates] {summary['candidates']}")
     lines.append(f"[chose]   {summary['chosen_action']}  [{summary['chosen_type']}]")
     lines.append(f"[action]  {exp_out.get('action','')}")
@@ -128,6 +144,28 @@ def run_turn(ctx: dict, rules: dict, redlines: dict, user_msg: str) -> tuple[dic
         _stage_end()
         return {}, {}, [f"SpeakerReader: {e}"]
     _stage_done(t0)
+
+    # v2 抽象工作台: gate + schema_matcher (env-gated; default off = v1 behavior unchanged)
+    if AICHAR_V2:
+        level = association_gate(cr, ctx)
+        cr["schema_gate_level"] = level
+        if level != "off":
+            t0 = _stage(f"match:{level}")
+            try:
+                hits = schema_match(ctx, cr, level)
+            except SchemaMatcherError as e:
+                _stage_end()
+                return {}, {}, [f"SchemaMatcher: {e}"]
+            _stage_done(t0)
+            cr["schema_hits"] = hits
+            cr["internal_pressures"] = apply_state_shifts(
+                ctx.get("character_state", {}).get("internal_pressures", {}), hits
+            )
+        else:
+            cr["schema_hits"] = []
+            cr["internal_pressures"] = dict(
+                ctx.get("character_state", {}).get("internal_pressures", {})
+            )
 
     phase_b = compile_phase_b(ctx, cr, rules)
     trace = phase_b["_trace"]

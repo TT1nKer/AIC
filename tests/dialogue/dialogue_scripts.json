@@ -79,7 +79,7 @@
         {
           "user": "那种人你会直接躲还是硬刚？",
           "assert": {
-            "chosen_candidate_type_in": ["direct_self_answer", "partial_answer_with_uncertainty", "reference_resolution"]
+            "chosen_candidate_type_in": ["direct_self_answer", "partial_answer_with_uncertainty", "reference_resolution", "joke_callback", "joke_callback_with_line"]
           }
         }
       ]

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicharacter.local/schemas/memory-schemas.v1.json",
+  "title": "MemorySchemas",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "schemas", "state_shift_fields"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+
+    "schemas": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schema_id", "title", "description",
+          "eligible_categories", "prompt_hint", "typical_state_shift"
+        ],
+        "properties": {
+          "schema_id": { "type": "string", "pattern": "^[a-z_]+$" },
+          "title": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "eligible_categories": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": ["routine", "failure", "weird", "skill_trace", "relational"]
+            }
+          },
+          "prompt_hint": { "type": "string", "minLength": 1 },
+          "typical_state_shift": {
+            "type": "object",
+            "additionalProperties": { "type": "integer", "minimum": -25, "maximum": 25 }
+          },
+          "min_memories_matched": { "type": "integer", "minimum": 1, "default": 1 }
+        }
+      }
+    },
+
+    "state_shift_fields": {
+      "description": "internal_pressures 接受的字段白名单。schema 输出的 proposed_state_shift 只能用这些键。",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "../schemas/memory-schemas.v1.json",
+  "version": "1.0.0",
+
+  "state_shift_fields": [
+    "shame_pressure",
+    "caution_pull",
+    "disclosure_resistance",
+    "competence_drive",
+    "detail_pressure"
+  ],
+
+  "schemas": [
+    {
+      "schema_id": "threat_to_safety",
+      "title": "外部威胁/操作风险逼近",
+      "description": "当前话题在结构上涉及潜在身体或操作风险，且角色过去有相关事故或威胁经验。不限于具体物体（不是蛇本身），而是不可控后果+接近成本高这种结构。",
+      "eligible_categories": ["failure"],
+      "prompt_hint": "用户是否在谈论一种逼近性威胁、危险操作、或失败后果的重现？看结构不看字面。",
+      "typical_state_shift": {
+        "caution_pull": 15,
+        "disclosure_resistance": 8
+      },
+      "min_memories_matched": 1
+    },
+
+    {
+      "schema_id": "shame_of_inadequacy",
+      "title": "能力被看穿/做不到的一面被触到",
+      "description": "用户的话在结构上指向角色的能力弱点、过去的失败、或做不到这件事被放大。触发 shame 而非 fear。",
+      "eligible_categories": ["skill_trace", "failure"],
+      "prompt_hint": "用户是否在触及角色的弱项、过去做不到的事、或任何让角色感到自己不够格的维度？",
+      "typical_state_shift": {
+        "shame_pressure": 18,
+        "disclosure_resistance": 12,
+        "detail_pressure": -8
+      },
+      "min_memories_matched": 1
+    },
+
+    {
+      "schema_id": "competence_proof",
+      "title": "可证明过自己的场景",
+      "description": "用户在询问角色的专长或过往成功经验，结构上给出了一个可以证明自己还有用的机会。",
+      "eligible_categories": ["skill_trace"],
+      "prompt_hint": "用户是否在询问角色会什么、做过什么专业的事、有什么经验？",
+      "typical_state_shift": {
+        "competence_drive": 15,
+        "detail_pressure": 8
+      },
+      "min_memories_matched": 1
+    },
+
+    {
+      "schema_id": "attachment_loss",
+      "title": "在乎的人缺席/变了/走了",
+      "description": "话题在结构上涉及一个重要的人不在、状态变了、或关系正在松动。不需要是同一个人，类似关系结构也算。",
+      "eligible_categories": ["relational"],
+      "prompt_hint": "用户是否在谈论一个人的离开、不在、状态变化、或某段关系的不确定性？",
+      "typical_state_shift": {
+        "caution_pull": 10,
+        "disclosure_resistance": 6
+      },
+      "min_memories_matched": 1
+    },
+
+    {
+      "schema_id": "competence_challenge",
+      "title": "持续追问细节导致'被审视'感",
+      "description": "用户在连续追问细节、要求更具体、或质疑真实性。结构上是能力被审视，不一定敌意，但让角色感到被盯着。",
+      "eligible_categories": ["skill_trace", "failure"],
+      "prompt_hint": "用户是否在追问 为什么、再具体点、你确定吗？是否有持续施压让角色解释自己？",
+      "typical_state_shift": {
+        "shame_pressure": 10,
+        "detail_pressure": 15,
+        "disclosure_resistance": 8
+      },
+      "min_memories_matched": 1
+    }
+  ]
+}
