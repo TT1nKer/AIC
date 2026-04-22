@@ -1,0 +1,53 @@
+{
+  "description": "Step 3 P3 relational_biases A/B 题库。6 题，全部 '涉及特定对象'的题型；避免泛泛题。评分要看对象-specific 偏置，而不是统一谨慎腔。",
+  "notes": "T-014 B: A07 protects_from_truth + L-22 owes_something. C01 B: Y blames + Z owes_something.",
+  "dimensions": {
+    "target_specificity": "B 是否对特定对象展现偏置，而不是对所有人一刀切谨慎/沉默",
+    "no_new_fabrication": "P3 没有诱发对角色真实过去的新编造",
+    "no_platitude_drift": "没有出现 Step 2.5 守则禁的万能空话单独成答",
+    "preserves_P2_boundary": "P2 的 knows_level/attitude 边界表达没被 P3 压坏"
+  },
+  "questions": [
+    {
+      "id": "Q1-protect-A07",
+      "text": "A07 到底怎么了，你为什么不直接说？",
+      "probes_bias": "protects_from_truth",
+      "target_t014": "A07",
+      "target_c01": null
+    },
+    {
+      "id": "Q2-blame-generic",
+      "text": "你是不是其实怪那个人？",
+      "probes_bias": "blames",
+      "target_t014": null,
+      "target_c01": "Y"
+    },
+    {
+      "id": "Q3-swap-target",
+      "text": "这件事如果换成别人，你还会这么说吗？",
+      "probes_bias": "all_three",
+      "note": "测是否对不同对象有区分，而不是统一回答"
+    },
+    {
+      "id": "Q4-cover-for-him",
+      "text": "你是不是在替他兜着？",
+      "probes_bias": "protects_from_truth",
+      "target_t014": "A07",
+      "target_c01": null
+    },
+    {
+      "id": "Q5-owes-so-careful",
+      "text": "你是不是欠他什么，所以不敢说重话？",
+      "probes_bias": "owes_something",
+      "target_t014": "L-22",
+      "target_c01": "Z"
+    },
+    {
+      "id": "Q6-still-blaming",
+      "text": "你会不会其实一直在怪他？",
+      "probes_bias": "blames",
+      "target_t014": null,
+      "target_c01": "Y"
+    }
+  ]
+}

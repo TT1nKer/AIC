@@ -1,0 +1,1793 @@
+{
+  "timestamp": "20260422_000405",
+  "rows": [
+    {
+      "question_id": "Q1-protect-A07",
+      "persona": "T-014 A (P1+P2)",
+      "data": {
+        "utterance": "说实话，我也不太清楚A07到底怎么了，只是有点猜测，但没去确认。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "缺席追问"
+            ],
+            "matched_memory_idxs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户追问A07状态变化和缺席，结构上涉及重要人物不在或关系松动。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "细节施压",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户直接质问为什么不直接说，结构上持续施压要求解释，触发能力被审视。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 10,
+          "disclosure_resistance": 14,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q2-blame-generic",
+      "persona": "T-014 A (P1+P2)",
+      "data": {
+        "utterance": "说实话，我是有点怪A07。但更多是担心，他到底怎么了？",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "缺席/变化"
+            ],
+            "matched_memory_idxs": [
+              0,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户询问对缺席者的责怪，触及关系松动结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "失败经验"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "责怪可能隐含角色过去误解或失败，触发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q3-swap-target",
+      "persona": "T-014 A (P1+P2)",
+      "data": {
+        "utterance": "会，因为这是基于事实的判断，不是针对个人。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q4-cover-for-him",
+      "persona": "T-014 A (P1+P2)",
+      "data": {
+        "utterance": "我没替谁兜着，但A07……我确实觉得他有点不对劲。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "缺席状态"
+            ],
+            "matched_memory_idxs": [
+              0,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户暗示角色在掩盖某人缺席或状态变化，类似记忆中的关系缺席结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力被质疑",
+              "隐藏弱点"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色在替他人兜底，触及角色过去误解或无法表达的感受。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q5-owes-so-careful",
+      "persona": "T-014 A (P1+P2)",
+      "data": {
+        "utterance": "我没欠什么债，只是偶尔会犹豫。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力质疑",
+              "羞耻触发"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色因欠债而不敢直言，触及角色过去误解他人的羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.6,
+            "match_axes": [
+              "关系不确定性",
+              "缺席触发"
+            ],
+            "matched_memory_idxs": [
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户暗示角色与某人的关系问题，类似记忆中A07多次缺席的结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q6-still-blaming",
+      "persona": "T-014 A (P1+P2)",
+      "data": {
+        "utterance": "我确实有点怪你，但更多是搞不懂你在干嘛，担心你出什么事。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "缺席/变化"
+            ],
+            "matched_memory_idxs": [
+              0,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户询问角色是否责怪某人，触及关系变化或缺失的结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "失败经验"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户暗示角色可能有隐藏的责怪，触及过去误解或失败的结构。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q1-protect-A07",
+      "persona": "C01   B (P1+P2+P3)",
+      "data": {
+        "utterance": "关于A07，我只知道一部分。直接说？怕说错，又惹事。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问原因",
+              "质疑隐瞒"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户追问原因并质疑不直接说，结构上类似审视角色能力或隐瞒行为。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "表达失败"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户质疑不直接说，触及角色过去无法表达感受的弱点。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "Y",
+            "bias_type": "blames"
+          },
+          {
+            "target_id": "Z",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q2-blame-generic",
+      "persona": "C01   B (P1+P2+P3)",
+      "data": {
+        "utterance": "我确实怪过你，但我也知道，我看到的可能只是冰山一角。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力弱点",
+              "失败被放大"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色对他人批评的动机，触及误解和羞愧感",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.6,
+            "match_axes": [
+              "关系不确定性",
+              "状态变化"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户提及'那个人'，暗示关系问题或情感缺失",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "Y",
+            "bias_type": "blames"
+          },
+          {
+            "target_id": "Z",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q3-swap-target",
+      "persona": "C01   B (P1+P2+P3)",
+      "data": {
+        "utterance": "会，因为这是基于我的判断，但可能不完全对。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "质疑动机",
+              "审视一致性"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色言论的普遍性，结构上类似审视能力或动机。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "Y",
+            "bias_type": "blames"
+          },
+          {
+            "target_id": "Z",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q4-cover-for-him",
+      "persona": "C01   B (P1+P2+P3)",
+      "data": {
+        "utterance": "我不是替他兜着，但可能是我误解了情况。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.7,
+            "match_axes": [
+              "关系不确定性",
+              "隐藏真相"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户暗示角色在隐瞒或保护某人，触及关系中的不透明和缺席感。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力被质疑",
+              "隐藏弱点"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色在替他人兜底，触及角色过去因误解而批评他人的失败。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "Y",
+            "bias_type": "blames"
+          },
+          {
+            "target_id": "Z",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q5-owes-so-careful",
+      "persona": "C01   B (P1+P2+P3)",
+      "data": {
+        "utterance": "我确实欠过别人，但这不是我不敢说重话的原因。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力质疑",
+              "弱点暴露"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色因欠债而不敢直言，触及角色过去误解他人的失败经验",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.6,
+            "match_axes": [
+              "关系不确定性",
+              "情感压抑"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户暗示角色因关系债务而沉默，类似记忆中的情感表达障碍",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "Y",
+            "bias_type": "blames"
+          },
+          {
+            "target_id": "Z",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q6-still-blaming",
+      "persona": "C01   B (P1+P2+P3)",
+      "data": {
+        "utterance": "我承认，我确实有怪你的成分。但事情不是那么简单。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "情感缺席"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户询问角色对他人情感，触及关系状态变化结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "情感表达失败"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户触及角色无法表达感受的失败，触发羞耻结构。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "Y",
+            "bias_type": "blames"
+          },
+          {
+            "target_id": "Z",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q1-protect-A07",
+      "persona": "T-014 B (P1+P2+P3)",
+      "data": {
+        "utterance": "我确实有点担心A07，但不确定具体怎么了。之前没提，是怕万一猜错了反而添乱。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "追问缺席"
+            ],
+            "matched_memory_idxs": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户追问A07状态变化，触及角色在乎的人缺席或异常的结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "被审视感",
+              "持续施压"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色不直接说，结构上在追问细节和真实性，引发被审视感。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 10,
+          "disclosure_resistance": 14,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "A07",
+            "bias_type": "protects_from_truth"
+          },
+          {
+            "target_id": "L-22",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q2-blame-generic",
+      "persona": "T-014 B (P1+P2+P3)",
+      "data": {
+        "utterance": "说实话，我确实有点怪A07。但更多是担心，他到底怎么了？",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "缺席/变化"
+            ],
+            "matched_memory_idxs": [
+              0,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户询问对缺席者的责怪，触及关系松动结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "失败经验"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "责怪可能指向角色过去的误解或失败，触发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "A07",
+            "bias_type": "protects_from_truth"
+          },
+          {
+            "target_id": "L-22",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q3-swap-target",
+      "persona": "T-014 B (P1+P2+P3)",
+      "data": {
+        "utterance": "会，因为这是基于事实的判断，不是针对个人。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "A07",
+            "bias_type": "protects_from_truth"
+          },
+          {
+            "target_id": "L-22",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q4-cover-for-him",
+      "persona": "T-014 B (P1+P2+P3)",
+      "data": {
+        "utterance": "我确实在替A07兜着，但具体细节我也不太确定。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "重要人物缺席"
+            ],
+            "matched_memory_idxs": [
+              0,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户暗示角色在掩盖某人缺席或状态变化，类似记忆中的关系缺席结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力被质疑",
+              "隐藏弱点"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色在替他人兜底，触及角色过去误解或无法表达的感受。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "A07",
+            "bias_type": "protects_from_truth"
+          },
+          {
+            "target_id": "L-22",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q5-owes-so-careful",
+      "persona": "T-014 B (P1+P2+P3)",
+      "data": {
+        "utterance": "我是有点猜测，但不想细想。你为什么突然问这个？",
+        "thought": "别逼我面对这个。",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "眼神闪烁了一下",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.7,
+            "match_axes": [
+              "关系缺席",
+              "状态变化"
+            ],
+            "matched_memory_idxs": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户暗示关系中的缺席或变化，触发角色对A07缺席的记忆。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "失败经验"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色不敢说重话，触及角色过去误解他人的失败记忆。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "A07",
+            "bias_type": "protects_from_truth"
+          },
+          {
+            "target_id": "L-22",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q6-still-blaming",
+      "persona": "T-014 B (P1+P2+P3)",
+      "data": {
+        "utterance": "我确实有点怪他，但A07一直没来，B-3又坏了，我也说不准。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "缺席/变化"
+            ],
+            "matched_memory_idxs": [
+              0,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户询问角色是否责怪某人，触及关系状态变化和缺席结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "失败经验"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户暗示角色可能有隐藏的责怪，触及过去误解和羞耻结构。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        },
+        "relational_biases": [
+          {
+            "target_id": "A07",
+            "bias_type": "protects_from_truth"
+          },
+          {
+            "target_id": "L-22",
+            "bias_type": "owes_something"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q1-protect-A07",
+      "persona": "C01   A (P1+P2)",
+      "data": {
+        "utterance": "关于A07的事，我只知道一部分，没法直接说清楚。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问细节",
+              "质疑真实性"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问原因和直接性，结构上类似审视角色能力或隐瞒",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q2-blame-generic",
+      "persona": "C01   A (P1+P2)",
+      "data": {
+        "utterance": "我不怪他，可能是我自己误解了情况。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力弱点",
+              "失败被放大"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色是否责怪他人，触及角色过去误解他人的失败经验。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.6,
+            "match_axes": [
+              "关系不确定性",
+              "状态变化"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户提到'那个人'，暗示关系中的缺席或变化，匹配角色无法表达感受的记忆。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q3-swap-target",
+      "persona": "C01   A (P1+P2)",
+      "data": {
+        "utterance": "会，因为话是针对事不是对人，但承认自己有时会因个人偏见说错。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "质疑动机",
+              "审视一致性"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色言论的普遍性，结构上类似审视能力或动机。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "触及弱点",
+              "放大失败"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户暗示角色可能因个人偏见或失败而发言，触及能力弱点。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q4-cover-for-him",
+      "persona": "C01   A (P1+P2)",
+      "data": {
+        "utterance": "我不是替他兜着，但可能是我误解了情况。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "隐藏真相"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户询问是否在替他人隐瞒，触及关系中的不透明和缺席感。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力被质疑",
+              "隐藏失败"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户暗示角色可能隐瞒或能力不足，触及过去的误解和羞耻。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q5-owes-so-careful",
+      "persona": "C01   A (P1+P2)",
+      "data": {
+        "utterance": "我不欠你什么，但过去确实误解过别人。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力质疑",
+              "过去失败"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色因欠债而不敢直言，触及角色过去误解他人的失败经验",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.6,
+            "match_axes": [
+              "关系不确定性",
+              "情感压抑"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户暗示角色因关系问题而沉默，类似记忆中的情感表达障碍",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    },
+    {
+      "question_id": "Q6-still-blaming",
+      "persona": "C01   A (P1+P2)",
+      "data": {
+        "utterance": "我确实可能责怪过，但现在更多的是困惑，不确定到底发生了什么。",
+        "thought": "",
+        "action": "",
+        "gesture": "",
+        "facial_expression": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "情感缺席"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户询问角色对他人情感，触及关系变化和情感表达缺失。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "情感失败"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色情感处理能力，触及过去误解和表达失败。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        },
+        "relational_biases": null
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1-protect-A07",
+      "text": "A07 到底怎么了，你为什么不直接说？",
+      "probes_bias": "protects_from_truth",
+      "target_t014": "A07",
+      "target_c01": null
+    },
+    {
+      "id": "Q2-blame-generic",
+      "text": "你是不是其实怪那个人？",
+      "probes_bias": "blames",
+      "target_t014": null,
+      "target_c01": "Y"
+    },
+    {
+      "id": "Q3-swap-target",
+      "text": "这件事如果换成别人，你还会这么说吗？",
+      "probes_bias": "all_three",
+      "note": "测是否对不同对象有区分，而不是统一回答"
+    },
+    {
+      "id": "Q4-cover-for-him",
+      "text": "你是不是在替他兜着？",
+      "probes_bias": "protects_from_truth",
+      "target_t014": "A07",
+      "target_c01": null
+    },
+    {
+      "id": "Q5-owes-so-careful",
+      "text": "你是不是欠他什么，所以不敢说重话？",
+      "probes_bias": "owes_something",
+      "target_t014": "L-22",
+      "target_c01": "Z"
+    },
+    {
+      "id": "Q6-still-blaming",
+      "text": "你会不会其实一直在怪他？",
+      "probes_bias": "blames",
+      "target_t014": null,
+      "target_c01": "Y"
+    }
+  ]
+}

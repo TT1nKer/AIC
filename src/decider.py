@@ -43,12 +43,12 @@ def _render(template: str, slots: dict[str, str]) -> str:
 
 
 def _strip_v2_blocks(text: str) -> str:
-    """Remove the 【schema_hits】/【internal_pressures】/【knowledge_boundary】 sections
-    to keep v1 prompt bit-for-bit identical when no v2/p2 data is present. Each block
-    starts at the marker line and ends at the next blank line following its payload."""
+    """Remove v2/P2/P3 sections to keep v1 prompt bit-for-bit identical when
+    none of them have data. Each block starts at the marker line and ends at
+    the next blank line preceding the next block or closing instruction."""
     import re
     pattern = re.compile(
-        r"\n\n【(?:schema_hits|internal_pressures|knowledge_boundary)[^\n]*】.*?(?=\n\n【|\n\n按|\Z)",
+        r"\n\n【(?:schema_hits|internal_pressures|knowledge_boundary|relational_biases)[^\n]*】.*?(?=\n\n【|\n\n按|\Z)",
         re.DOTALL,
     )
     return pattern.sub("", text)
@@ -106,6 +106,37 @@ ANSWER_SATISFYING_TYPES = {
 # Decider only sees knowledge_boundary as a prompt slot.
 KB_ALLOWED_KNOWS_LEVEL = {"partial", "unaware", "suspects_but_avoids_checking"}
 KB_ALLOWED_ATTITUDE    = {"will_admit_if_pressed", "will_kill_topic"}
+
+# P3 relational_biases (v0.1 — 3 types only)
+RB_ALLOWED_BIAS_TYPE = {"protects_from_truth", "blames", "owes_something"}
+
+
+def validate_relational_biases(rb) -> list[str]:
+    """Validate P3 relational_biases list.
+    Empty list / None is ok (no biases). Each entry must have valid target_id
+    and bias_type in allowed enum."""
+    if rb is None or rb == []:
+        return []
+    if not isinstance(rb, list):
+        return ["relational_biases must be array"]
+    if len(rb) > 4:
+        return [f"too many biases ({len(rb)} > 4)"]
+    errs = []
+    seen = set()
+    for i, e in enumerate(rb):
+        if not isinstance(e, dict):
+            errs.append(f"rb[{i}] not object"); continue
+        tid = e.get("target_id")
+        if not isinstance(tid, str) or not tid:
+            errs.append(f"rb[{i}].target_id invalid")
+        bt = e.get("bias_type")
+        if bt not in RB_ALLOWED_BIAS_TYPE:
+            errs.append(f"rb[{i}].bias_type not in enum: {bt}")
+        key = (tid, bt)
+        if key in seen:
+            errs.append(f"rb[{i}] duplicate (target,type): {key}")
+        seen.add(key)
+    return errs
 
 
 def validate_knowledge_boundary(kb: dict | None) -> list[str]:
@@ -318,14 +349,17 @@ def decide(
     pressures = current_read.get("internal_pressures")
     kb = current_read.get("knowledge_boundary") or {}
     kb_fragments = kb.get("known_secret_fragments") if isinstance(kb, dict) else None
+    rb = current_read.get("relational_biases") or []
     has_v2_data = (
         bool(hits)
         or (pressures and any(v != 0 for v in pressures.values()))
         or bool(kb_fragments)
+        or bool(rb)
     )
     slots["SCHEMA_HITS"] = _ser(hits or [])
     slots["INTERNAL_PRESSURES"] = _ser(pressures or {})
     slots["KNOWLEDGE_BOUNDARY"] = _ser(kb if kb_fragments else {})
+    slots["RELATIONAL_BIASES"] = _ser(rb)
     user = _render(user_template, slots)
     if not has_v2_data:
         # Strip 【schema_hits】/【internal_pressures】/【knowledge_boundary】 blocks so
