@@ -54,6 +54,7 @@ def chat_json(
     model: str = DEFAULT_MODEL,
     temperature: float = 0.3,
     max_tokens: int = 1024,
+    timeout: int | None = None,
 ) -> dict:
     """Call DeepSeek with JSON response format; return parsed dict."""
     body = {
@@ -72,13 +73,14 @@ def chat_json(
         "Authorization": f"Bearer {_api_key()}",
         "Content-Type": "application/json",
     }
+    effective_timeout = timeout if timeout is not None else TIMEOUT
 
     last_err: Exception | None = None
     for attempt in range(MAX_RETRIES + 1):
         req = urllib.request.Request(DEEPSEEK_URL, data=data, headers=headers, method="POST")
         try:
             ctx = ssl.create_default_context()
-            with urllib.request.urlopen(req, timeout=TIMEOUT, context=ctx) as resp:
+            with urllib.request.urlopen(req, timeout=effective_timeout, context=ctx) as resp:
                 raw = resp.read().decode("utf-8")
             payload = json.loads(raw)
             content = payload["choices"][0]["message"]["content"]

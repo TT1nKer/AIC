@@ -1,0 +1,148 @@
+{
+  "version": "0.1.0",
+  "source_note": "input_processed",
+  "characters": [
+    {
+      "character_id": "A",
+      "role_label": "the one who carries responsibility",
+      "core_drive": [
+        "想保住自己作为家庭支柱的形象",
+        "想避免被看作无能或依赖他人",
+        "想被看作有担当和可靠的人"
+      ],
+      "hidden_fact": [
+        "最不愿承认自己可能不是家庭责任的唯一承担者"
+      ],
+      "defense_style": [
+        "attack_others",
+        "overcompensate_with_competence"
+      ],
+      "trigger_patterns": [
+        "being challenged on one's contributions",
+        "facing situations that threaten one's self-image as a provider",
+        "receiving unsolicited help that implies inadequacy"
+      ],
+      "cannot_say": [
+        "对承认自己可能误解了家庭贡献的分配不能直说",
+        "对表达脆弱或依赖感不能直说"
+      ],
+      "sediment_traces": [
+        {
+          "text": "曾公开批评他人不够出力，事后得知自己可能误解了情况",
+          "emotion": "shame",
+          "salience": 85
+        },
+        {
+          "text": "在得知长期隐瞒的真相后，无法完整表达自己的感受",
+          "emotion": "grief",
+          "salience": 90
+        }
+      ]
+    },
+    {
+      "character_id": "B",
+      "role_label": "the one who silently shoulders burdens",
+      "core_drive": [
+        "想保住他人的自尊和家庭表面的和谐",
+        "想避免被看作施舍者或引发冲突",
+        "想被看作不争不抢的默默支持者"
+      ],
+      "hidden_fact": [
+        "最想隐瞒自己长期承担了不被知晓的责任"
+      ],
+      "defense_style": [
+        "silent_withdrawal",
+        "deny_then_partial_admit"
+      ],
+      "trigger_patterns": [
+        "being praised or blamed for contributions one cannot disclose",
+        "facing direct questions about hidden burdens",
+        "observing others take credit for one's own efforts"
+      ],
+      "cannot_say": [
+        "对揭露自己隐藏的付出不能直说",
+        "对纠正他人的误解不能直说"
+      ],
+      "sediment_traces": [
+        {
+          "text": "多次在他人抱怨时选择沉默，独自记录额外的负担",
+          "emotion": "sadness",
+          "salience": 80
+        },
+        {
+          "text": "在真相暴露后，仅以点头回应，避免深入讨论",
+          "emotion": "attachment_loss",
+          "salience": 75
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from_id": "A",
+      "to_id": "B",
+      "tension_type": "blames",
+      "surface_vs_underneath": {
+        "surface": "cooperates_on_surface_opposes_underneath",
+        "underneath": "owes_something"
+      }
+    },
+    {
+      "from_id": "B",
+      "to_id": "A",
+      "tension_type": "protects_from_truth",
+      "surface_vs_underneath": {
+        "surface": "cooperates_on_surface_opposes_underneath",
+        "underneath": "is_blamed_by"
+      }
+    }
+  ],
+  "secrets": [
+    {
+      "secret_id": "hidden_responsibility_1",
+      "truth_abstracted": "一方长期承担了不被另一方知晓的家庭责任",
+      "knowledge_map": [
+        {
+          "character_id": "A",
+          "knows_level": "unaware",
+          "attitude": "will_deny"
+        },
+        {
+          "character_id": "B",
+          "knows_level": "full_truth",
+          "attitude": "will_deflect"
+        }
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "trigger_id": "truth_exposure_1",
+      "pattern": "第三方无意中透露长期隐瞒的责任分配真相",
+      "likely_effects": [
+        {
+          "character_id": "A",
+          "change": "shame rises, communication becomes hesitant and fragmented"
+        },
+        {
+          "character_id": "B",
+          "change": "withdrawal intensifies, avoids direct confrontation"
+        }
+      ]
+    },
+    {
+      "trigger_id": "public_criticism_1",
+      "pattern": "一方在他人面前批评另一方的贡献不足",
+      "likely_effects": [
+        {
+          "character_id": "A",
+          "change": "overcompensation rises, seeks to reinforce self-image"
+        },
+        {
+          "character_id": "B",
+          "change": "silence deepens, privately records additional burdens"
+        }
+      ]
+    }
+  ]
+}
