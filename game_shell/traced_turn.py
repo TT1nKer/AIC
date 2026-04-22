@@ -82,6 +82,12 @@ def run_turn_traced(ctx: dict, rules: dict, redlines: dict, user_msg: str,
     print(f"  {DIM}recent_turns={len(ctx.get('recent_turns', []))}  "
           f"memories={len(ctx['character_state'].get('memories', []))}  "
           f"pressures={ctx['character_state'].get('internal_pressures', {})}{RESET}")
+    facts = ctx.get("interlocutor_facts") or {}
+    if facts.get("user_name") or facts.get("claimed_role") or facts.get("claims_made_this_session"):
+        print(f"  {DIM}interlocutor_facts={facts}{RESET}")
+    ident = ctx["character_state"].get("identity", {})
+    if ident.get("name_policy"):
+        print(f"  {DIM}identity.name_policy={ident.get('name_policy')}  display_name={ident.get('display_name')}  id={ident.get('id')}{RESET}")
 
     # ── [A] compile_phase_a ──
     t0 = time.time()
@@ -175,7 +181,14 @@ def run_turn_traced(ctx: dict, rules: dict, redlines: dict, user_msg: str,
     _kv("resolved_mode", trace.get("resolved_mode"))
     if trace.get("escalated_by"):
         _kv("escalated_by", trace.get("escalated_by"))
-    _kv("decider hard_constraints (count)", len(phase_b["decider_payload"].get("hard_constraints", [])))
+    hc = phase_b["decider_payload"].get("hard_constraints", [])
+    _kv("decider hard_constraints (count)", len(hc))
+    truth_hc = [c for c in hc if str(c.get("src", "")).startswith("truth:")]
+    if truth_hc:
+        print(f"  {GREEN}truth-layer constraints active:{RESET}")
+        for c in truth_hc:
+            snippet = (c.get("text", "") or "").replace("\n", " ")[:120]
+            print(f"    {DIM}[{c['src']}]{RESET} {snippet}…")
 
     # ── [H] decide ──
     t0 = time.time()

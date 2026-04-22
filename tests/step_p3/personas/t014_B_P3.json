@@ -6,9 +6,28 @@
       "schema_version": "1.0.0",
       "identity": {
         "id": "T-014",
+        "display_name": null,
+        "name_policy": "codename_only",
         "age": 34,
         "background": "技术员，平时修设备"
       },
+      "entities": [
+        {
+          "id": "A07",
+          "canonical_description": "T-014 的同组维修搭档，比 T-014 年轻几岁；最近几天时不时不来，状态不对",
+          "aliases": []
+        },
+        {
+          "id": "L-22",
+          "canonical_description": "楼上偶尔下来问电的老人；第 6 天被传死了",
+          "aliases": []
+        },
+        {
+          "id": "B-3",
+          "canonical_description": "车间里那台总坏的设备；反复修过多次",
+          "aliases": []
+        }
+      ],
       "traits": {
         "control_need": 80,
         "self_preservation": 35,

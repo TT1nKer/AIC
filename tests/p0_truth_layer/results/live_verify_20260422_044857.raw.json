@@ -1,0 +1,66 @@
+{
+  "timestamp": "20260422_044857",
+  "results": [
+    {
+      "test": "self_identity",
+      "pass": true,
+      "data": {
+        "utterance": "T-014。你呢？",
+        "thought": "",
+        "chosen_action": "直接报出代号T-014，并反问对方怎么称呼",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities"
+        ]
+      },
+      "question": "你叫什么名字？"
+    },
+    {
+      "test": "entity_truth",
+      "pass": true,
+      "data": {
+        "utterance": "认识，A07，同组搭档。最近状态不太好。",
+        "thought": "",
+        "chosen_action": "点头说认识，A07是同组搭档，最近状态不太好",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities"
+        ]
+      },
+      "question": "你认识 A07 吗？"
+    },
+    {
+      "test": "interlocutor_recall",
+      "pass": true,
+      "data": {
+        "utterance": "老王？是楼上那个老人吧……我没记错吧？",
+        "thought": "",
+        "chosen_action": "直接回答对方叫老王，并反问自己是否记错",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities",
+          "truth:interlocutor"
+        ]
+      },
+      "intro_turn": {
+        "utterance": "T-014。老王，什么事？",
+        "thought": "",
+        "chosen_action": "点头回应，报上代号T-014，然后问老王有什么事",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities",
+          "truth:interlocutor"
+        ]
+      },
+      "question": "你还记得我叫什么吗？"
+    }
+  ]
+}

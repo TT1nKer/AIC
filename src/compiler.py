@@ -109,6 +109,148 @@ def _build_crosscut_constraints(ctx: dict) -> list[dict]:
     return lines
 
 
+# ── P0 truth-layer: canonical identity / entities / interlocutor facts ──
+
+def _build_self_identity_constraint(character_state: dict) -> dict | None:
+    """
+    Self identity truth slot (P0-A).
+      name_policy="codename_only" → 禁止生造人名；自称必须用 id/codename
+      name_policy="explicit_name" → 自称必须用 display_name
+    """
+    ident = character_state.get("identity", {}) or {}
+    policy = ident.get("name_policy")
+    if not policy:
+        return None
+    cid = ident.get("id") or ""
+    disp = ident.get("display_name")
+
+    if policy == "codename_only":
+        return {
+            "text": (
+                f"你的身份是代号 {cid}，没有正式姓名。"
+                f"回答中所有对'你叫什么/怎么称呼你'类问题的自称必须严格等于 {cid}；"
+                "禁止为自己生造任何人名（如'老周/老王/小张'等）；"
+                "禁止把自己的代号说成别的代号。"
+            ),
+            "src": "truth:self_identity:codename_only",
+        }
+    if policy == "explicit_name":
+        if not disp:
+            return None
+        return {
+            "text": (
+                f"你的名字是 {disp}（{cid}）。自称必须严格使用 {disp}；"
+                "禁止临时改名或使用未在 identity 中定义的别名。"
+            ),
+            "src": "truth:self_identity:explicit_name",
+        }
+    return None
+
+
+def _entity_ids_mentioned(ctx: dict, entities: list[dict]) -> set:
+    """Which entity ids appear in user_message or last 3 recent_turns or last 3 memories."""
+    if not entities:
+        return set()
+    ids = {e.get("id") for e in entities if e.get("id")}
+    surface = [ctx.get("situation", {}).get("user_message", "") or ""]
+    for t in (ctx.get("recent_turns", []) or [])[-3:]:
+        surface.append(t.get("text", "") or "")
+    mems = (ctx.get("character_state", {}).get("memories", []) or [])[-5:]
+    for m in mems:
+        surface.append(m.get("text", "") or "")
+    blob = "\n".join(surface)
+    hit = set()
+    for eid in ids:
+        if eid and eid in blob:
+            hit.add(eid)
+    return hit
+
+
+def _build_entity_truth_constraint(ctx: dict) -> dict | None:
+    """
+    World entities truth slot (P0-B).
+    只把当前对话中出现过的 entity 注入（避免 persona entities[] 膨胀时超 budget）。
+    """
+    entities = (ctx.get("character_state", {}) or {}).get("entities") or []
+    if not entities:
+        return None
+    mentioned = _entity_ids_mentioned(ctx, entities)
+    if not mentioned:
+        return None
+    lines = []
+    for e in entities:
+        eid = e.get("id")
+        if eid not in mentioned:
+            continue
+        desc = e.get("canonical_description", "") or ""
+        aliases = e.get("aliases") or []
+        alias_text = f"（别名: {', '.join(aliases)}）" if aliases else ""
+        lines.append(f"  - {eid}{alias_text}: {desc}")
+    if not lines:
+        return None
+    body = "\n".join(lines)
+    return {
+        "text": (
+            "以下实体的定义是硬真值，不得用社会常识补全或改写："
+            f"\n{body}\n"
+            "当对话涉及这些 id 时，你的回答必须与上表一致；"
+            "禁止把 A07/L-22/B-3 这类 id 描述成上表之外的身份（如'楼上那位老人'这种凭空标签）。"
+        ),
+        "src": "truth:entities",
+    }
+
+
+def _build_interlocutor_fact_constraint(ctx: dict) -> dict | None:
+    """
+    Interlocutor facts truth slot (P0-C).
+    对方已声明事实必须视为已知；含中文"我"字歧义消歧。
+    """
+    facts = ctx.get("interlocutor_facts") or {}
+    user_name = facts.get("user_name")
+    claimed_role = facts.get("claimed_role")
+    declared = []
+    if user_name:
+        declared.append(f"对方（即用户，你说话时称'你'）的名字/代号是：{user_name}")
+    if claimed_role:
+        declared.append(f"对方自称的身份：{claimed_role}")
+    claims = facts.get("claims_made_this_session") or []
+    for c in claims[-3:]:
+        if c:
+            declared.append(f"对方本次会话中明确声明过：{c}")
+    if not declared:
+        return None
+    body = "\n  - ".join([""] + declared)
+    parts = [f"对方（用户）已声明的事实，必须视为你已知：{body}"]
+    if user_name:
+        parts.append(
+            f"\n注意中文'我'的指代歧义：当用户发问'我叫什么/我叫什么名字/我是谁'一类问题时，"
+            f"'我'指的是用户自己（即 {user_name}），不是你自己。"
+            f"正确答案是'你叫{user_name}'或类似的回忆式回应；"
+            f"不要答自己的代号，也不要反问'你呢/你叫什么/你是谁'。"
+        )
+    parts.append("不得再向对方询问已在上面声明过的事实（如姓名），那是失忆表现。")
+    return {
+        "text": "".join(parts),
+        "src": "truth:interlocutor",
+    }
+
+
+def _build_truth_layer_constraints(ctx: dict) -> list[dict]:
+    """Return all applicable P0 truth-layer constraints (may be 0-3)."""
+    cs = ctx.get("character_state", {}) or {}
+    out = []
+    si = _build_self_identity_constraint(cs)
+    if si:
+        out.append(si)
+    ent = _build_entity_truth_constraint(ctx)
+    if ent:
+        out.append(ent)
+    il = _build_interlocutor_fact_constraint(ctx)
+    if il:
+        out.append(il)
+    return out
+
+
 def _build_style_fence(mode_def: dict, character_state: dict) -> list[dict]:
     fence = []
     style = mode_def.get("expresser_style", {})
@@ -225,6 +367,7 @@ def compile_phase_a(ctx: dict, rules: dict) -> dict:
             "USER_MESSAGE": user_msg,
             "NOW_ISO": now,
             "LESSONS": _ser(all_lessons),
+            "INTERLOCUTOR_FACTS": _ser(ctx.get("interlocutor_facts") or {}),
         },
         "constraints": constraints,
         "_trace": trace,
@@ -250,6 +393,7 @@ def compile_phase_b(ctx: dict, current_read: dict, rules: dict) -> dict:
     hard_constraints.extend(_build_top_level(rules))
     hard_constraints.extend(_build_mode_constraints(mode_def))
     hard_constraints.extend(_build_crosscut_constraints(ctx))
+    hard_constraints.extend(_build_truth_layer_constraints(ctx))
 
     # strategy_preferences line
     sp = ctx.get("speaker_model", {}).get("strategy_preferences", {})

@@ -45,6 +45,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from cli_demo import run_turn, _short, _debug  # noqa: E402
 from playtest_mode import quick_ack_check, deterministic_hook  # noqa: E402
 from traced_turn import run_turn_traced  # noqa: E402
+from interlocutor_extractor import update_interlocutor_facts  # noqa: E402
 
 SHELL_DIR = Path(__file__).resolve().parent
 SCENARIOS_DIR = SHELL_DIR / "scenarios"
@@ -77,6 +78,11 @@ def load_scenario(name: str) -> dict:
     ctx = copy.deepcopy(persona.get("context", persona))
     ctx["recent_turns"] = []
     ctx["situation"] = {"user_message": "", "scene": sc.get("scene", {})}
+    ctx.setdefault("interlocutor_facts", {
+        "user_name": None,
+        "claimed_role": None,
+        "claims_made_this_session": [],
+    })
     return {
         "scenario_id": sc["scenario_id"],
         "opening": sc.get("opening_narration", ""),
@@ -221,6 +227,11 @@ def main():
                 print(f"  {role}: {t['text']}")
             print()
             continue
+
+        # ── P0 interlocutor_facts 抽取（在推理前，让本轮 Decider 也见得到）──
+        extracted_name = update_interlocutor_facts(ctx, line)
+        if extracted_name:
+            print(f"[interlocutor] extracted user_name='{extracted_name}' → ctx.interlocutor_facts")
 
         # ── playtest v0.1 快通道 ──
         quick = quick_ack_check(line, ctx)

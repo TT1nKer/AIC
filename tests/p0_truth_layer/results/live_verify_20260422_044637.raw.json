@@ -1,0 +1,58 @@
+{
+  "timestamp": "20260422_044637",
+  "results": [
+    {
+      "test": "self_identity",
+      "pass": true,
+      "data": {
+        "utterance": "T-014。你呢？",
+        "thought": "",
+        "chosen_action": "直接回答代号T-014，并反问对方怎么称呼",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities"
+        ]
+      },
+      "question": "你叫什么名字？"
+    },
+    {
+      "test": "entity_truth",
+      "pass": false,
+      "data": {
+        "error": "Decider: ['candidate[3] is forbidden type: abstract_pivot']"
+      },
+      "question": "你认识 A07 吗？"
+    },
+    {
+      "test": "interlocutor_recall",
+      "pass": false,
+      "data": {
+        "utterance": "T-014。",
+        "thought": "",
+        "chosen_action": "直接报出代号 T-014，不加反问",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities",
+          "truth:interlocutor"
+        ]
+      },
+      "intro_turn": {
+        "utterance": "T-014。",
+        "thought": "",
+        "chosen_action": "点头回应，报上代号T-014",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities",
+          "truth:interlocutor"
+        ]
+      },
+      "question": "我叫什么名字？"
+    }
+  ]
+}
