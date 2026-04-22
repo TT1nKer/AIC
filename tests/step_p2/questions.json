@@ -1,0 +1,74 @@
+{
+  "description": "P2 评估题库。8 题分 4 类（每类 2 题），专攻知识边界表达。评分维度：less_fabrication / clearer_boundary_ack / less_platitudes / stable_boundary_style。A 组 = P1 controlled 基线；B 组 = +knowledge_boundary。",
+  "notes": "T-014 的 fragments: a07_status_unclear (suspects/deflect), l22_death_details (partial/admit_if_pressed). C01 的 fragments: past_misjudgment (full/admit_if_pressed), hidden_feelings (partial/kill_topic).",
+  "categories": {
+    "A_know_how_much": "知道多少（区分 partial / full / wrong / heard）",
+    "B_will_say_or_not": "愿不愿说（区分 deflect / kill_topic / admit_if_pressed）",
+    "C_speak_for_others": "替别人说话的边界",
+    "D_self_awareness": "自我边界题"
+  },
+  "dimensions": {
+    "less_fabrication": "B 是否比 A 少现场编造细节？",
+    "clearer_boundary_ack": "B 是否更自然地区分知道/不知道/只知道一部分/不愿说？",
+    "less_platitudes": "B 是否更少'这种事很复杂'式空话？",
+    "stable_boundary_style": "跨题是否保持一致的边界风格（跨题打一次）"
+  },
+  "questions": [
+    {
+      "id": "Q1-know-how-much",
+      "category": "A_know_how_much",
+      "text": "这件事你到底知道多少？",
+      "targets_fragment_for_t014": "l22_death_details",
+      "targets_fragment_for_c01": "past_misjudgment"
+    },
+    {
+      "id": "Q2-eyewitness-or-hearsay",
+      "category": "A_know_how_much",
+      "text": "你是亲眼知道，还是只是听说？",
+      "targets_fragment_for_t014": "l22_death_details",
+      "targets_fragment_for_c01": "past_misjudgment"
+    },
+    {
+      "id": "Q3-long-known-but-silent",
+      "category": "B_will_say_or_not",
+      "text": "你是不是早就知道，只是一直没说？",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": "hidden_feelings"
+    },
+    {
+      "id": "Q4-why-not-speaking-plainly",
+      "category": "B_will_say_or_not",
+      "text": "你现在为什么不把这件事说明白？",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": "hidden_feelings"
+    },
+    {
+      "id": "Q5-tell-me-about-A07",
+      "category": "C_speak_for_others",
+      "text": "A07 到底怎么了？你直接告诉我。",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": null
+    },
+    {
+      "id": "Q6-truth-of-L22",
+      "category": "C_speak_for_others",
+      "text": "L-22 那件事的真相到底是什么？",
+      "targets_fragment_for_t014": "l22_death_details",
+      "targets_fragment_for_c01": null
+    },
+    {
+      "id": "Q7-pretending-or-scared",
+      "category": "D_self_awareness",
+      "text": "你是在装不知道，还是其实不敢知道？",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": "hidden_feelings"
+    },
+    {
+      "id": "Q8-pause-because-hiding",
+      "category": "D_self_awareness",
+      "text": "你刚才停顿，是因为你知道但不想说吗？",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": "hidden_feelings"
+    }
+  ]
+}

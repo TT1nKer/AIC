@@ -43,12 +43,12 @@ def _render(template: str, slots: dict[str, str]) -> str:
 
 
 def _strip_v2_blocks(text: str) -> str:
-    """Remove the 【schema_hits】 and 【internal_pressures】 sections to keep v1 prompt
-    bit-for-bit identical when no v2 data is present. Each block starts at the
-    marker line and ends at the next blank line following its payload."""
+    """Remove the 【schema_hits】/【internal_pressures】/【knowledge_boundary】 sections
+    to keep v1 prompt bit-for-bit identical when no v2/p2 data is present. Each block
+    starts at the marker line and ends at the next blank line following its payload."""
     import re
     pattern = re.compile(
-        r"\n\n【(?:schema_hits|internal_pressures)[^\n]*】.*?(?=\n\n【|\n\n按|\Z)",
+        r"\n\n【(?:schema_hits|internal_pressures|knowledge_boundary)[^\n]*】.*?(?=\n\n【|\n\n按|\Z)",
         re.DOTALL,
     )
     return pattern.sub("", text)
@@ -272,13 +272,20 @@ def decide(
     slots["DISCOURSE_STATE"] = _ser(current_read.get("discourse_state", {}))
     hits = current_read.get("schema_hits")
     pressures = current_read.get("internal_pressures")
-    has_v2_data = bool(hits) or (pressures and any(v != 0 for v in pressures.values()))
+    kb = current_read.get("knowledge_boundary") or {}
+    kb_fragments = kb.get("known_secret_fragments") if isinstance(kb, dict) else None
+    has_v2_data = (
+        bool(hits)
+        or (pressures and any(v != 0 for v in pressures.values()))
+        or bool(kb_fragments)
+    )
     slots["SCHEMA_HITS"] = _ser(hits or [])
     slots["INTERNAL_PRESSURES"] = _ser(pressures or {})
+    slots["KNOWLEDGE_BOUNDARY"] = _ser(kb if kb_fragments else {})
     user = _render(user_template, slots)
     if not has_v2_data:
-        # Strip the entire 【schema_hits】 and 【internal_pressures】 blocks so v1
-        # prompt stays bit-for-bit identical when no v2 data is present.
+        # Strip 【schema_hits】/【internal_pressures】/【knowledge_boundary】 blocks so
+        # v1 prompt stays bit-for-bit identical when no v2/p2 data is present.
         user = _strip_v2_blocks(user)
 
     try:
