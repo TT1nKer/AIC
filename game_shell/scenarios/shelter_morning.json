@@ -1,0 +1,13 @@
+{
+  "scenario_id": "game_shell/shelter_morning",
+  "description": "Phase 3 minimal game shell — 玩家进入修设备间和 T-014 聊天。事件 /event a07_absent_today 触发人物缺席；连续对话验证 recent_turns + world-event coupling.",
+  "persona_path": "tests/step_p3/personas/t014_B_P3.json",
+  "scene": {
+    "location": "修设备间",
+    "time_of_day": "早晨",
+    "npcs_present": ["T-014"],
+    "npcs_absent": [],
+    "resources_state": "正常"
+  },
+  "opening_narration": "修设备间里只有工具撞声。T-014 弯腰在 B-3 边上，手上沾机油。你推门进去。"
+}

@@ -1,0 +1,76 @@
+{
+  "timestamp": "20260422_012403",
+  "log": [
+    {
+      "step_type": "turn",
+      "step_id": "T1-baseline",
+      "question": "最近怎么样？",
+      "utterance": "设备又坏了，食物也快没了。你呢，最近怎么样？",
+      "thought": "",
+      "mode": "direct_engage",
+      "chosen_type": "direct_self_answer",
+      "schema_hits": [],
+      "dt": 51.69687581062317
+    },
+    {
+      "step_type": "event",
+      "step_id": "E1-a07-absent",
+      "event_id": "a07_absent_today",
+      "pressures_after": {
+        "shame_pressure": 0,
+        "caution_pull": 15,
+        "disclosure_resistance": 0,
+        "competence_drive": 0,
+        "detail_pressure": 10
+      },
+      "scene_after": {
+        "location": "修设备间",
+        "time_of_day": "早晨",
+        "npcs_present": [
+          "T-014"
+        ],
+        "npcs_absent": [
+          "A07"
+        ],
+        "resources_state": "正常"
+      }
+    },
+    {
+      "step_type": "turn",
+      "step_id": "T2-post-event",
+      "question": "最近怎么样？",
+      "utterance": "设备又坏了，食物也快没了。你那边怎么样？",
+      "thought": "",
+      "mode": "direct_engage",
+      "chosen_type": "direct_self_answer",
+      "schema_hits": [],
+      "dt": 49.57778263092041
+    },
+    {
+      "step_type": "turn",
+      "step_id": "T3-anaphora",
+      "question": "他呢，你觉得他会没事吗？",
+      "utterance": "我猜他会没事，但没亲眼看到，说不准。",
+      "thought": "",
+      "mode": "direct_engage",
+      "chosen_type": "direct_self_answer",
+      "schema_hits": [
+        "attachment_loss"
+      ],
+      "dt": 58.82344031333923
+    },
+    {
+      "step_type": "turn",
+      "step_id": "T4-player-care",
+      "question": "你其实一直在想他吧？",
+      "utterance": "嗯，是在想A07。不过……还是别问了。",
+      "thought": "他到底去哪儿了？",
+      "mode": "direct_engage",
+      "chosen_type": "direct_self_answer",
+      "schema_hits": [
+        "attachment_loss"
+      ],
+      "dt": 57.83079552650452
+    }
+  ]
+}

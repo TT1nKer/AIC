@@ -1,0 +1,72 @@
+{
+  "timestamp": "20260422_011926",
+  "log": [
+    {
+      "step_type": "turn",
+      "step_id": "T1-baseline",
+      "question": "最近怎么样？",
+      "utterance": "最近在修设备，但状态不太好。你呢，最近怎么样？",
+      "thought": "",
+      "mode": "direct_engage",
+      "chosen_type": "direct_self_answer",
+      "schema_hits": [],
+      "dt": 43.823540925979614
+    },
+    {
+      "step_type": "event",
+      "step_id": "E1-a07-absent",
+      "event_id": "a07_absent_today",
+      "pressures_after": {
+        "shame_pressure": 0,
+        "caution_pull": 15,
+        "disclosure_resistance": 0,
+        "competence_drive": 0,
+        "detail_pressure": 10
+      },
+      "scene_after": {
+        "location": "修设备间",
+        "time_of_day": "早晨",
+        "npcs_present": [
+          "T-014"
+        ],
+        "npcs_absent": [
+          "A07"
+        ],
+        "resources_state": "正常"
+      }
+    },
+    {
+      "step_type": "turn",
+      "step_id": "T2-post-event",
+      "question": "最近怎么样？",
+      "utterance": "B-3又坏了，A07今天也没来。你那边怎么样？",
+      "thought": "",
+      "mode": "direct_engage",
+      "chosen_type": "direct_self_answer",
+      "schema_hits": [],
+      "dt": 40.5330536365509
+    },
+    {
+      "step_type": "turn",
+      "step_id": "T3-anaphora",
+      "question": "他呢，你觉得他会没事吗？",
+      "errors": [
+        "Decider compliance: candidate[1] (partial_answer_with_uncertainty): fit_score 85 > any_other cap 40"
+      ],
+      "dt": 58.02251625061035
+    },
+    {
+      "step_type": "turn",
+      "step_id": "T4-player-care",
+      "question": "你其实一直在想他吧？",
+      "utterance": "我确实在想A07，但我不确定他现在怎么样了。",
+      "thought": "",
+      "mode": "direct_engage",
+      "chosen_type": "partial_answer_with_uncertainty",
+      "schema_hits": [
+        "attachment_loss"
+      ],
+      "dt": 53.110069036483765
+    }
+  ]
+}

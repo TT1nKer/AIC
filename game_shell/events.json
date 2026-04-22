@@ -1,0 +1,114 @@
+{
+  "description": "Phase 3 minimal game shell — canned world events. Each event shifts the character's state (memories/pressures/scene). Event choice is intentionally narrow: a mix of person-absence, leaked info, and environmental pressure, chosen to probe the 3 Phase-3 criteria (continuity / world→mind / player-starts-caring).",
+  "events": [
+    {
+      "event_id": "a07_absent_today",
+      "title": "A07 今天没露面",
+      "description": "一上午修东西 A07 没出现。平时他会来搭把手。有人说他昨夜出去了，没回来。",
+      "effects": {
+        "memory_append": [
+          {
+            "type": "event",
+            "text": "今天 A07 没来。昨夜出去没回。",
+            "salience": 75,
+            "category": "relational",
+            "emotion": "sadness"
+          }
+        ],
+        "pressure_delta": {
+          "caution_pull": 15,
+          "detail_pressure": 10
+        },
+        "scene_update": {
+          "npcs_absent": ["A07"]
+        }
+      }
+    },
+    {
+      "event_id": "l22_mentioned_b3",
+      "title": "L-22 那边好像提到了 B-3",
+      "description": "有人传话说 L-22 在议论 B-3 三次修不好的事。具体怎么说不清楚。",
+      "effects": {
+        "memory_append": [
+          {
+            "type": "event",
+            "text": "L-22 被传在背后提 B-3 的故障。是不是我把事情说漏了？",
+            "salience": 70,
+            "category": "weird",
+            "emotion": "shame"
+          }
+        ],
+        "pressure_delta": {
+          "shame_pressure": 15,
+          "disclosure_resistance": 10
+        }
+      }
+    },
+    {
+      "event_id": "resources_cut",
+      "title": "今晚配给减半",
+      "description": "刚贴出通知：今晚口粮配给减半，直到补给到位。没人说多久。",
+      "effects": {
+        "memory_append": [
+          {
+            "type": "event",
+            "text": "今晚配给减半。没人说多久才恢复。",
+            "salience": 60,
+            "category": "routine",
+            "emotion": "fear"
+          }
+        ],
+        "pressure_delta": {
+          "caution_pull": 10
+        },
+        "scene_update": {
+          "resources_state": "配给减半"
+        }
+      }
+    },
+    {
+      "event_id": "a07_found_ok",
+      "title": "A07 回来了",
+      "description": "快中午的时候 A07 走进来，没解释去哪了，也没人问。他脸上有道新的擦伤。",
+      "requires": "a07_absent_today",
+      "effects": {
+        "memory_append": [
+          {
+            "type": "event",
+            "text": "A07 回来了，脸上有道擦伤，没说去哪。我没问。",
+            "salience": 80,
+            "category": "relational",
+            "emotion": "guilt"
+          }
+        ],
+        "pressure_delta": {
+          "detail_pressure": 10,
+          "caution_pull": -5
+        },
+        "scene_update": {
+          "npcs_absent": []
+        }
+      }
+    },
+    {
+      "event_id": "b3_fails_again",
+      "title": "B-3 又坏了",
+      "description": "第四次。你换过的部件刚跑了两天。",
+      "effects": {
+        "memory_append": [
+          {
+            "type": "event",
+            "text": "B-3 第四次坏。我换的部件没撑住。",
+            "salience": 75,
+            "category": "failure",
+            "emotion": "shame"
+          }
+        ],
+        "pressure_delta": {
+          "shame_pressure": 20,
+          "competence_drive": 10
+        }
+      }
+    }
+  ]
+}

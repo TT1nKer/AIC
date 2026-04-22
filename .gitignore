@@ -3,3 +3,4 @@ src/__pycache__/
 *.env
 .claude/
 story_distiller/src/__pycache__/
+game_shell/__pycache__/
