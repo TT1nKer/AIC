@@ -101,13 +101,32 @@
 
 v1 的 7 条具体检查项见 [SCOPE.md](SCOPE.md)（已全部 pass）。
 
-## 下一阶段目标（Phase 2）
+## Phase 2：关系痕迹可积累 — ✅ done (2026-04-22)
 
-> **关系痕迹可积累**。
+**封板依据**（三层 + 两尺度 + 一硬化）：
 
-- 缺席 / 重逢 / 故障 / 死讯等事件能稳定改变回答倾向
-- 不同角色开始有不同别扭方向
-- 抽象工作台（schema_matcher / internal_pressures）已搭完框架，下一步是让它们在多角色、多天累积中表现出差异
+- **P1 过去厚度**（shipped commit `70cc08a` + distilled 验证 `75eadea` / `0ff16cb`）：空白角色不再空心；domain-mismatch sediment 通过 damping + gate 控住。
+- **P2 知识边界**（`0e6b786`）：partial / suspects_but_avoids_checking / admit_if_pressed / kill_topic 能被单轮精准转化；anti-fabrication 守则去掉了 full_truth/will_deflect 诱发的编造；5/8 固定题明显 B>A。
+- **P3 关系偏置**（`4aeab36`）：对特定对象展现 protects_from_truth / blames / owes_something；未匹配 target 不激活（双向证明 "没匹配就不起作用"）；4/6 固定题明显 B>A。
+- **纵向稳定**（`fe254f0`）：T-014 + C01 各 14 轮连续对话，recent_turns 不重置。3/4 门槛通过，意外涌现 **RB 跨对象对比**（单轮未达成，长对话达成）。
+- **空话硬化**（`4620d61`）：万能空话从 prompt 软劝升级为 `verbal_redlines.json` v1.0.2 的 block-level regex；spot re-verify 0/5 platitude occurrence。
+
+**已知边界**（写清不遮盖）：
+
+1. **RB v0.1 做方向性偏置，不做强对比引擎**。单轮 "换成别人" 题四个 persona 趋同；长对话里才涌现对象间对比。想做稳定对象对比需加 intensity / counter-bias（v2.1 后）。
+2. **跨 session 记忆尚未开启**。同一 session recent_turns 累积有效；session 结束后 SpeakerModel 不持久化学习。v2.8 再碰。
+3. **横向泛化验证尚未完成**。P1+P2+P3 在 T-014 (technician) + C01 (blank) 两种 persona 形状上成立；nurse / courier / drifter 等其它 role 还没测 → V2-5 正在验。
+4. **三个 schema_matcher 类型收窄**（Step 2 controlled 裁剪）：knows_level 只保留 `partial / unaware / suspects_but_avoids_checking`；attitude 只保留 `will_admit_if_pressed / will_kill_topic`。`full_truth / will_deflect / wrong_version / will_volunteer / will_deny` 已从 v0.2 移出——需要时再引入新字段代替而非回炉旧枚举。
+5. **compliance error 率 ~5%**（Decider / Expresser schema miss 偶发 LLM variance）。retry-once 兜底够用；想到 ~0% 要专门工程化。
+6. **语言范围只中文**。未测其它语种。
+
+## 下一阶段目标（Phase 2.5 / V2-5 横向验证）— 进行中
+
+目标：**P1+P2+P3 在不同 role 上是否仍保持净收益，而不塌成统一腔调**。不扩复杂度，只横向扩 persona。
+
+- nurse / courier / drifter 三种 role 新 personas（from_doomsday 产出）
+- 每 persona 跑一套覆盖 P1/P2/P3 触发的题
+- 4 条门槛：每 persona 至少 1 次 P1 命中 / 1 次 P2 命中 / 1 次 P3 命中 / 不变成统一谨慎腔
 
 ## Phase 3 目标（尚未开工）
 
