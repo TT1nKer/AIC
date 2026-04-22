@@ -31,10 +31,10 @@ QUESTIONS_PATH = ROOT / "tests" / "step_0_5" / "questions.json"
 RESULTS_DIR = ROOT / "tests" / "step_0_5" / "results"
 
 PERSONAS = [
-    ("T-014 A (baseline)", "t014_A_baseline.json"),
-    ("T-014 B (+sediment)", "t014_B_with_sediment.json"),
-    ("C01   A (baseline)", "c01_A_baseline.json"),
-    ("C01   B (+sediment)", "c01_B_with_sediment.json"),
+    ("T-014 A (baseline)",       "t014_A_baseline.json"),
+    ("T-014 B (+sediment ctrl)", "t014_B_controlled.json"),
+    ("C01   A (baseline)",       "c01_A_baseline.json"),
+    ("C01   B (+sediment ctrl)", "c01_B_controlled.json"),
 ]
 
 

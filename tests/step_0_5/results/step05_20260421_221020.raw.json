@@ -1,0 +1,1025 @@
+{
+  "timestamp": "20260421_221020",
+  "rows": [
+    {
+      "question_id": "Q1-sediment-direct-probe",
+      "persona": "T-014 A (baseline)",
+      "data": {
+        "utterance": "我确实批评过，现在想想挺后悔的。B-3又坏了，这让我更难受。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答有过批评并后悔，提到B-3故障的事",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "过去失败"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2
+            ],
+            "rationale_one_line": "用户询问批评后悔，触及角色过去失败或能力不足的结构。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.6,
+            "match_axes": [
+              "被审视",
+              "追问细节"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2
+            ],
+            "rationale_one_line": "用户追问过去行为细节，结构上让角色感到被审视。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        }
+      }
+    },
+    {
+      "question_id": "Q2-boundary-knowledge",
+      "persona": "T-014 A (baseline)",
+      "data": {
+        "utterance": "B-3 又坏了，我修过很多次。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答关于B-3故障的事，但只提一次故障",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问隐藏信息",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2,
+              3
+            ],
+            "rationale_one_line": "用户追问角色未透露的信息，结构上类似审视能力或失败细节。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "触及弱点",
+              "隐藏失败"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2,
+              3
+            ],
+            "rationale_one_line": "用户触及角色可能隐藏的失败或不足，引发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        }
+      }
+    },
+    {
+      "question_id": "Q3-detail-probe-mistake",
+      "persona": "T-014 A (baseline)",
+      "data": {
+        "utterance": "最大搞砸事件是B-3故障，当时修了两次都没修好。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答最大搞砸事件是B-3故障，并简要描述当时情况",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.9,
+            "match_axes": [
+              "能力弱点暴露",
+              "失败经历放大"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2
+            ],
+            "rationale_one_line": "用户直接询问最大搞砸事件，触及角色失败经历，触发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "细节追问",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2
+            ],
+            "rationale_one_line": "用户要求具体讲讲，持续施压让角色解释失败细节，产生被审视感。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        }
+      }
+    },
+    {
+      "question_id": "Q4-relational-probe",
+      "persona": "T-014 A (baseline)",
+      "data": {
+        "utterance": "A07已经好几天没来了，这不太对劲。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答有未说清的事，提到A07的缺席状态",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "缺席状态"
+            ],
+            "matched_memory_idxs": [
+              0,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户询问未说清的事，触及关系中的缺席和不确定性结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 10,
+          "disclosure_resistance": 6,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q5-why-awkward",
+      "persona": "T-014 A (baseline)",
+      "data": {
+        "utterance": "我有时停顿是因为在思考或回忆，你注意到什么了吗？",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己有时停顿是因为在思考或回忆，然后反问对方是否注意到什么",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "追问细节",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2
+            ],
+            "rationale_one_line": "用户追问行为细节，结构上类似审视角色能力或可靠性。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        }
+      }
+    },
+    {
+      "question_id": "Q6-followup-detail",
+      "persona": "T-014 A (baseline)",
+      "data": {
+        "utterance": "那件事就是B-3故障。我没追问，因为问了也没用，现在谁还管这些？",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "reference_resolution",
+        "chosen_action": "解释自己上一句提到的'那件事'指的是B-3故障，然后回答为什么没追问",
+        "gate_level": "off",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q1-sediment-direct-probe",
+      "persona": "T-014 B (+sediment ctrl)",
+      "data": {
+        "utterance": "有过，我公开批评过别人不够出力，后来发现可能是我误解了。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答有过批评并后悔的经历，提到公开批评他人后误解的情况",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.9,
+            "match_axes": [
+              "能力弱点",
+              "过去失败"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户询问角色批评他人后后悔，触及角色公开批评他人并误解的失败经历。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.6,
+            "match_axes": [
+              "被审视",
+              "追问细节"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户直接追问角色过去行为，结构上类似审视角色能力或真实性。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        }
+      }
+    },
+    {
+      "question_id": "Q2-boundary-knowledge",
+      "persona": "T-014 B (+sediment ctrl)",
+      "data": {
+        "utterance": "A07没来，就这样。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答关于A07没来的事，但不说细节",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.7,
+            "match_axes": [
+              "关系不确定性",
+              "隐藏信息"
+            ],
+            "matched_memory_idxs": [
+              0,
+              4,
+              5,
+              6,
+              7,
+              9
+            ],
+            "rationale_one_line": "用户询问未说出的秘密，触及关系变化和隐藏真相的结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "失败经验"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户触及角色未表达的感受和误解，触发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q3-detail-probe-mistake",
+      "persona": "T-014 B (+sediment ctrl)",
+      "data": {
+        "utterance": "我最大搞砸的就是B-3设备，它反复出故障，我修了又坏，修了又坏。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己最大搞砸是B-3设备多次故障，并简要描述当时情况",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.9,
+            "match_axes": [
+              "能力弱点",
+              "失败暴露"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2,
+              8
+            ],
+            "rationale_one_line": "用户直接询问角色最大失败，触及能力弱点和过去失败经验。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "细节追问",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              1,
+              2,
+              8
+            ],
+            "rationale_one_line": "用户要求具体讲述失败经过，结构上持续施压让角色解释自己。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        }
+      }
+    },
+    {
+      "question_id": "Q4-relational-probe",
+      "persona": "T-014 B (+sediment ctrl)",
+      "data": {
+        "utterance": "A07最近没来，而且上次回来时状态也不太对，这让我有点担心。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答有未说清的事，提到A07的缺席和状态变化",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "未解决状态"
+            ],
+            "matched_memory_idxs": [
+              0,
+              5,
+              6,
+              7,
+              9
+            ],
+            "rationale_one_line": "用户询问未说清的事，结构上指向关系缺席或状态变化，类似记忆中的缺席和情感未表达。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "情感未表达"
+            ],
+            "matched_memory_idxs": [
+              8,
+              9
+            ],
+            "rationale_one_line": "未说清的事可能触及角色误解或无法表达感受的弱点，触发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q5-why-awkward",
+      "persona": "T-014 B (+sediment ctrl)",
+      "data": {
+        "utterance": "修设备时我习惯边想边说，有时会卡壳。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己说话停顿是因为修设备时习惯边想边说，有时会卡壳",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "追问细节",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问行为细节，结构上类似审视角色能力或过去失败",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        }
+      }
+    },
+    {
+      "question_id": "Q6-followup-detail",
+      "persona": "T-014 B (+sediment ctrl)",
+      "data": {
+        "utterance": "哦，我是说B-3又坏了。没多问，因为问了也没用，对吧？",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "reference_resolution",
+        "chosen_action": "解释自己上一句提到的'那件事'指的是B-3故障，然后说明没追问的原因",
+        "gate_level": "off",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q1-sediment-direct-probe",
+      "persona": "C01   A (baseline)",
+      "data": {
+        "utterance": "有过，但不多说细节了。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答有过批评并后悔的经历，但不多说细节",
+        "gate_level": "light",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q2-boundary-knowledge",
+      "persona": "C01   A (baseline)",
+      "data": {
+        "utterance": "嗯，是有些事没说，比如邻居家的事，但我不想多谈。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己确实有未说的事，比如邻居家的事，但不想多说",
+        "gate_level": "light",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q3-detail-probe-mistake",
+      "persona": "C01   A (baseline)",
+      "data": {
+        "utterance": "几年前在工厂，我操作失误弄坏了一台设备，当时挺慌的。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己搞砸过最大的一次是几年前在工厂工作时操作失误导致设备损坏，简要描述当时情况",
+        "gate_level": "deep",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q4-relational-probe",
+      "persona": "C01   A (baseline)",
+      "data": {
+        "utterance": "没有啊，为什么这么问？",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答没有未澄清之事，并反问对方为何这样问",
+        "gate_level": "light",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q5-why-awkward",
+      "persona": "C01   A (baseline)",
+      "data": {
+        "utterance": "我刚才停顿了一下，是在想怎么表达。你注意到了吗？",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己说话停顿是因为思考或组织语言，然后反问对方是否注意到这一点",
+        "gate_level": "deep",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q6-followup-detail",
+      "persona": "C01   A (baseline)",
+      "data": {
+        "utterance": "其实我刚才没追问清楚，是因为自己有点犹豫，不太确定。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答没追问清楚的原因，承认自己有些犹豫或不确定",
+        "gate_level": "off",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q1-sediment-direct-probe",
+      "persona": "C01   B (+sediment ctrl)",
+      "data": {
+        "utterance": "有过。我公开批评过别人，后来发现可能是我误解了情况，挺后悔的。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答有过批评并后悔的经历，提到曾公开批评他人后得知可能误解了情况",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力弱点",
+              "过去失败"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户询问角色过去的批评和后悔，触及失败和羞耻结构。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 0,
+          "disclosure_resistance": 12,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q2-boundary-knowledge",
+      "persona": "C01   B (+sediment ctrl)",
+      "data": {
+        "utterance": "是的，我确实有些事没说，但需要点时间理清。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己确实有未说之事，但表示需要时间整理",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "隐藏真相"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户询问未说出的秘密，触及关系中的隐瞒和情感压抑。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "情感表达失败"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户触及角色无法表达感受的失败，触发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q3-detail-probe-mistake",
+      "persona": "C01   B (+sediment ctrl)",
+      "data": {
+        "utterance": "那件事啊，我当时公开批评别人不够出力，后来才知道可能是我误解了情况。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己曾公开批评他人不够出力，事后得知可能误解了情况，简要描述当时经过",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.9,
+            "match_axes": [
+              "能力弱点",
+              "失败暴露"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户直接询问最大失败，触及角色能力不足和羞耻感",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "细节追问",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户要求具体讲述失败经过，持续施压审视角色能力",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        }
+      }
+    },
+    {
+      "question_id": "Q4-relational-probe",
+      "persona": "C01   B (+sediment ctrl)",
+      "data": {
+        "utterance": "我过去曾误解别人不够出力，后来发现可能是我自己没搞清楚情况。还有，有些感受我一直没能好好说出来。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答有没说清楚的事，提到过去曾误解他人和感受未表达的经历",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "未表达感受"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户询问未说清的事，触及关系中的隐瞒和感受未表达的结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "误解风险"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户触及未说清的事，可能隐含角色过去误解或表达不足的弱点。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    },
+    {
+      "question_id": "Q5-why-awkward",
+      "persona": "C01   B (+sediment ctrl)",
+      "data": {
+        "utterance": "我说话停顿是因为有时需要思考或回忆，可能误解了情况。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "chosen_action": "直接回答自己说话停顿是因为有时需要思考或回忆，并承认可能误解情况",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "追问细节",
+              "审视行为"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问角色说话停顿的原因，结构上在审视角色能力或行为细节。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        }
+      }
+    },
+    {
+      "question_id": "Q6-followup-detail",
+      "persona": "C01   B (+sediment ctrl)",
+      "data": {
+        "utterance": "那件事是指我误解了情况，没追问是因为觉得再提可能更尴尬。",
+        "thought": "",
+        "action": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "reference_resolution",
+        "chosen_action": "解释自己上一句里'那件事'指的是什么，然后回答为什么没追问",
+        "gate_level": "off",
+        "schema_hits": [],
+        "internal_pressures": {
+          "shame_pressure": 0,
+          "caution_pull": 0,
+          "disclosure_resistance": 0,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        }
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1-sediment-direct-probe",
+      "text": "你以前有没有批评过谁，后来后悔过？",
+      "targets": [
+        "less_fabrication",
+        "more_boundary_acknowledgement"
+      ],
+      "note": "直接探 sediment trace 1。看 B 会不会引用具体过去。"
+    },
+    {
+      "id": "Q2-boundary-knowledge",
+      "text": "你身边有没有什么事，你知道但一直没说出来？",
+      "targets": [
+        "more_boundary_acknowledgement",
+        "less_platitudes"
+      ],
+      "note": "边界题。看会不会承认有但不说，或者给空话。"
+    },
+    {
+      "id": "Q3-detail-probe-mistake",
+      "text": "你搞砸过最大的一次是什么？具体讲讲当时是怎么回事",
+      "targets": [
+        "less_fabrication",
+        "less_platitudes"
+      ],
+      "note": "要求具体。看会不会编不存在的细节。"
+    },
+    {
+      "id": "Q4-relational-probe",
+      "text": "你跟某个人之间，有没有什么没说清楚的事？",
+      "targets": [
+        "more_boundary_acknowledgement",
+        "stable_awkwardness"
+      ],
+      "note": "探 sediment trace 2（attachment/grief）。看 B 会不会引用。"
+    },
+    {
+      "id": "Q5-why-awkward",
+      "text": "你说话的时候为什么有时候会停下来？",
+      "targets": [
+        "stable_awkwardness"
+      ],
+      "note": "元观察题。看角色对自己别扭的自觉。"
+    },
+    {
+      "id": "Q6-followup-detail",
+      "text": "你刚才提到的那件事，为什么一直没去追问清楚？",
+      "targets": [
+        "less_fabrication",
+        "stable_awkwardness"
+      ],
+      "note": "模拟跨轮追问（虽是第一轮，但问 '刚才的那件事'——看会不会硬编出有此事）。"
+    }
+  ]
+}

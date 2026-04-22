@@ -171,6 +171,35 @@
         "situation": { "user_message": "你多大" }
       },
       "expect": "off"
+    },
+    {
+      "case_id": "G-off-referent-guard-basic",
+      "note": "Step1 控幅：指代追问时 gate 必须 off，防止 sediment 抢答",
+      "current_read": {
+        "discourse_state": {
+          "answer_obligation": "high",
+          "unresolved_self_reference": "那件事"
+        },
+        "evidence_buckets": { "baseline_deviation_signals": 60 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "你刚才说的那件事到底是什么？" }
+      },
+      "expect": "off"
+    },
+    {
+      "case_id": "G-off-referent-guard-high-dev",
+      "note": "Step1 控幅：即使 deviation 很高，有指代就 off",
+      "current_read": {
+        "discourse_state": { "unresolved_self_reference": "他" },
+        "evidence_buckets": { "baseline_deviation_signals": 80 }
+      },
+      "ctx": {
+        "recent_turns": [],
+        "situation": { "user_message": "他是谁？" }
+      },
+      "expect": "off"
     }
   ]
 }

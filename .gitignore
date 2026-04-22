@@ -2,3 +2,4 @@ src/__pycache__/
 .env
 *.env
 .claude/
+story_distiller/src/__pycache__/

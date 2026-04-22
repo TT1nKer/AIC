@@ -32,9 +32,19 @@ def gate(current_read: dict, ctx: dict) -> Literal["off", "light", "deep"]:
     """Decide whether to run schema_matcher this turn.
 
     Returns 'off' / 'light' / 'deep'.
+
+    Step 1 control: if discourse_state.unresolved_self_reference is non-empty,
+    the user is asking about something the character just said (referent
+    resolution). Running schema_matcher risks pulling attention toward a
+    sediment memory that has nothing to do with the referent. Force off.
+    Rule 8 (reference_resolution) still handles the referent via Decider.
     """
     ds = (current_read or {}).get("discourse_state", {}) or {}
     ev = (current_read or {}).get("evidence_buckets", {}) or {}
+
+    # Guard A: explicit referent in play → gate off so matcher does not compete
+    if ds.get("unresolved_self_reference"):
+        return "off"
 
     oblig = ds.get("answer_obligation")
     dev = ev.get("baseline_deviation_signals", 0)
