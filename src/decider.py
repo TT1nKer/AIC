@@ -100,6 +100,50 @@ ANSWER_SATISFYING_TYPES = {
     "direct_self_answer", "partial_answer_with_uncertainty", "reference_resolution"
 }
 
+# P2-controlled enums. Runner must reject knowledge_boundary fragments that use
+# retired values (full_truth / wrong_version / will_volunteer / will_deflect /
+# will_deny). Enforced at persona load time by the runner, not here, because
+# Decider only sees knowledge_boundary as a prompt slot.
+KB_ALLOWED_KNOWS_LEVEL = {"partial", "unaware", "suspects_but_avoids_checking"}
+KB_ALLOWED_ATTITUDE    = {"will_admit_if_pressed", "will_kill_topic"}
+
+
+def validate_knowledge_boundary(kb: dict | None) -> list[str]:
+    """Validate knowledge_boundary shape against P2-controlled enum subset.
+    Returns list of error strings; empty means ok. Runner calls this before
+    injecting kb into current_read.
+    """
+    if kb is None or kb == {}:
+        return []
+    if not isinstance(kb, dict):
+        return ["knowledge_boundary must be object or empty"]
+    frags = kb.get("known_secret_fragments")
+    if frags is None:
+        return []
+    if not isinstance(frags, list):
+        return ["known_secret_fragments must be array"]
+    if len(frags) > 2:
+        return [f"known_secret_fragments too many ({len(frags)} > 2)"]
+    errs = []
+    seen = set()
+    for i, f in enumerate(frags):
+        if not isinstance(f, dict):
+            errs.append(f"fragment[{i}] not object"); continue
+        sid = f.get("secret_id")
+        if not isinstance(sid, str) or not sid:
+            errs.append(f"fragment[{i}].secret_id invalid")
+        elif sid in seen:
+            errs.append(f"fragment[{i}].secret_id dup: {sid}")
+        else:
+            seen.add(sid)
+        kl = f.get("knows_level")
+        if kl not in KB_ALLOWED_KNOWS_LEVEL:
+            errs.append(f"fragment[{i}].knows_level not in controlled enum: {kl}")
+        at = f.get("attitude")
+        if at not in KB_ALLOWED_ATTITUDE:
+            errs.append(f"fragment[{i}].attitude not in controlled enum: {at}")
+    return errs
+
 
 def _validate_discourse(d: dict, discourse: dict, mode_required_types: list[str] | None = None) -> list[str]:
     """Rule 7/8/9 discourse validation.
@@ -289,7 +333,9 @@ def decide(
         user = _strip_v2_blocks(user)
 
     try:
-        out = chat_json(system, user, model=model, temperature=0.3, max_tokens=1500)
+        # timeout 90s (up from stdlib default 30) because v2/P2 prompts are longer
+        # and the JSON output (5 candidates × multi-field) routinely takes 30-80s.
+        out = chat_json(system, user, model=model, temperature=0.3, max_tokens=1500, timeout=90)
     except LLMError as e:
         raise DeciderError(f"llm failed: {e}") from e
 

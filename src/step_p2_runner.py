@@ -18,6 +18,7 @@ import json
 import os
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -26,7 +27,7 @@ os.environ.setdefault("AICHAR_P2", "1")
 
 from compiler import compile_phase_a, compile_phase_b
 from speaker_reader import read_speaker, SpeakerReaderError
-from decider import decide, DeciderError
+from decider import decide, DeciderError, validate_knowledge_boundary
 from expresser import express, ExpresserError
 from association_gate import gate as association_gate
 from schema_matcher import match as schema_match, apply_state_shifts, SchemaMatcherError
@@ -41,11 +42,12 @@ AICHAR_P2 = os.environ.get("AICHAR_P2", "0") == "1"
 
 # (display_label, path_to_persona_json, variant: 'A' | 'B')
 # A variants come from the frozen P1 controlled baseline.
+# B variants use P2-controlled fragments (trimmed enum set + anti-fabrication).
 PERSONAS = [
-    ("T-014 A (P1 baseline)",   P1_PERSONAS_DIR / "t014_B_controlled.json", "A"),
-    ("T-014 B (P1+P2)",         PERSONAS_DIR / "t014_B_P2.json",            "B"),
-    ("C01   A (P1 baseline)",   P1_PERSONAS_DIR / "c01_B_controlled.json",  "A"),
-    ("C01   B (P1+P2)",         PERSONAS_DIR / "c01_B_P2.json",             "B"),
+    ("T-014 A (P1 baseline)",       P1_PERSONAS_DIR / "t014_B_controlled.json",   "A"),
+    ("T-014 B (P1+P2 controlled)",  PERSONAS_DIR / "t014_B_P2_controlled.json",   "B"),
+    ("C01   A (P1 baseline)",       P1_PERSONAS_DIR / "c01_B_controlled.json",    "A"),
+    ("C01   B (P1+P2 controlled)",  PERSONAS_DIR / "c01_B_P2_controlled.json",    "B"),
 ]
 
 
@@ -89,9 +91,13 @@ def run_question(ctx: dict, rules: dict, redlines: dict, user_msg: str, variant:
             ctx.get("character_state", {}).get("internal_pressures", {})
         )
 
-    # P2 layer: only for B variant, only when AICHAR_P2 on, only if persona has it
+    # P2 layer: only for B variant, only when AICHAR_P2 on, only if persona has it.
+    # Validate against P2-controlled enum subset; reject on violation (no fallback).
     kb_in_persona = ctx.get("character_state", {}).get("knowledge_boundary")
     if AICHAR_P2 and variant == "B" and kb_in_persona:
+        kb_errs = validate_knowledge_boundary(kb_in_persona)
+        if kb_errs:
+            return {"error": f"KB schema invalid: {kb_errs}"}
         cr["knowledge_boundary"] = kb_in_persona
 
     phase_b = compile_phase_b(ctx, cr, rules)
@@ -249,34 +255,45 @@ def write_markdown(rows: list[dict], questions: list[dict], out_path: Path):
     out_path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def _run_persona_serial(plab, ppath, variant, questions, rules, redlines):
+    """Run one persona's full question set serially. Returns list of row dicts.
+    Called from thread pool — each thread handles one persona independently."""
+    persona = load_json(ppath)
+    ctx = persona["context"]
+    rows_local = []
+    for q in questions:
+        t0 = time.time()
+        data = run_question(ctx, rules, redlines, q["text"], variant)
+        dt = time.time() - t0
+        if "error" in data:
+            print(f"  [{plab} Q={q['id']}] {dt:.1f}s ERROR: {data['error'][:60]}", flush=True)
+        else:
+            kb_tag = "+KB" if data.get("knowledge_boundary") else "no-KB"
+            print(f"  [{plab} Q={q['id']}] {dt:.1f}s {data['chosen_type']:30s} {kb_tag}", flush=True)
+        rows_local.append({"question_id": q["id"], "persona": plab, "data": data})
+    return rows_local
+
+
 def main():
     rules = load_json(ROOT / "rules" / "pose_rules.json")
     redlines = load_json(ROOT / "rules" / "verbal_redlines.json")
     questions_data = load_json(QUESTIONS_PATH)
     questions = questions_data["questions"]
 
-    rows = []
     total = len(PERSONAS) * len(questions)
-    done = 0
     print(f"Running {total} combinations ({len(PERSONAS)} personas × {len(questions)} questions)")
     print(f"AICHAR_V2={os.environ.get('AICHAR_V2')}  AICHAR_P2={os.environ.get('AICHAR_P2')}")
+    print(f"Parallelism: {len(PERSONAS)} personas concurrent (each persona's 8 Qs serial)")
     t0_all = time.time()
 
-    for plab, ppath, variant in PERSONAS:
-        persona = load_json(ppath)
-        ctx = persona["context"]
-        for q in questions:
-            done += 1
-            t0 = time.time()
-            print(f"  [{done}/{total}] {plab}  Q={q['id']} ", end="", flush=True)
-            data = run_question(ctx, rules, redlines, q["text"], variant)
-            dt = time.time() - t0
-            if "error" in data:
-                print(f"  [{dt:.1f}s] ERROR: {data['error'][:80]}")
-            else:
-                kb_tag = "+KB" if data.get("knowledge_boundary") else "no-KB"
-                print(f"  [{dt:.1f}s] {data['chosen_type']:30s} {kb_tag}")
-            rows.append({"question_id": q["id"], "persona": plab, "data": data})
+    rows = []
+    with ThreadPoolExecutor(max_workers=len(PERSONAS)) as ex:
+        futures = {
+            ex.submit(_run_persona_serial, plab, ppath, variant, questions, rules, redlines): plab
+            for plab, ppath, variant in PERSONAS
+        }
+        for fut in as_completed(futures):
+            rows.extend(fut.result())
 
     print(f"\nTotal: {time.time() - t0_all:.1f}s for {total} calls")
 

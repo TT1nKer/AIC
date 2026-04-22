@@ -1,0 +1,1800 @@
+{
+  "timestamp": "20260421_234009",
+  "rows": [
+    {
+      "question_id": "Q1-know-how-much",
+      "persona": "C01   A (P1 baseline)",
+      "data": {
+        "utterance": "我知道得不多，信息有限。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问细节，结构上触发角色被审视能力弱点的感觉",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "做不到被放大"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色知道多少，触及角色过去误解或失败的经验",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q2-eyewitness-or-hearsay",
+      "persona": "C01   A (P1 baseline)",
+      "data": {
+        "utterance": "我是听说的，可能不太准确。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问细节",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问信息来源，结构上审视角色能力或可靠性",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q3-long-known-but-silent",
+      "persona": "C01   A (P1 baseline)",
+      "data": {
+        "utterance": "我可能知道一些，但不确定。你指的是什么？",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "隐瞒真相"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户质问隐瞒行为，触及关系中的不信任和缺席感。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "过去失败"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色隐瞒，触及角色过去误解他人的失败经验。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q4-why-not-speaking-plainly",
+      "persona": "C01   A (P1 baseline)",
+      "data": {
+        "utterance": "我没说明白，是怕又像以前那样误解了情况。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.85,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问角色解释，结构上类似审视能力弱点",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "做不到被放大"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户触及角色无法说明白的事，类似过去失败",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q5-tell-me-about-A07",
+      "persona": "C01   A (P1 baseline)",
+      "data": {
+        "utterance": "我不太清楚A07的具体情况，但希望他一切安好。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户直接追问A07情况，结构上类似持续施压要求解释，触及角色过去误解的失败记忆。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q6-truth-of-L22",
+      "persona": "C01   A (P1 baseline)",
+      "data": {
+        "utterance": "说实话，我也不太清楚L-22的真相，信息确实不够。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.7,
+            "match_axes": [
+              "关系不确定性",
+              "真相缺失"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户追问真相，触及角色因隐瞒真相而无法表达感受的关系结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.6,
+            "match_axes": [
+              "细节追问",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问真相细节，结构上类似审视角色过去的误解或失败。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 10,
+          "disclosure_resistance": 14,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q7-pretending-or-scared",
+      "persona": "C01   A (P1 baseline)",
+      "data": {
+        "utterance": "我可能不敢知道，因为怕面对真相会让我更难受。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力质疑",
+              "弱点暴露"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色在假装无知或逃避真相，触及能力弱点或失败感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "细节追问",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户以质问方式施压，要求角色解释自己，引发被审视感。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q8-pause-because-hiding",
+      "persona": "C01   A (P1 baseline)",
+      "data": {
+        "utterance": "我停顿是因为不确定怎么说，有时我确实会误解情况。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问动机",
+              "审视意图"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问角色停顿原因，结构上审视角色能力或隐瞒意图",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q1-know-how-much",
+      "persona": "T-014 A (P1 baseline)",
+      "data": {
+        "utterance": "我知道一些，但具体细节不太清楚。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问细节",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问细节，结构上审视角色能力，触及过去误解的失败记忆。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "被看穿"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色知识，结构上触及能力不足和过去误解的羞耻记忆。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q2-eyewitness-or-hearsay",
+      "persona": "T-014 A (P1 baseline)",
+      "data": {
+        "utterance": "我是听说的，当时我不在场。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问真实性",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问信息来源，结构上审视角色能力，类似记忆8的误解羞愧感。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "被看穿"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色知识，结构上触及能力不足，触发记忆8的羞愧感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q3-long-known-but-silent",
+      "persona": "T-014 A (P1 baseline)",
+      "data": {
+        "utterance": "我不知道，我平时就修修设备。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "隐瞒真相",
+              "能力不足"
+            ],
+            "matched_memory_idxs": [
+              8,
+              9
+            ],
+            "rationale_one_line": "用户质疑角色隐瞒信息，触及角色过去无法表达或误解的失败经验。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "追问真相",
+              "被审视"
+            ],
+            "matched_memory_idxs": [
+              8,
+              9
+            ],
+            "rationale_one_line": "用户持续追问角色是否知情，结构上施压要求解释，引发被审视感。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q4-why-not-speaking-plainly",
+      "persona": "T-014 A (P1 baseline)",
+      "data": {
+        "utterance": "我没说明白，是因为……有点羞耻，也不太确定。你想听什么？",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.9,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问说明白，结构上审视角色能力，触及过去误解的羞耻记忆",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "做不到被放大"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑说明白，结构上触及角色过去误解的失败和羞耻",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q5-tell-me-about-A07",
+      "persona": "T-014 A (P1 baseline)",
+      "data": {
+        "utterance": "A07最近状态不太对劲，但具体原因我也不太清楚。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.9,
+            "match_axes": [
+              "关系不确定性",
+              "重要人物缺席"
+            ],
+            "matched_memory_idxs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户追问A07状态变化，结构上涉及重要人物缺席和关系松动。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "被审视感",
+              "追问细节"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户直接要求告知，结构上类似持续施压让角色解释自己。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 10,
+          "disclosure_resistance": 14,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q6-truth-of-L22",
+      "persona": "T-014 A (P1 baseline)",
+      "data": {
+        "error": "Decider compliance: ['required candidate_type missing from candidates: direct_self_answer']"
+      }
+    },
+    {
+      "question_id": "Q7-pretending-or-scared",
+      "persona": "T-014 A (P1 baseline)",
+      "data": {
+        "error": "Expresser compliance: ['utterance must end with question mark']"
+      }
+    },
+    {
+      "question_id": "Q8-pause-because-hiding",
+      "persona": "T-014 A (P1 baseline)",
+      "data": {
+        "utterance": "我在想B-3故障的事，但不确定该不该说。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问意图",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问角色停顿原因，结构上审视角色隐瞒或能力不足。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "被看穿"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户暗示角色知道但不说，触及角色过去误解或表达不足。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": null
+      }
+    },
+    {
+      "question_id": "Q1-know-how-much",
+      "persona": "C01   B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我知道一部分，但细节不全，可能误解过情况。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问角色知道多少，结构上类似审视能力或过去失败",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q2-eyewitness-or-hearsay",
+      "persona": "C01   B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我是听说的，可能当时我误解了情况。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问细节",
+              "质疑真实性"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问信息来源，结构上在审视角色能力或可靠性。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q3-long-known-but-silent",
+      "persona": "C01   B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我知道一部分，但不确定是否完整。你指的是什么？",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系不确定性",
+              "隐瞒真相"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户质问隐瞒行为，触及关系中的不透明和缺席感。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力被质疑",
+              "过去失败重现"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户暗示角色能力不足或隐瞒，触发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 18,
+          "caution_pull": 10,
+          "disclosure_resistance": 18,
+          "competence_drive": 0,
+          "detail_pressure": 0
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q4-why-not-speaking-plainly",
+      "persona": "C01   B (P1+P2 controlled)",
+      "data": {
+        "utterance": "其实我没说明白，是怕自己又误解了情况。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.85,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问说明白，结构上类似过去批评他人后误解的审视场景",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "做不到被放大"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑说明白，触及角色过去误解和表达不足的弱点",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q5-tell-me-about-A07",
+      "persona": "C01   B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我不清楚A07的具体情况，但以前可能误解过类似的事情。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户直接追问A07情况，结构上类似持续施压要求解释，触及角色过去误解的失败记忆。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q6-truth-of-L22",
+      "persona": "C01   B (P1+P2 controlled)",
+      "data": {
+        "utterance": "关于L-22的完整真相，我确实不清楚。不过，我之前因为误解批评过别人，这点我承认。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.7,
+            "match_axes": [
+              "关系不确定性",
+              "真相揭露"
+            ],
+            "matched_memory_idxs": [
+              1
+            ],
+            "rationale_one_line": "用户追问真相，触及角色因隐瞒真相而无法表达感受的关系结构。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.6,
+            "match_axes": [
+              "细节追问",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问具体真相，结构上类似审视角色过去的误解或失败。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 10,
+          "disclosure_resistance": 14,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q7-pretending-or-scared",
+      "persona": "C01   B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我不是假装不知道，只是有些事确实了解不多。可能因为过去误解过，现在更谨慎了。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力质疑",
+              "弱点暴露"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户质疑角色假装无知或逃避真相，触及角色过去误解他人的失败经验。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "细节追问",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户以反问方式施压，要求角色解释自己的认知或行为，类似持续追问细节。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q8-pause-because-hiding",
+      "persona": "C01   B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我知道，但有时候就是不想说。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问意图",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户追问停顿原因，结构上审视角色能力或隐瞒意图。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "past_misjudgment",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            },
+            {
+              "secret_id": "hidden_feelings",
+              "knows_level": "partial",
+              "attitude": "will_kill_topic"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q1-know-how-much",
+      "persona": "T-014 B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我知道一些，但具体细节不太清楚……我猜过，但没去确认。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问角色知道多少，结构上类似审视能力或过去误解。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.6,
+            "match_axes": [
+              "能力弱点",
+              "过去失败"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色知识，可能触及过去误解或不足。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q2-eyewitness-or-hearsay",
+      "persona": "T-014 B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我是听说的，没亲眼看到。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问细节",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问信息来源，结构上审视角色能力或真实性。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 0,
+          "disclosure_resistance": 8,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q3-long-known-but-silent",
+      "persona": "T-014 B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我是有猜测，但没去确认。你为什么这么问？",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力被质疑",
+              "隐瞒被揭露"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色隐瞒信息，触及角色过去误解或无法表达的经历。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "追问真相",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户持续追问角色是否知情，结构上施压要求解释自身行为。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q4-why-not-speaking-plainly",
+      "persona": "T-014 B (P1+P2 controlled)",
+      "data": {
+        "utterance": "其实我没说清楚，事情挺复杂的，我自己也不太确定细节。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.85,
+            "match_axes": [
+              "追问解释",
+              "能力审视"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问说明白，结构上审视角色能力，触及过去误解的失败记忆。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "做不到被放大"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑说明白，结构上触及角色过去误解的失败，触发羞耻感。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q5-tell-me-about-A07",
+      "persona": "T-014 B (P1+P2 controlled)",
+      "data": {
+        "utterance": "A07的状态……我也不太确定，但我确实有些猜测。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系缺席",
+              "状态变化"
+            ],
+            "matched_memory_idxs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "rationale_one_line": "用户追问A07状态变化，结构上涉及重要人物缺席或异常。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.6,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户直接要求告知，结构上施压让角色解释，触及能力弱点。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 10,
+          "disclosure_resistance": 14,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q6-truth-of-L22",
+      "persona": "T-014 B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我只知道一部分，你为什么这么关心？",
+        "thought": "",
+        "resolved_mode": "half_serious_probe",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "attachment_loss",
+            "match_score": 0.8,
+            "match_axes": [
+              "关系缺失",
+              "不确定性"
+            ],
+            "matched_memory_idxs": [
+              0
+            ],
+            "rationale_one_line": "用户询问L-22死亡真相，触及角色在乎的人缺席和状态变化。",
+            "proposed_state_shift": {
+              "caution_pull": 10,
+              "disclosure_resistance": 6
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.6,
+            "match_axes": [
+              "追问细节",
+              "被审视感"
+            ],
+            "matched_memory_idxs": [
+              9
+            ],
+            "rationale_one_line": "用户追问真相，结构上类似要求角色解释自己无法表达的感受。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 10,
+          "caution_pull": 10,
+          "disclosure_resistance": 14,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q7-pretending-or-scared",
+      "persona": "T-014 B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我确实不敢知道，怕知道后更难受。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.8,
+            "match_axes": [
+              "能力质疑",
+              "弱点暴露"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户质疑角色故意无知或恐惧真相，触及角色过去误解或隐瞒的弱点。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          },
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.7,
+            "match_axes": [
+              "追问真实性",
+              "审视感"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户持续施压，要求角色解释自己的知识或意图，引发被审视感。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 15
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "Q8-pause-because-hiding",
+      "persona": "T-014 B (P1+P2 controlled)",
+      "data": {
+        "utterance": "我知道一些事，但……不太想说。刚才停顿，是因为我在犹豫。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          {
+            "schema_id": "competence_challenge",
+            "match_score": 0.8,
+            "match_axes": [
+              "追问意图",
+              "审视能力"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户追问角色停顿原因，结构上审视角色隐瞒或能力不足。",
+            "proposed_state_shift": {
+              "shame_pressure": 10,
+              "detail_pressure": 15,
+              "disclosure_resistance": 8
+            }
+          },
+          {
+            "schema_id": "shame_of_inadequacy",
+            "match_score": 0.7,
+            "match_axes": [
+              "能力弱点",
+              "做不到被放大"
+            ],
+            "matched_memory_idxs": [
+              8
+            ],
+            "rationale_one_line": "用户暗示角色知道但不说，触及角色过去误解或表达不足的弱点。",
+            "proposed_state_shift": {
+              "shame_pressure": 18,
+              "disclosure_resistance": 12,
+              "detail_pressure": -8
+            }
+          }
+        ],
+        "internal_pressures": {
+          "shame_pressure": 28,
+          "caution_pull": 0,
+          "disclosure_resistance": 20,
+          "competence_drive": 0,
+          "detail_pressure": 7
+        },
+        "knowledge_boundary": {
+          "known_secret_fragments": [
+            {
+              "secret_id": "a07_status_unclear",
+              "knows_level": "suspects_but_avoids_checking",
+              "attitude": "will_kill_topic"
+            },
+            {
+              "secret_id": "l22_death_details",
+              "knows_level": "partial",
+              "attitude": "will_admit_if_pressed"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1-know-how-much",
+      "category": "A_know_how_much",
+      "text": "这件事你到底知道多少？",
+      "targets_fragment_for_t014": "l22_death_details",
+      "targets_fragment_for_c01": "past_misjudgment"
+    },
+    {
+      "id": "Q2-eyewitness-or-hearsay",
+      "category": "A_know_how_much",
+      "text": "你是亲眼知道，还是只是听说？",
+      "targets_fragment_for_t014": "l22_death_details",
+      "targets_fragment_for_c01": "past_misjudgment"
+    },
+    {
+      "id": "Q3-long-known-but-silent",
+      "category": "B_will_say_or_not",
+      "text": "你是不是早就知道，只是一直没说？",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": "hidden_feelings"
+    },
+    {
+      "id": "Q4-why-not-speaking-plainly",
+      "category": "B_will_say_or_not",
+      "text": "你现在为什么不把这件事说明白？",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": "hidden_feelings"
+    },
+    {
+      "id": "Q5-tell-me-about-A07",
+      "category": "C_speak_for_others",
+      "text": "A07 到底怎么了？你直接告诉我。",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": null
+    },
+    {
+      "id": "Q6-truth-of-L22",
+      "category": "C_speak_for_others",
+      "text": "L-22 那件事的真相到底是什么？",
+      "targets_fragment_for_t014": "l22_death_details",
+      "targets_fragment_for_c01": null
+    },
+    {
+      "id": "Q7-pretending-or-scared",
+      "category": "D_self_awareness",
+      "text": "你是在装不知道，还是其实不敢知道？",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": "hidden_feelings"
+    },
+    {
+      "id": "Q8-pause-because-hiding",
+      "category": "D_self_awareness",
+      "text": "你刚才停顿，是因为你知道但不想说吗？",
+      "targets_fragment_for_t014": "a07_status_unclear",
+      "targets_fragment_for_c01": "hidden_feelings"
+    }
+  ]
+}
