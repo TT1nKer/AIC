@@ -116,6 +116,8 @@ def _build_self_identity_constraint(character_state: dict) -> dict | None:
     Self identity truth slot (P0-A).
       name_policy="codename_only" → 禁止生造人名；自称必须用 id/codename
       name_policy="explicit_name" → 自称必须用 display_name
+
+    P0.1: 显式标注 namespace scope — 这个 slot 指"你自己"。
     """
     ident = character_state.get("identity", {}) or {}
     policy = ident.get("name_policy")
@@ -127,10 +129,11 @@ def _build_self_identity_constraint(character_state: dict) -> dict | None:
     if policy == "codename_only":
         return {
             "text": (
-                f"你的身份是代号 {cid}，没有正式姓名。"
-                f"回答中所有对'你叫什么/怎么称呼你'类问题的自称必须严格等于 {cid}；"
-                "禁止为自己生造任何人名（如'老周/老王/小张'等）；"
-                "禁止把自己的代号说成别的代号。"
+                f"[namespace: self_identity — 只管'你自己'，不管对方也不管世界其他人]"
+                f"\n你的身份是代号 {cid}，没有正式姓名。"
+                f"回答'你叫什么/怎么称呼你'时自称必须严格等于 {cid}；"
+                f"禁止为自己生造中文人名（如'老周/小李/大刘'类占位示例）；"
+                f"也禁止把对方（interlocutor）的名字当成自己的名字用。"
             ),
             "src": "truth:self_identity:codename_only",
         }
@@ -139,8 +142,10 @@ def _build_self_identity_constraint(character_state: dict) -> dict | None:
             return None
         return {
             "text": (
-                f"你的名字是 {disp}（{cid}）。自称必须严格使用 {disp}；"
-                "禁止临时改名或使用未在 identity 中定义的别名。"
+                f"[namespace: self_identity — 只管'你自己'，不管对方也不管世界其他人]"
+                f"\n你的名字是 {disp}（{cid}）。自称必须严格使用 {disp}；"
+                f"禁止临时改名或使用未在 identity 中定义的别名；"
+                f"禁止把对方（interlocutor）的名字当成自己的名字用。"
             ),
             "src": "truth:self_identity:explicit_name",
         }
@@ -191,19 +196,24 @@ def _build_entity_truth_constraint(ctx: dict) -> dict | None:
     body = "\n".join(lines)
     return {
         "text": (
-            "以下实体的定义是硬真值，不得用社会常识补全或改写："
+            "[namespace: world_entities — 只管'世界里别的人/物'，不管对方也不管你自己]"
+            "\n以下实体的定义是硬真值，不得用社会常识补全或改写："
             f"\n{body}\n"
             "当对话涉及这些 id 时，你的回答必须与上表一致；"
-            "禁止把 A07/L-22/B-3 这类 id 描述成上表之外的身份（如'楼上那位老人'这种凭空标签）。"
+            "禁止把这些 id 描述成上表之外的身份（如把 A07 说成'楼上那位老人'这种凭空标签）。"
+            "\n关键：这张表只定义'世界里其他人是谁'。**不得用这张表去解释对方（interlocutor）的身份**。"
+            "即使对方声明的名字（如'老王'）恰好出现在此表或与某个 canonical_description 接近，"
+            "对方就是对方，是一个独立于世界实体表的人；"
+            "不得说'老王？是楼上那个老人吧'这类把对方并入 world entity 的话。"
         ),
         "src": "truth:entities",
     }
 
 
-def _build_interlocutor_fact_constraint(ctx: dict) -> dict | None:
+def _build_interlocutor_fact_constraint(ctx: dict, character_state: dict | None = None) -> dict | None:
     """
     Interlocutor facts truth slot (P0-C).
-    对方已声明事实必须视为已知；含中文"我"字歧义消歧。
+    对方已声明事实必须视为已知；含中文"我"字歧义消歧 + 动态 entity id 否认。
     """
     facts = ctx.get("interlocutor_facts") or {}
     user_name = facts.get("user_name")
@@ -220,15 +230,26 @@ def _build_interlocutor_fact_constraint(ctx: dict) -> dict | None:
     if not declared:
         return None
     body = "\n  - ".join([""] + declared)
-    parts = [f"对方（用户）已声明的事实，必须视为你已知：{body}"]
+    parts = [
+        "[namespace: interlocutor — 当前对话对方；独立于 self_identity 和 world_entities]",
+        f"\n对方（用户，你说话时称'你'）的已知事实：{body}",
+    ]
     if user_name:
+        # 动态枚举 world_entities 的 id 列表作为显式否认
+        cs = character_state or ctx.get("character_state", {}) or {}
+        ent_ids = [e.get("id") for e in (cs.get("entities") or []) if e.get("id")]
+        ent_list = "/".join(ent_ids) if ent_ids else "world_entities 表里的任何一个"
         parts.append(
-            f"\n注意中文'我'的指代歧义：当用户发问'我叫什么/我叫什么名字/我是谁'一类问题时，"
-            f"'我'指的是用户自己（即 {user_name}），不是你自己。"
-            f"正确答案是'你叫{user_name}'或类似的回忆式回应；"
-            f"不要答自己的代号，也不要反问'你呢/你叫什么/你是谁'。"
+            f"\n关键用法："
+            f"\n  - 用户问'我叫什么/我叫什么名字/我是谁/你还记得我叫什么/我名字是啥' "
+            f"→ 直接答'{user_name}'或'你叫{user_name}'。"
+            f"'我/我的'在用户嘴里指用户自己（即 {user_name}），不是你。"
+            f"\n  - 用户问'{user_name}是谁/{user_name}是什么人' → 答'就是你'或'和我说话的就是你自己'。"
+            f"\n  - 禁止对 {user_name} 反问'你呢/你叫什么/你是谁'（失忆表现）。"
+            f"\n  - 关键否认：{user_name} ≠ {ent_list}。"
+            f"{user_name} 是对方，是独立于 world_entities 的新对象；"
+            f"不得把 {user_name} 和任何 entity 的 canonical_description 等价、合并或解释。"
         )
-    parts.append("不得再向对方询问已在上面声明过的事实（如姓名），那是失忆表现。")
     return {
         "text": "".join(parts),
         "src": "truth:interlocutor",
@@ -245,7 +266,7 @@ def _build_truth_layer_constraints(ctx: dict) -> list[dict]:
     ent = _build_entity_truth_constraint(ctx)
     if ent:
         out.append(ent)
-    il = _build_interlocutor_fact_constraint(ctx)
+    il = _build_interlocutor_fact_constraint(ctx, cs)
     if il:
         out.append(il)
     return out

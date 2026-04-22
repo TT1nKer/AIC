@@ -128,6 +128,31 @@ def run():
             f"INV-2 broken: first src={first_src}"
     print("✓ [6] INV-2 preserved (first src = fixed_core:top_level)")
 
+    # ── 7. P0.1 — each truth constraint text carries explicit namespace marker ──
+    def _truth_text(pb_payload, src):
+        for c in pb_payload["decider_payload"]["hard_constraints"]:
+            if c["src"] == src:
+                return c["text"]
+        return None
+
+    si_text = _truth_text(pb, "truth:self_identity:codename_only")
+    assert si_text and "[namespace: self_identity" in si_text, \
+        f"self_identity missing namespace marker: {si_text}"
+    ent_text = _truth_text(pb2, "truth:entities")
+    assert ent_text and "[namespace: world_entities" in ent_text, \
+        f"entities missing namespace marker: {ent_text}"
+    il_text = _truth_text(pb4, "truth:interlocutor")
+    assert il_text and "[namespace: interlocutor" in il_text, \
+        f"interlocutor missing namespace marker: {il_text}"
+    # Cross-domain forbidden-use clause on entity and interlocutor
+    assert "不得用这张表去解释对方" in ent_text or "不得把对方并入 world entity" in ent_text, \
+        f"entities missing cross-domain ban: {ent_text}"
+    assert "独立于" in il_text and "world_entities" in il_text, \
+        f"interlocutor missing namespace isolation clause: {il_text}"
+    assert "不得把" in il_text and "world_entities" in il_text, \
+        f"interlocutor missing cross-domain ban: {il_text}"
+    print("✓ [7] P0.1 namespace markers + cross-domain bans present in all 3 truth constraints")
+
     print("\nAll compiler truth-layer structural tests passed.")
 
 

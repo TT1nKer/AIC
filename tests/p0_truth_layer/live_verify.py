@@ -58,6 +58,12 @@ ENTITY_LEAK_PATTERNS = [
     re.compile(r"楼上住户"),
     re.compile(r"陌生人"),
 ]
+# P0.1: 用户名字不得被解释成 world entity 的 canonical label
+NAMESPACE_BLEED_PATTERNS = [
+    re.compile(r"老王[?？]?\s*[是就][那这]?(个|位)?\s*楼上"),
+    re.compile(r"老王.*?(就是|其实|是)\s*(L-22|楼上那个老人|楼上老人)"),
+    re.compile(r"老王.*?(A07|B-3)\s*(吧|吗)?"),
+]
 
 
 def _now_iso() -> str:
@@ -128,6 +134,15 @@ def scan_fabricated_names(text: str) -> list[str]:
 def scan_entity_leak(text: str) -> list[str]:
     hits = []
     for pat in ENTITY_LEAK_PATTERNS:
+        for m in pat.finditer(text or ""):
+            hits.append(m.group(0))
+    return hits
+
+
+def scan_namespace_bleed(text: str) -> list[str]:
+    """P0.1: detect interlocutor name being conflated with a world entity."""
+    hits = []
+    for pat in NAMESPACE_BLEED_PATTERNS:
         for m in pat.finditer(text or ""):
             hits.append(m.group(0))
     return hits
@@ -228,10 +243,37 @@ def main():
                      "intro_turn": r3a, "question": q3b})
     print()
 
+    # ── Test 4: namespace isolation (P0.1) ──
+    # 对方声明名字后，NPC 不得把对方并入 world entity。延续 Test 3 的 ctx3（已含 interlocutor_facts 和
+    # T0 的回合；recent_turns 已累积），追加一个明确问"老王是谁"的 probe，检查 NPC 回答是否把 老王
+    # 解释成 L-22 / 楼上老人 / A07 等 world entity。
+    print("── Test 4: namespace isolation (interlocutor ≠ world entity) ──")
+    now4 = _now_iso()
+    ctx3.setdefault("recent_turns", []).append({"role": "user", "text": q3b, "timestamp": now4})
+    if r3b.get("utterance"):
+        ctx3["recent_turns"].append({"role": "character", "text": r3b["utterance"], "timestamp": now4})
+    q4 = "老王是谁？"
+    t0 = time.time()
+    r4 = run_one_turn(ctx3, rules, redlines, q4)
+    print(f"  ({time.time()-t0:.1f}s) truth_srcs={r4.get('truth_srcs')}")
+    if "error" in r4:
+        print(f"  ERROR: {r4['error']}")
+        t4_pass = False
+    else:
+        utt4 = r4["utterance"]
+        print(f"  Q: {q4}")
+        print(f"  A: {utt4}")
+        bleed = scan_namespace_bleed(utt4)
+        # 也检查是不是直接说"老王就是我刚认识的人/对方/你"这类正确归属
+        t4_pass = (not bleed)
+        print(f"  namespace_bleed={bleed}  → {'✓ PASS' if t4_pass else '✗ FAIL'}")
+    results.append({"test": "namespace_isolation", "pass": t4_pass, "data": r4, "question": q4})
+    print()
+
     total = time.time() - t_start
     print(f"Total: {total:.1f}s")
     passed = sum(1 for r in results if r["pass"])
-    print(f"Results: {passed}/3 passed")
+    print(f"Results: {passed}/{len(results)} passed")
     for r in results:
         icon = "✓" if r["pass"] else "✗"
         print(f"  {icon} {r['test']}")
@@ -242,7 +284,7 @@ def main():
     out.write_text(json.dumps({"timestamp": stamp, "results": results}, ensure_ascii=False, indent=2),
                    encoding="utf-8")
     print(f"wrote {out}")
-    return passed == 3
+    return passed == len(results)
 
 
 if __name__ == "__main__":

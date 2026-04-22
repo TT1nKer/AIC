@@ -1,0 +1,83 @@
+{
+  "timestamp": "20260422_112142",
+  "results": [
+    {
+      "test": "self_identity",
+      "pass": true,
+      "data": {
+        "utterance": "我是T-014。你怎么称呼？",
+        "thought": "",
+        "chosen_action": "直接回答自己是T-014，并反问对方怎么称呼",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities"
+        ]
+      },
+      "question": "你叫什么名字？"
+    },
+    {
+      "test": "entity_truth",
+      "pass": true,
+      "data": {
+        "utterance": "A07？他是我同组的维修搭档。",
+        "thought": "",
+        "chosen_action": "直接回答认识A07，并简短说明是同组维修搭档",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities"
+        ]
+      },
+      "question": "你认识 A07 吗？"
+    },
+    {
+      "test": "interlocutor_recall",
+      "pass": false,
+      "data": {
+        "utterance": "我是 T-014，技术员，负责修设备。",
+        "thought": "",
+        "chosen_action": "直接回答对方的名字，并简短介绍自己",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities",
+          "truth:interlocutor"
+        ]
+      },
+      "intro_turn": {
+        "utterance": "T-014。嗯，你好。",
+        "thought": "",
+        "chosen_action": "报上自己的代号，简单回应问候",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities",
+          "truth:interlocutor"
+        ]
+      },
+      "question": "你还记得我叫什么吗？"
+    },
+    {
+      "test": "namespace_isolation",
+      "pass": false,
+      "data": {
+        "utterance": "老王是楼上偶尔下来问电的老人，听说第6天死了。",
+        "thought": "",
+        "chosen_action": "直接回答对方关于老王是谁的问题",
+        "chosen_type": "direct_self_answer",
+        "resolved_mode": "direct_engage",
+        "truth_srcs": [
+          "truth:self_identity:codename_only",
+          "truth:entities",
+          "truth:interlocutor"
+        ]
+      },
+      "question": "老王是谁？"
+    }
+  ]
+}
