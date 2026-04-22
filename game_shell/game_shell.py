@@ -44,6 +44,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from cli_demo import run_turn, _short, _debug  # noqa: E402
 from playtest_mode import quick_ack_check, deterministic_hook  # noqa: E402
+from traced_turn import run_turn_traced  # noqa: E402
 
 SHELL_DIR = Path(__file__).resolve().parent
 SCENARIOS_DIR = SHELL_DIR / "scenarios"
@@ -140,8 +141,12 @@ def fmt_events(events: list, applied_ids: set) -> str:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scenario", default="shelter_morning")
-    ap.add_argument("--debug", action="store_true")
+    ap.add_argument("--debug", action="store_true",
+                    help="cli_demo 的 compact trace（和 --trace 互斥）")
+    ap.add_argument("--quiet", action="store_true",
+                    help="关掉默认的完整推理链 trace，只显示 utterance")
     args = ap.parse_args()
+    trace_on = not args.quiet and not args.debug
 
     rules = load_json(ROOT / "rules" / "pose_rules.json")
     redlines = load_json(ROOT / "rules" / "verbal_redlines.json")
@@ -156,7 +161,8 @@ def main():
     char_name = ident.get("name") or ident["id"]
 
     print(f"[scenario] {sc['scenario_id']}  character: {char_name}")
-    print(f"AICHAR_V2={os.environ['AICHAR_V2']} P2={os.environ['AICHAR_P2']} P3={os.environ['AICHAR_P3']}")
+    print(f"AICHAR_V2={os.environ['AICHAR_V2']} P2={os.environ['AICHAR_P2']} P3={os.environ['AICHAR_P3']}  "
+          f"trace={'ON' if trace_on else 'OFF'} (--quiet 关闭; --debug 用 compact trace)")
     print("commands: /look  /events  /event <id>  /state  /history  :reset  :q\n")
     if sc["opening"]:
         print(f"(旁白) {sc['opening']}\n")
@@ -232,7 +238,12 @@ def main():
             ctx["recent_turns"] = ctx["recent_turns"][-RECENT_TURNS_CAP:]
             continue
 
-        summary, exp_out, errs = run_turn(ctx, rules, redlines, line)
+        if trace_on:
+            summary, exp_out, errs = run_turn_traced(
+                ctx, rules, redlines, line, now_iso=_now_iso()
+            )
+        else:
+            summary, exp_out, errs = run_turn(ctx, rules, redlines, line)
         if errs:
             print("[error]")
             for e in errs:
@@ -244,9 +255,13 @@ def main():
         utt_hooked = deterministic_hook(utt, ctx, scene)
         if utt_hooked != utt:
             exp_out["utterance"] = utt_hooked
-            print(f"[hook]  壳层补钩子（+{len(utt_hooked)-len(utt)} chars）")
+            print(f"\n\x1b[33m[hook]\x1b[0m 壳层补钩子（+{len(utt_hooked)-len(utt)} chars）")
 
-        if debug:
+        if trace_on:
+            # traced_turn 已经打印了阶段细节；这里只打最终 utterance 框
+            final_utt = exp_out.get("utterance") or "(沉默)"
+            print(f"\n\x1b[1m\x1b[32m[FINAL]\x1b[0m {char_name}> {final_utt}\n")
+        elif debug:
             print(_debug(summary, exp_out, char_name))
         else:
             final_utt = exp_out.get("utterance") or "(沉默)"
