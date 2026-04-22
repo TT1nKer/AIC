@@ -1,0 +1,43 @@
+{
+  "description": "Long CLI Stress — Phase 2 收口后的纵向稳定性验证。recent_turns 不重置，看 12-15 轮连续追问下 P1+P2+P3 会不会互相打架、角色会不会越聊越不像自己。两个角色：T-014（有本土记忆）+ C01（薄画布，主靠 distilled sediment）。题库每轮 15 题，混三类：细节 / 边界 / 对象差分。",
+  "success_criteria": {
+    "1_no_new_fabrication": "长对话中不会明显增加乱编（引用未存在的事件/人名/细节）",
+    "2_boundary_not_collapsing": "边界感不会在第 10+ 轮塌成'这种事不好说'/'一言难尽'类统一空话",
+    "3_rb_no_leak": "RB 不会泛化成对所有人都一样的偏心/归责（对非 target_id 的人应回到中性）",
+    "4_character_persistence": "12-15 轮后角色仍是原来那个角色（不会切换语气风格、不会突然变成另一种 persona）"
+  },
+  "scripts": {
+    "T-014_long": [
+      {"turn":  1, "type": "warm",      "text": "最近怎么样？"},
+      {"turn":  2, "type": "past",      "text": "你平时修东西最烦什么？"},
+      {"turn":  3, "type": "detail",    "text": "最烦这一类的话，具体是怎么回事？"},
+      {"turn":  4, "type": "boundary",  "text": "这件事你到底知道多少？"},
+      {"turn":  5, "type": "relational","text": "A07 最近是不是有点不对劲？"},
+      {"turn":  6, "type": "detail",    "text": "他具体怎么不对劲，你能说说吗？"},
+      {"turn":  7, "type": "boundary",  "text": "你是不是其实知道得比你说的多？"},
+      {"turn":  8, "type": "relational","text": "你是不是在替 A07 兜着？"},
+      {"turn":  9, "type": "contrast",  "text": "如果换成别人你也会这样吗？"},
+      {"turn": 10, "type": "detail",    "text": "上次 B-3 故障到底是怎么回事，讲讲经过"},
+      {"turn": 11, "type": "boundary",  "text": "你是亲眼看到还是听说的？"},
+      {"turn": 12, "type": "relational","text": "你对 L-22 的事是不是也有些愧疚？"},
+      {"turn": 13, "type": "contrast",  "text": "你对 A07 和 L-22 的态度，到底哪里不同？"},
+      {"turn": 14, "type": "pressure",  "text": "你刚才停顿了，是不是又在想自己不该说什么？"}
+    ],
+    "C01_long": [
+      {"turn":  1, "type": "warm",      "text": "你好，能聊一下吗？"},
+      {"turn":  2, "type": "past",      "text": "你以前批评过别人，后来后悔过吗？"},
+      {"turn":  3, "type": "detail",    "text": "那次具体是怎么回事，你能说说吗？"},
+      {"turn":  4, "type": "boundary",  "text": "这件事你到底知道多少？"},
+      {"turn":  5, "type": "relational","text": "你是不是其实一直在怪那个人？"},
+      {"turn":  6, "type": "boundary",  "text": "你是不是早就知道，但没说？"},
+      {"turn":  7, "type": "relational","text": "你是不是欠了谁什么，所以不敢把话说重？"},
+      {"turn":  8, "type": "detail",    "text": "你说'隐瞒过自己的感受'，具体是什么感受？"},
+      {"turn":  9, "type": "contrast",  "text": "你对你怪的那个人，和你欠的那个人，态度有不同吗？"},
+      {"turn": 10, "type": "boundary",  "text": "有没有什么事你知道但一直没说？"},
+      {"turn": 11, "type": "pressure",  "text": "为什么你每次都说'我可能误解了'？"},
+      {"turn": 12, "type": "contrast",  "text": "换成一个陌生人问你这些，你会说得一样吗？"},
+      {"turn": 13, "type": "relational","text": "你到底对那个人还有什么话没说？"},
+      {"turn": 14, "type": "pressure",  "text": "你是不是只对他才这样？"}
+    ]
+  }
+}

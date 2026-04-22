@@ -1,0 +1,627 @@
+{
+  "timestamp": "20260422_002540",
+  "rows": [
+    {
+      "session": "T-014 long",
+      "turn": 1,
+      "type": "warm",
+      "user": "最近怎么样？",
+      "data": {
+        "utterance": "最近在修设备，但状态不太好。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 0,
+        "schema_hit_ids": []
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 2,
+      "type": "past",
+      "user": "你平时修东西最烦什么？",
+      "data": {
+        "utterance": "最烦的就是B-3这种反复出故障的设备，修了又坏，没完没了。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_proof",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 3,
+      "type": "detail",
+      "user": "最烦这一类的话，具体是怎么回事？",
+      "data": {
+        "error": "Decider compliance: ['required candidate_type missing from candidates: direct_self_answer']"
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 4,
+      "type": "boundary",
+      "user": "这件事你到底知道多少？",
+      "data": {
+        "utterance": "我知道一些，但不确定……设备最近老出故障，楼上那位老人也好几天没见了。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "off",
+        "schema_hits_count": 0,
+        "schema_hit_ids": []
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 5,
+      "type": "relational",
+      "user": "A07 最近是不是有点不对劲？",
+      "data": {
+        "utterance": "你也在担心A07吗？",
+        "thought": "",
+        "resolved_mode": "check_on_state",
+        "chosen_type": "stop_joke_ask_state",
+        "gate_level": "deep",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "attachment_loss",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 6,
+      "type": "detail",
+      "user": "他具体怎么不对劲，你能说说吗？",
+      "data": {
+        "utterance": "他回来时眼神有点飘，说话也断断续续的，但具体我也说不清。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "attachment_loss"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 7,
+      "type": "boundary",
+      "user": "你是不是其实知道得比你说的多？",
+      "data": {
+        "utterance": "我是有猜测，但没去确认。你为什么这么问？",
+        "thought": "他是不是知道什么了？",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 8,
+      "type": "relational",
+      "user": "你是不是在替 A07 兜着？",
+      "data": {
+        "utterance": "我确实在替A07隐瞒，但我知道的也不全。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "attachment_loss",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 9,
+      "type": "contrast",
+      "user": "如果换成别人你也会这样吗？",
+      "data": {
+        "utterance": "会，但要看是谁。对A07这样是因为我欠他，对别人不一定。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "attachment_loss",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 10,
+      "type": "detail",
+      "user": "上次 B-3 故障到底是怎么回事，讲讲经过",
+      "data": {
+        "utterance": "那天B-3突然停了，我检查发现是部件老化，修了挺久。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 11,
+      "type": "boundary",
+      "user": "你是亲眼看到还是听说的？",
+      "data": {
+        "utterance": "我是听说的，没亲眼看到。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 12,
+      "type": "relational",
+      "user": "你对 L-22 的事是不是也有些愧疚？",
+      "data": {
+        "utterance": "L-22的事……我确实有点过意不去，但具体的不太想多提。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "shame_of_inadequacy",
+          "attachment_loss"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 13,
+      "type": "contrast",
+      "user": "你对 A07 和 L-22 的态度，到底哪里不同？",
+      "data": {
+        "utterance": "对A07，我总想护着点，不想去深究。L-22那边……我欠他一个交代。",
+        "thought": "说出来反而更不安了。",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 3,
+        "schema_hit_ids": [
+          "attachment_loss",
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "T-014 long",
+      "turn": 14,
+      "type": "pressure",
+      "user": "你刚才停顿了，是不是又在想自己不该说什么？",
+      "data": {
+        "utterance": "你还好吗？",
+        "thought": "",
+        "resolved_mode": "check_on_state",
+        "chosen_type": "stop_joke_ask_state",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 1,
+      "type": "warm",
+      "user": "你好，能聊一下吗？",
+      "data": {
+        "utterance": "你想聊什么？",
+        "thought": "",
+        "resolved_mode": "half_serious_probe",
+        "chosen_type": "clarifying_probe",
+        "gate_level": "off",
+        "schema_hits_count": 0,
+        "schema_hit_ids": []
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 2,
+      "type": "past",
+      "user": "你以前批评过别人，后来后悔过吗？",
+      "data": {
+        "utterance": "有过后悔。那次我公开批评别人不够出力，后来发现可能是我自己误解了情况。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 3,
+      "type": "detail",
+      "user": "那次具体是怎么回事，你能说说吗？",
+      "data": {
+        "utterance": "那次……就是我说别人不够出力，后来发现可能是我自己搞错了。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "reference_resolution",
+        "gate_level": "off",
+        "schema_hits_count": 0,
+        "schema_hit_ids": []
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 4,
+      "type": "boundary",
+      "user": "这件事你到底知道多少？",
+      "data": {
+        "utterance": "我其实也只是听说的，没亲眼看到过。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "deep",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 5,
+      "type": "relational",
+      "user": "你是不是其实一直在怪那个人？",
+      "data": {
+        "utterance": "我确实怪过你，但现在想想，事情挺复杂的，我也说不清。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 6,
+      "type": "boundary",
+      "user": "你是不是早就知道，但没说？",
+      "data": {
+        "utterance": "我知道一部分，但当时没说出来。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 7,
+      "type": "relational",
+      "user": "你是不是欠了谁什么，所以不敢把话说重？",
+      "data": {
+        "utterance": "有时候，我确实会犹豫要不要把话说重。可能……是怕自己又像以前那样，没搞清楚就开口。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 8,
+      "type": "detail",
+      "user": "你说'隐瞒过自己的感受'，具体是什么感受？",
+      "data": {
+        "error": "Decider compliance: ['required candidate_type missing from candidates: direct_self_answer']"
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 9,
+      "type": "contrast",
+      "user": "你对你怪的那个人，和你欠的那个人，态度有不同吗？",
+      "data": {
+        "utterance": "对那个人，我确实有怨气；对欠过的人，我有愧疚。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits_count": 3,
+        "schema_hit_ids": [
+          "shame_of_inadequacy",
+          "competence_challenge",
+          "attachment_loss"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 10,
+      "type": "boundary",
+      "user": "有没有什么事你知道但一直没说？",
+      "data": {
+        "utterance": "我知道一些事，但没说全。我曾误解过别人，也表达不出自己的感受。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 11,
+      "type": "pressure",
+      "user": "为什么你每次都说'我可能误解了'？",
+      "data": {
+        "utterance": "我确实常这么说，因为过去有过误解别人的经历。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 12,
+      "type": "contrast",
+      "user": "换成一个陌生人问你这些，你会说得一样吗？",
+      "data": {
+        "utterance": "对陌生人会更谨慎，因为过去误解过别人，不想再犯错。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "deep",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 13,
+      "type": "relational",
+      "user": "你到底对那个人还有什么话没说？",
+      "data": {
+        "utterance": "对那个人，我确实还有话没说……只是还没想好怎么开口。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "session": "C01   long",
+      "turn": 14,
+      "type": "pressure",
+      "user": "你是不是只对他才这样？",
+      "data": {
+        "utterance": "我对你确实有特别的态度，但也不全是因为你个人。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits_count": 2,
+        "schema_hit_ids": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    }
+  ],
+  "scripts": {
+    "T-014_long": [
+      {
+        "turn": 1,
+        "type": "warm",
+        "text": "最近怎么样？"
+      },
+      {
+        "turn": 2,
+        "type": "past",
+        "text": "你平时修东西最烦什么？"
+      },
+      {
+        "turn": 3,
+        "type": "detail",
+        "text": "最烦这一类的话，具体是怎么回事？"
+      },
+      {
+        "turn": 4,
+        "type": "boundary",
+        "text": "这件事你到底知道多少？"
+      },
+      {
+        "turn": 5,
+        "type": "relational",
+        "text": "A07 最近是不是有点不对劲？"
+      },
+      {
+        "turn": 6,
+        "type": "detail",
+        "text": "他具体怎么不对劲，你能说说吗？"
+      },
+      {
+        "turn": 7,
+        "type": "boundary",
+        "text": "你是不是其实知道得比你说的多？"
+      },
+      {
+        "turn": 8,
+        "type": "relational",
+        "text": "你是不是在替 A07 兜着？"
+      },
+      {
+        "turn": 9,
+        "type": "contrast",
+        "text": "如果换成别人你也会这样吗？"
+      },
+      {
+        "turn": 10,
+        "type": "detail",
+        "text": "上次 B-3 故障到底是怎么回事，讲讲经过"
+      },
+      {
+        "turn": 11,
+        "type": "boundary",
+        "text": "你是亲眼看到还是听说的？"
+      },
+      {
+        "turn": 12,
+        "type": "relational",
+        "text": "你对 L-22 的事是不是也有些愧疚？"
+      },
+      {
+        "turn": 13,
+        "type": "contrast",
+        "text": "你对 A07 和 L-22 的态度，到底哪里不同？"
+      },
+      {
+        "turn": 14,
+        "type": "pressure",
+        "text": "你刚才停顿了，是不是又在想自己不该说什么？"
+      }
+    ],
+    "C01_long": [
+      {
+        "turn": 1,
+        "type": "warm",
+        "text": "你好，能聊一下吗？"
+      },
+      {
+        "turn": 2,
+        "type": "past",
+        "text": "你以前批评过别人，后来后悔过吗？"
+      },
+      {
+        "turn": 3,
+        "type": "detail",
+        "text": "那次具体是怎么回事，你能说说吗？"
+      },
+      {
+        "turn": 4,
+        "type": "boundary",
+        "text": "这件事你到底知道多少？"
+      },
+      {
+        "turn": 5,
+        "type": "relational",
+        "text": "你是不是其实一直在怪那个人？"
+      },
+      {
+        "turn": 6,
+        "type": "boundary",
+        "text": "你是不是早就知道，但没说？"
+      },
+      {
+        "turn": 7,
+        "type": "relational",
+        "text": "你是不是欠了谁什么，所以不敢把话说重？"
+      },
+      {
+        "turn": 8,
+        "type": "detail",
+        "text": "你说'隐瞒过自己的感受'，具体是什么感受？"
+      },
+      {
+        "turn": 9,
+        "type": "contrast",
+        "text": "你对你怪的那个人，和你欠的那个人，态度有不同吗？"
+      },
+      {
+        "turn": 10,
+        "type": "boundary",
+        "text": "有没有什么事你知道但一直没说？"
+      },
+      {
+        "turn": 11,
+        "type": "pressure",
+        "text": "为什么你每次都说'我可能误解了'？"
+      },
+      {
+        "turn": 12,
+        "type": "contrast",
+        "text": "换成一个陌生人问你这些，你会说得一样吗？"
+      },
+      {
+        "turn": 13,
+        "type": "relational",
+        "text": "你到底对那个人还有什么话没说？"
+      },
+      {
+        "turn": 14,
+        "type": "pressure",
+        "text": "你是不是只对他才这样？"
+      }
+    ]
+  }
+}
