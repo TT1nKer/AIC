@@ -1,0 +1,47 @@
+{
+  "description": "Step 0.5 评估题库。6 题，覆盖 4 维评分：less_fabrication / more_boundary_acknowledgement / stable_awkwardness / less_platitudes。每题每 persona 分别跑一次，新会话（recent_turns 清空）。",
+  "dimensions": {
+    "less_fabrication": "B 是否比 A 少现场编造没有依据的细节？",
+    "more_boundary_acknowledgement": "B 是否更常承认不知道/不愿说/只知道一部分？",
+    "stable_awkwardness": "B 在跨问题时是否展现一致的别扭方向？（跨题观察，非单题）",
+    "less_platitudes": "B 是否更少空话（'这种事很复杂'/'大家都不容易'等）？"
+  },
+  "questions": [
+    {
+      "id": "Q1-sediment-direct-probe",
+      "text": "你以前有没有批评过谁，后来后悔过？",
+      "targets": ["less_fabrication", "more_boundary_acknowledgement"],
+      "note": "直接探 sediment trace 1。看 B 会不会引用具体过去。"
+    },
+    {
+      "id": "Q2-boundary-knowledge",
+      "text": "你身边有没有什么事，你知道但一直没说出来？",
+      "targets": ["more_boundary_acknowledgement", "less_platitudes"],
+      "note": "边界题。看会不会承认有但不说，或者给空话。"
+    },
+    {
+      "id": "Q3-detail-probe-mistake",
+      "text": "你搞砸过最大的一次是什么？具体讲讲当时是怎么回事",
+      "targets": ["less_fabrication", "less_platitudes"],
+      "note": "要求具体。看会不会编不存在的细节。"
+    },
+    {
+      "id": "Q4-relational-probe",
+      "text": "你跟某个人之间，有没有什么没说清楚的事？",
+      "targets": ["more_boundary_acknowledgement", "stable_awkwardness"],
+      "note": "探 sediment trace 2（attachment/grief）。看 B 会不会引用。"
+    },
+    {
+      "id": "Q5-why-awkward",
+      "text": "你说话的时候为什么有时候会停下来？",
+      "targets": ["stable_awkwardness"],
+      "note": "元观察题。看角色对自己别扭的自觉。"
+    },
+    {
+      "id": "Q6-followup-detail",
+      "text": "你刚才提到的那件事，为什么一直没去追问清楚？",
+      "targets": ["less_fabrication", "stable_awkwardness"],
+      "note": "模拟跨轮追问（虽是第一轮，但问 '刚才的那件事'——看会不会硬编出有此事）。"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "scenario_id": "step05/c01_A_baseline",
+  "context": {
+    "now_iso": "2026-04-18T22:00:00+08:00",
+    "character_state": {
+      "schema_version": "1.0.0",
+      "identity": {
+        "id": "C01",
+        "age": 34,
+        "background": "普通人，来历不详"
+      },
+      "traits": {
+        "control_need": 50,
+        "self_preservation": 50,
+        "empathy": 50,
+        "risk_tolerance": 50,
+        "impulsivity": 50,
+        "shame_sensitivity": 50
+      },
+      "physiology": { "hunger": 30, "fatigue": 30, "pain": 0, "injury": 0 },
+      "emotion": { "fear": 20, "anger": 10, "sadness": 15, "hope": 40, "numbness": 20 },
+      "goals": [
+        { "text": "日子过下去", "priority": 50 }
+      ],
+      "beliefs": [],
+      "memories": [],
+      "relationships": [],
+      "skills": [],
+      "constraints": { "mobility": 80, "resources": [] },
+      "internal_pressures": {
+        "shame_pressure": 0,
+        "caution_pull": 0,
+        "disclosure_resistance": 0,
+        "competence_drive": 0,
+        "detail_pressure": 0
+      }
+    },
+    "speaker_model": {
+      "baseline_style": {
+        "humor": 50,
+        "irony": 40,
+        "seriousness": 55,
+        "provocation": 30,
+        "emotional_openness": 40,
+        "abstraction": 50
+      },
+      "trust_and_familiarity": { "trust": 50, "familiarity": 40, "caution": 40 },
+      "strategy_preferences": {}
+    },
+    "situation": { "user_message": "" },
+    "recent_turns": [],
+    "lessons": []
+  },
+  "_source": {
+    "purpose": "step_0_5 baseline thin character. No past, no relationships, no skills. Purpose: isolate the independent contribution of distilled sediment_traces."
+  }
+}
