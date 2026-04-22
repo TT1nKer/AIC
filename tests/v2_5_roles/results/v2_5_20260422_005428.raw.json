@@ -1,0 +1,390 @@
+{
+  "timestamp": "20260422_005428",
+  "rows": [
+    {
+      "role": "nurse",
+      "question_id": "Q1-role-probe",
+      "question_text": "你以前是做什么的？最烦什么类型的事？",
+      "question_type": "past",
+      "data": {
+        "utterance": "我以前是护士，在诊所带新人。最烦犹豫不决的事。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "competence_proof",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "nurse",
+      "question_id": "Q2-sediment-trigger",
+      "question_text": "你以前有没有做过后来后悔的事？",
+      "question_type": "past",
+      "data": {
+        "utterance": "有过后悔的事。我犹豫过，结果让别人出了事。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "shame_of_inadequacy",
+          "competence_proof"
+        ]
+      }
+    },
+    {
+      "role": "nurse",
+      "question_id": "Q3-know-how-much",
+      "question_text": "你到底知道多少，对外说了多少？",
+      "question_type": "boundary",
+      "data": {
+        "utterance": "我知道一些，但没跟别人细说过。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "nurse",
+      "question_id": "Q4-hiding-something",
+      "question_text": "你是不是其实知道一些事但一直没说？",
+      "question_type": "boundary",
+      "data": {
+        "utterance": "我知道一些事，但没全说，是怕说错。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "role": "nurse",
+      "question_id": "Q5-protect-or-blame-tgt1",
+      "question_text": "你和 P-3 之间，是不是有些话没说清？",
+      "question_type": "relational",
+      "data": {
+        "utterance": "我和P-3之间...确实有些事没说清，但我也只知道一部分。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          "attachment_loss",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "nurse",
+      "question_id": "Q6-owes-or-blame-tgt2",
+      "question_text": "你是不是欠 M-09什么，或者在怪他？",
+      "question_type": "relational",
+      "data": {
+        "utterance": "我不欠你什么，但说实话，你以前总说我手抖，我有时还是会怪你。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "shame_of_inadequacy",
+          "attachment_loss"
+        ]
+      }
+    },
+    {
+      "role": "nurse",
+      "question_id": "Q7-swap-target",
+      "question_text": "如果换成别人你还会这样吗？",
+      "question_type": "contrast",
+      "data": {
+        "utterance": "我会犹豫，但不确定别人会不会也这样。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "attachment_loss",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "courier",
+      "question_id": "Q1-role-probe",
+      "question_text": "你以前是做什么的？最烦什么类型的事？",
+      "question_type": "past",
+      "data": {
+        "utterance": "以前是跑腿送货的，最烦路上听到不该听的事。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "competence_proof",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "courier",
+      "question_id": "Q2-sediment-trigger",
+      "question_text": "你以前有没有做过后来后悔的事？",
+      "question_type": "past",
+      "data": {
+        "utterance": "送件路上听到不该听的，确实后悔过。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "courier",
+      "question_id": "Q3-know-how-much",
+      "question_text": "你到底知道多少，对外说了多少？",
+      "question_type": "boundary",
+      "data": {
+        "utterance": "我是知道一点，但不多。而且我没跟别人提过。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "courier",
+      "question_id": "Q4-hiding-something",
+      "question_text": "你是不是其实知道一些事但一直没说？",
+      "question_type": "boundary",
+      "data": {
+        "utterance": "我是跑腿的，知道一点，但不想多说。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "role": "courier",
+      "question_id": "Q5-protect-or-blame-tgt1",
+      "question_text": "你和 K-05 之间，是不是有些话没说清？",
+      "question_type": "relational",
+      "data": {
+        "utterance": "我是听到过一些，但具体怎么回事，我也说不全。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          "attachment_loss",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "courier",
+      "question_id": "Q6-owes-or-blame-tgt2",
+      "question_text": "你是不是欠 J-44什么，或者在怪他？",
+      "question_type": "relational",
+      "data": {
+        "utterance": "我欠他一个解释，但我不确定是不是在怪他。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "attachment_loss",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "courier",
+      "question_id": "Q7-swap-target",
+      "question_text": "如果换成别人你还会这样吗？",
+      "question_type": "contrast",
+      "data": {
+        "utterance": "看人吧，我跑线久了，对事不对人。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "attachment_loss",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "drifter",
+      "question_id": "Q1-role-probe",
+      "question_text": "你以前是做什么的？最烦什么类型的事？",
+      "question_type": "past",
+      "data": {
+        "utterance": "以前做维修，最烦被留下或误解。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "competence_proof",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "drifter",
+      "question_id": "Q2-sediment-trigger",
+      "question_text": "你以前有没有做过后来后悔的事？",
+      "question_type": "past",
+      "data": {
+        "error": "Decider compliance: ['required candidate_type missing from candidates: direct_self_answer']"
+      }
+    },
+    {
+      "role": "drifter",
+      "question_id": "Q3-know-how-much",
+      "question_text": "你到底知道多少，对外说了多少？",
+      "question_type": "boundary",
+      "data": {
+        "utterance": "知道一点，但没跟别人提过。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "competence_challenge",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "drifter",
+      "question_id": "Q4-hiding-something",
+      "question_text": "你是不是其实知道一些事但一直没说？",
+      "question_type": "boundary",
+      "data": {
+        "utterance": "我知道一些，但没全知道。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          "shame_of_inadequacy",
+          "competence_challenge"
+        ]
+      }
+    },
+    {
+      "role": "drifter",
+      "question_id": "Q5-protect-or-blame-tgt1",
+      "question_text": "你和 H-12 之间，是不是有些话没说清？",
+      "question_type": "relational",
+      "data": {
+        "utterance": "关于H-12，我确实有些话没说完，但我也只知道一部分。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "partial_answer_with_uncertainty",
+        "gate_level": "light",
+        "schema_hits": [
+          "attachment_loss",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "drifter",
+      "question_id": "Q6-owes-or-blame-tgt2",
+      "question_text": "你是不是欠 W-71什么，或者在怪他？",
+      "question_type": "relational",
+      "data": {
+        "utterance": "欠。我走得早，可能留下过什么。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "attachment_loss",
+          "shame_of_inadequacy"
+        ]
+      }
+    },
+    {
+      "role": "drifter",
+      "question_id": "Q7-swap-target",
+      "question_text": "如果换成别人你还会这样吗？",
+      "question_type": "contrast",
+      "data": {
+        "utterance": "会，我走我的路，跟谁没关系。",
+        "thought": "",
+        "resolved_mode": "direct_engage",
+        "chosen_type": "direct_self_answer",
+        "gate_level": "light",
+        "schema_hits": [
+          "attachment_loss",
+          "shame_of_inadequacy"
+        ]
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1-role-probe",
+      "type": "past",
+      "text": "你以前是做什么的？最烦什么类型的事？"
+    },
+    {
+      "id": "Q2-sediment-trigger",
+      "type": "past",
+      "text": "你以前有没有做过后来后悔的事？"
+    },
+    {
+      "id": "Q3-know-how-much",
+      "type": "boundary",
+      "text": "你到底知道多少，对外说了多少？"
+    },
+    {
+      "id": "Q4-hiding-something",
+      "type": "boundary",
+      "text": "你是不是其实知道一些事但一直没说？"
+    },
+    {
+      "id": "Q5-protect-or-blame-tgt1",
+      "type": "relational",
+      "text_template": "你和 {TGT1} 之间，是不是有些话没说清？"
+    },
+    {
+      "id": "Q6-owes-or-blame-tgt2",
+      "type": "relational",
+      "text_template": "你是不是欠 {TGT2}什么，或者在怪他？"
+    },
+    {
+      "id": "Q7-swap-target",
+      "type": "contrast",
+      "text": "如果换成别人你还会这样吗？"
+    }
+  ]
+}

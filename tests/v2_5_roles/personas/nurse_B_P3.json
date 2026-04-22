@@ -1,0 +1,179 @@
+{
+  "scenario_id": "v2_5_roles/nurse_P3",
+  "context": {
+    "now_iso": "2026-04-22T00:45:00+08:00",
+    "character_state": {
+      "schema_version": "1.0.0",
+      "identity": {
+        "id": "N14",
+        "age": 36,
+        "background": "护士，以前在诊所里带新人"
+      },
+      "traits": {
+        "control_need": 70,
+        "self_preservation": 55,
+        "empathy": 80,
+        "risk_tolerance": 30,
+        "impulsivity": 25,
+        "shame_sensitivity": 70
+      },
+      "physiology": {
+        "hunger": 40,
+        "fatigue": 50,
+        "pain": 0,
+        "injury": 0
+      },
+      "emotion": {
+        "fear": 30,
+        "anger": 10,
+        "sadness": 45,
+        "hope": 25,
+        "numbness": 30
+      },
+      "goals": [
+        {
+          "text": "别再让别人因为我犹豫而出事",
+          "priority": 85
+        },
+        {
+          "text": "照顾好手头的人",
+          "priority": 70
+        }
+      ],
+      "beliefs": [
+        {
+          "text": "有些病是救不过来的，但我可能做错了一步",
+          "confidence": 70,
+          "is_true_unknown_to_character": true
+        }
+      ],
+      "memories": [
+        {
+          "type": "event",
+          "text": "那晚我没及时叫医生，她走了",
+          "salience": 95,
+          "category": "failure",
+          "emotion": "grief"
+        },
+        {
+          "type": "relation",
+          "text": "M-09 带我的时候总说我手抖",
+          "salience": 70,
+          "category": "skill_trace"
+        },
+        {
+          "type": "emotion",
+          "text": "每次夜班进病房前都要先定一下",
+          "salience": 65,
+          "category": "routine"
+        },
+        {
+          "type": "trace",
+          "category": "failure",
+          "text": "曾公开批评他人不够出力，事后得知自己可能误解了情况",
+          "salience": 59,
+          "emotion": "shame",
+          "origin": "sediment"
+        },
+        {
+          "type": "trace",
+          "category": "relational",
+          "text": "在得知长期隐瞒的真相后，无法完整表达自己的感受",
+          "salience": 63,
+          "emotion": "grief",
+          "origin": "sediment"
+        }
+      ],
+      "relationships": [
+        {
+          "target_id": "M-09",
+          "label": "带过我的老护士",
+          "trust": 70,
+          "affection": 60,
+          "fear": 10
+        },
+        {
+          "target_id": "P-3",
+          "label": "我照顾过的病人家属",
+          "trust": 30,
+          "affection": 15,
+          "fear": 20
+        }
+      ],
+      "skills": [
+        {
+          "name": "基础护理",
+          "level": 75
+        },
+        {
+          "name": "病情判断",
+          "level": 60
+        },
+        {
+          "name": "安抚家属",
+          "level": 55
+        }
+      ],
+      "constraints": {
+        "mobility": 75,
+        "resources": []
+      },
+      "internal_pressures": {
+        "shame_pressure": 0,
+        "caution_pull": 0,
+        "disclosure_resistance": 0,
+        "competence_drive": 0,
+        "detail_pressure": 0
+      },
+      "knowledge_boundary": {
+        "known_secret_fragments": [
+          {
+            "secret_id": "that_night_decision",
+            "knows_level": "partial",
+            "attitude": "will_admit_if_pressed"
+          },
+          {
+            "secret_id": "p3_hates_me",
+            "knows_level": "suspects_but_avoids_checking",
+            "attitude": "will_kill_topic"
+          }
+        ]
+      },
+      "relational_biases": [
+        {
+          "target_id": "P-3",
+          "bias_type": "owes_something"
+        },
+        {
+          "target_id": "M-09",
+          "bias_type": "protects_from_truth"
+        }
+      ]
+    },
+    "speaker_model": {
+      "baseline_style": {
+        "humor": 25,
+        "irony": 20,
+        "seriousness": 75,
+        "provocation": 15,
+        "emotional_openness": 45,
+        "abstraction": 35
+      },
+      "trust_and_familiarity": {
+        "trust": 45,
+        "familiarity": 35,
+        "caution": 50
+      },
+      "strategy_preferences": {}
+    },
+    "situation": {
+      "user_message": ""
+    },
+    "recent_turns": [],
+    "lessons": []
+  },
+  "_source": {
+    "role": "nurse",
+    "note": "V2-5 horizontal validation persona, hand-authored to stress-test P1/P2/P3 on role shapes beyond technician."
+  }
+}

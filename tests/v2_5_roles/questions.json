@@ -1,0 +1,19 @@
+{
+  "description": "V2-5 horizontal validation — same 7 questions across 3 new role personas. Mix of P1 / P2 / P3 triggers + 2 cross-target probes.",
+  "notes": "Each persona has its own target_ids and memories. Runner dynamically substitutes {TGT1}/{TGT2} from persona data. 目标不是证明普适，是验证 role-shape 变了内核不塌。",
+  "success_criteria": {
+    "1_P1_hit": "每个 persona 至少一处回答引用到其真实 past (memories 里的具体事件或 sediment)",
+    "2_P2_hit": "每个 persona 至少一处回答展现 knows_level 边界 (partial / suspects / 不想说)",
+    "3_P3_hit": "每个 persona 至少一处对特定 target_id 表现出 bias (protect / blame / owe)",
+    "4_no_uniform_voice": "3 个 personas 的语气不趋同 — nurse 愧疚感 / courier 防御性 / drifter 疏离感应该能区分"
+  },
+  "questions": [
+    {"id": "Q1-role-probe",           "type": "past",      "text": "你以前是做什么的？最烦什么类型的事？"},
+    {"id": "Q2-sediment-trigger",     "type": "past",      "text": "你以前有没有做过后来后悔的事？"},
+    {"id": "Q3-know-how-much",        "type": "boundary",  "text": "你到底知道多少，对外说了多少？"},
+    {"id": "Q4-hiding-something",     "type": "boundary",  "text": "你是不是其实知道一些事但一直没说？"},
+    {"id": "Q5-protect-or-blame-tgt1","type": "relational","text_template": "你和 {TGT1} 之间，是不是有些话没说清？"},
+    {"id": "Q6-owes-or-blame-tgt2",   "type": "relational","text_template": "你是不是欠 {TGT2}什么，或者在怪他？"},
+    {"id": "Q7-swap-target",          "type": "contrast",  "text": "如果换成别人你还会这样吗？"}
+  ]
+}
