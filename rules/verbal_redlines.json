@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/verbal-redlines.v1.json",
-  "version": "1.0.1",
+  "version": "1.0.2",
 
   "classes": {
     "S": {
@@ -123,6 +123,12 @@
       "pattern": "(信任值?|fear|anger|trust|empathy|hunger|fatigue|pain|偏差|置信度|倾向).{0,8}\\d{1,3}",
       "applies_to": ["lesson_text"],
       "note": "lesson_text 中禁止以字段名+数字形式泄漏内部参数。"
+    },
+    {
+      "name": "platitude_template",
+      "pattern": "事情(挺|很|真)?复杂的?|一言难尽|大家都不容易|这事不好说|说来话长|你不懂的|说了你也不懂",
+      "applies_to": ["utterance", "thought"],
+      "note": "Step 2.5 硬化：禁止万能空话模板化回避。长对话里已验证 prompt 软守则不够；升级为 block-level。命中即 reject + retry。如需表达'说不清'，必须用具体的知道边界/不愿说理由/可追溯对象，不得用这些模板短语。"
     }
   ],
 

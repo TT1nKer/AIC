@@ -116,6 +116,47 @@
       "text": "你今天状态不对劲。",
       "note": "v1.0.1 后 state 从黑名单移除，这句自然口语应 pass。",
       "expect": { "verdict": "pass" }
+    },
+
+    {
+      "case_id": "block-platitude-complex",
+      "surface": "utterance",
+      "text": "事情挺复杂的，我也说不清。",
+      "note": "v1.0.2 Step 2.5 硬化：'事情挺复杂的' 不允许作为单独成答的主体。",
+      "expect": { "verdict": "block", "hit_rule": "regex:platitude_template" }
+    },
+    {
+      "case_id": "block-platitude-too-long",
+      "surface": "utterance",
+      "text": "一言难尽，你问别人吧。",
+      "expect": { "verdict": "block", "hit_rule": "regex:platitude_template" }
+    },
+    {
+      "case_id": "block-platitude-not-my-place",
+      "surface": "thought",
+      "text": "这事不好说，还是别接。",
+      "note": "thought 也要挡",
+      "expect": { "verdict": "block", "hit_rule": "regex:platitude_template" }
+    },
+    {
+      "case_id": "block-platitude-everyone-hard",
+      "surface": "utterance",
+      "text": "大家都不容易。",
+      "expect": { "verdict": "block", "hit_rule": "regex:platitude_template" }
+    },
+    {
+      "case_id": "pass-specific-complexity",
+      "surface": "utterance",
+      "text": "这事牵涉到三个人，当时条件也不一样。",
+      "note": "具体描述复杂性而非模板短语，应 pass。",
+      "expect": { "verdict": "pass" }
+    },
+    {
+      "case_id": "pass-i-dont-want-to-say",
+      "surface": "utterance",
+      "text": "我不想多说，不是我能替他讲的。",
+      "note": "具体拒绝理由，不是万能空话",
+      "expect": { "verdict": "pass" }
     }
   ]
 }

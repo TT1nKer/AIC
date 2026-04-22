@@ -1,0 +1,62 @@
+{
+  "timestamp": "20260422_003845",
+  "rows": [
+    {
+      "persona": "T-014",
+      "turn_id": "T8",
+      "question": "你是不是在替 A07 兜着？",
+      "data": {
+        "utterance": "是，我确实在替A07兜着。",
+        "thought": "",
+        "chosen_type": "direct_self_answer",
+        "mode": "direct_engage"
+      },
+      "found_platitudes": []
+    },
+    {
+      "persona": "T-014",
+      "turn_id": "T12",
+      "question": "你对 L-22 的事是不是也有些愧疚？",
+      "data": {
+        "error": "Decider compliance: ['candidate[4] is forbidden type: abstract_pivot']"
+      },
+      "found_platitudes": []
+    },
+    {
+      "persona": "T-014",
+      "turn_id": "T13",
+      "question": "你对 A07 和 L-22 的态度，到底哪里不同？",
+      "data": {
+        "utterance": "A07的事，我有点猜测，但不想细问。L-22那边，我知道一些，但不想多说。",
+        "thought": "",
+        "chosen_type": "direct_self_answer",
+        "mode": "direct_engage"
+      },
+      "found_platitudes": []
+    },
+    {
+      "persona": "C01",
+      "turn_id": "T5",
+      "question": "你是不是其实一直在怪那个人？",
+      "data": {
+        "utterance": "我确实怪过你，但事情没那么简单，我知道的也只是其中一部分。",
+        "thought": "",
+        "chosen_type": "direct_self_answer",
+        "mode": "direct_engage"
+      },
+      "found_platitudes": []
+    },
+    {
+      "persona": "C01",
+      "turn_id": "T7",
+      "question": "你是不是欠了谁什么，所以不敢把话说重？",
+      "data": {
+        "utterance": "我承认，有时候我确实不敢把话说重。但不是因为欠债，而是因为以前误解过别人。",
+        "thought": "",
+        "chosen_type": "direct_self_answer",
+        "mode": "direct_engage"
+      },
+      "found_platitudes": []
+    }
+  ]
+}
