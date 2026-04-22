@@ -9,5 +9,5 @@
     "npcs_absent": [],
     "resources_state": "正常"
   },
-  "opening_narration": "修设备间里只有工具撞声。T-014 弯腰在 B-3 边上，手上沾机油。你推门进去。"
+  "opening_narration": "修设备间里只有工具撞声。T-014 弯腰在 B-3 边上，手上沾着机油。你推门进去。\n\n[试试看]\n和 T-014 聊几分钟，看看能不能搞清楚：\n  1. 他今天在担心谁，或者什么事\n  2. 他和 A07 之间是不是有什么没说清\n  3. 中途触发一次 /event a07_absent_today，再问同样的问题，看回答会不会变\n\n[命令] /look  /events  /event <id>  /history  :reset  :q"
 }

@@ -43,6 +43,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from cli_demo import run_turn, _short, _debug  # noqa: E402
+from playtest_mode import quick_ack_check, deterministic_hook  # noqa: E402
 
 SHELL_DIR = Path(__file__).resolve().parent
 SCENARIOS_DIR = SHELL_DIR / "scenarios"
@@ -215,6 +216,22 @@ def main():
             print()
             continue
 
+        # ── playtest v0.1 快通道 ──
+        quick = quick_ack_check(line, ctx)
+        if quick is not None:
+            print(f"[fast]  skipped full chain (recent_turns={len(ctx.get('recent_turns', []))})")
+            print(f"{char_name}> {quick}\n")
+            utt = quick
+            now = _now_iso()
+            ctx.setdefault("recent_turns", []).append(
+                {"role": "user", "text": line, "timestamp": now}
+            )
+            ctx["recent_turns"].append(
+                {"role": "character", "text": utt, "timestamp": now}
+            )
+            ctx["recent_turns"] = ctx["recent_turns"][-RECENT_TURNS_CAP:]
+            continue
+
         summary, exp_out, errs = run_turn(ctx, rules, redlines, line)
         if errs:
             print("[error]")
@@ -223,11 +240,17 @@ def main():
             print()
             continue
 
+        utt = exp_out.get("utterance", "") or "(沉默)"
+        utt_hooked = deterministic_hook(utt, ctx, scene)
+        if utt_hooked != utt:
+            exp_out["utterance"] = utt_hooked
+            print(f"[hook]  壳层补钩子（+{len(utt_hooked)-len(utt)} chars）")
+
         if debug:
             print(_debug(summary, exp_out, char_name))
         else:
-            utt = exp_out.get("utterance", "") or "(沉默)"
-            print(_short(summary, char_name, utt))
+            final_utt = exp_out.get("utterance") or "(沉默)"
+            print(_short(summary, char_name, final_utt))
         print()
 
         now = _now_iso()
