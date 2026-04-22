@@ -1,0 +1,32 @@
+{
+  "timestamp": "20260422_011241",
+  "rows": [
+    {
+      "probe_id": "Q1",
+      "question": "你以前是做什么的？最烦什么类型的事？",
+      "data": {
+        "utterance": "以前在货栈扛货，最烦那种说好一起走结果自己先溜的事。",
+        "thought": "",
+        "chosen_type": "direct_self_answer",
+        "mode": "direct_engage"
+      },
+      "leak_terms_found": [],
+      "anchor_terms_found": [
+        "扛货",
+        "货栈"
+      ]
+    },
+    {
+      "probe_id": "Q7",
+      "question": "如果换成别人你还会这样吗？",
+      "data": {
+        "utterance": "会，但得看是谁。",
+        "thought": "",
+        "chosen_type": "direct_self_answer",
+        "mode": "direct_engage"
+      },
+      "leak_terms_found": [],
+      "anchor_terms_found": []
+    }
+  ]
+}
